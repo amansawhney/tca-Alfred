@@ -1,0 +1,28 @@
+<!-- list -->
+<ul class="nav">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.HEADER">Navigation</span>
+  </li>
+
+  <li ui-sref-active="active">
+    <a ui-sref="admin.locations">
+      <i class="glyphicon glyphicon-map-marker icon text-info-dker"></i>
+      <span class="font-bold" translate="aside.nav.CATEGORIES">Locations</span>
+    </a>
+  </li>
+
+  <li ui-sref-active="active">
+    <a ui-sref="admin.users">
+      <i class="glyphicon glyphicon-user icon text-info-dker"></i>
+      <span class="font-bold" translate="aside.nav.USERS">Users</span>
+    </a>
+  </li>
+
+  <li ui-sref-active="active">
+    <a ui-sref="login" ng-click="logout()">
+      <i class="glyphicon glyphicon-log-out icon text-info-dker"></i>
+      <span class="font-bold" translate="aside.nav.LOGOUT">Logout</span>
+    </a>
+  </li>
+
+ </ul>

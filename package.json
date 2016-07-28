@@ -1,0 +1,45 @@
+{
+  "name": "havenAPI",
+  "decription": "PIVOT API",
+  "private": false,
+  "author": "Fortunes Technology",
+  "devDependencies": {
+    "nodemon": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "scripts/run",
+    "test": "mocha -R spec --compilers js:babel/register --recursive",
+    "postinstall": "scripts/precompile",
+    "build": "scripts/precompile",
+    "lint": "eslint api"
+  },
+  "dependencies": {
+    "babel": "^5.6.14",
+    "babel-runtime": "^5.8.20",
+    "bcrypt": "^0.8.5",
+    "bluebird": "^2.9.34",
+    "body-parser": "^1.14.1",
+    "bower": "^1.3.12",
+    "ejs": "^2.4.2",
+    "eslint": "^2.4.0",
+    "express": "^4.13.3",
+    "express-promise-router": "0.0.9",
+    "express-router": "0.0.1",
+    "jsonwebtoken": "^5.4.1",
+    "mongoose": "^4.2.9",
+    "mongoose-model-update": "^1.5.0",
+    "morgan": "^1.6.1",
+    "node-rest-client": "^1.8.0",
+    "q": "^1.4.1",
+    "through": "^2.3.8",
+    "async": "^0.9.0",
+    "lodash": "^3.10.1",
+    "node-schedule": "^1.1.0",
+    "winston": "^2.1.1",
+    "email-templates":"^2.3.4",
+    "node-sass":"^3.8.0"
+  }
+}

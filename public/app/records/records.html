@@ -1,0 +1,91 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Records</h1>
+</div>
+<div class="wrapper-md">
+  <h4>Records Table</h4>
+  <div class="panel-body b-b b-light">
+    <div class="pull-left">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+    </div>
+
+    <div class="pull-right">
+      <button type="button" class="btn btn-primary" ng-click="showAddModal()">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Add New Record
+      </button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover table-condensed bg-white-only footable"  data-filter="#filter"  data-page-size="20">
+    <thead>
+      <tr style="font-weight: bold">
+        <th style="width:10%">ID</th>
+        <th style="width:15%">Name</th>
+        <th style="width:20%">Address</th>
+        <th style="width:10%">City</th>
+        <th style="width:20%">State</th>
+        <th style="width:20%">Zipcode</th>
+        <th style="width:20%">Phone No</th>
+        <th style="width:15%">Created</th>
+        <th style="width:10%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="record in records" footable-directive>
+        <td class="v-middle">
+          {{ record._id  || '_'}}
+        </td>
+
+        <td class="v-middle">
+          {{ record.recordName || '_' }}
+        </td>
+
+        <td class="v-middle">
+          {{ record.address || '_' }}
+        </td>
+
+        <td class="v-middle">
+          {{ record.city || '_' }}
+        </td>
+
+
+        <td class="v-middle">
+          {{ record.state || '_' }}
+        </td>
+
+
+        <td class="v-middle">
+          {{ record.zipcode || '_' }}
+        </td>
+
+
+        <td class="v-middle">
+          {{ record.phoneNo || '_' }}
+        </td>
+
+        <td class="v-middle">
+          {{ record.createdAt || 'empty' | date:'yyyy-MM-dd HH:mm' }}
+        </td>
+
+        <td style="white-space: nowrap">
+          <div class="buttons btn-group" dropdown="" ng-show="!rowform.$visible">
+            <button id="single-button" type="button" class="btn btn-success btn-sm" dropdown-toggle ng-disabled="disabled">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+              <li role="menuitem"><a ng-click="showUpdateModal(record)">Edit</a></li>
+              <li role="menuitem"><a ng-click="removeRecord(record._id)"  confirm="Are you sure to remove this record?">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="hide-if-no-paging">
+      <tr>
+        <td colspan="10" class="text-center">
+          <ul class="pagination"></ul>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

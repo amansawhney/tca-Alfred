@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"   data-ng-app="admin" >
+<head>
+    <meta charset="UTF-8">
+    <title>Haven Dashboard</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
+    <link rel="stylesheet" href="css/font.css" type="text/css">
+    <link rel="stylesheet" href="css/app.css" type="text/css">
+    <link rel="stylesheet" href="bower_components/footable/css/footable.core.css">
+    <link rel="stylesheet" href="bower_components/footable/css/footable.metro.min.css">
+    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
+    <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+
+</head>
+<body ng-controller="AdminController" >
+
+<div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+
+    <!-- Bower Components -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/footable/dist/footable.all.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-confirm-modal/angular-confirm.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
+    <!-- App -->
+    <script src="app/app.js"></script>
+    <script src="app/admin/admincontroller.js"></script>
+
+    <script src="app/users/users.controller.js"></script>
+    <script src="app/users/users.service.js"></script>
+    <script src="app/users/add.modal/add.modal.controller.js"></script>
+    <script src="app/users/edit.modal/edit.modal.controller.js"></script>
+
+    <script src="app/records/records.controller.js"></script>
+    <script src="app/records/records.service.js"></script>
+
+    <script src="app/login/login.controller.js"></script>
+    <script src="app/login/login.service.js"></script>
+
+</body>
+</html>
