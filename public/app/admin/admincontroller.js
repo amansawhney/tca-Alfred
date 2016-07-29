@@ -6,7 +6,7 @@ angular.module('admin')
         }
         // config
         $scope.app = {
-            name: 'Haven Admin Panel',
+            name: 'Pivot Admin Panel',
             version: '0.9',
             // for chart colors
             color: {

@@ -7,7 +7,9 @@ async function getMyRecords(req, res, next) {
     var user_id = req.decoded._id;
     //var search_keyword = req.query.search_keyword;
     //console.log("getMyRecords");
-    let records = await Record.find({$or:[{'creator': user_id},{'invitee':user_id}]}, null, {sort: {createdAt: -1}, skip: req.query.offset, limit: req.query.limit});
+    var offset = 0; //req.query.offset
+    var limit = 20;
+    let records = await Record.find({}, null, {sort: {createdAt: -1}, skip: 0, limit: limit});
 
     return res.status(200).send({
         records: records
@@ -17,13 +19,84 @@ async function getMyRecords(req, res, next) {
 async function getAllRecords(req, res, next) {
 
     var search_keyword = req.query.search_keyword;
+    var offset = 0; //req.query.offset
+    var limit = 10;
+    let records = await Record.findAsync({}, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
 
-    let records = await Record.findAsync({name: {$regex: search_keyword, $options: "i"}}, null, {sort: {createdAt: -1}, skip: req.query.offset, limit: req.query.limit});
-
+    //let clients = await Record.find().distinct('client');
+    //console.log(clients);
     return res.status(200).send({
         records: records
     });
 }
+
+async function getRecordsWithFilters(req, res, next) {
+
+    var offset = 0; //req.query.offset
+    var limit = 10;
+
+    var querySet = {};
+    if (req.query.client != "all")
+    {
+        querySet.client = req.query.client;
+    }
+    if (req.query.fcm != "all")
+    {
+        querySet.fcm = req.query.fcm;
+    }
+    if (req.query.trader != "all")
+    {
+        querySet.trader = req.query.trader;
+    }
+    if (req.query.algo != "all")
+    {
+        querySet.algo = req.query.algo;
+    }
+    if (req.query.exchange != "all")
+    {
+        querySet.exchange = req.query.exchange;
+    }
+    if (req.query.instrument != "all")
+    {
+        querySet.instrument = req.query.instrument;
+    }
+
+    if ((req.query.minSize != "") && (req.query.maxSize != ""))
+    {
+        querySet.size = {$gt: req.query.minSize, $lt: req.query.maxSize};
+    }
+    else if(req.query.minSize != "")
+    {
+        querySet.size = {$gt: req.query.minSize, $lt: req.query.maxSize};
+    }
+    let records = await Record.findAsync(querySet, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
+
+    //let clients = await Record.find().distinct('client');
+    //console.log(clients);
+    return res.status(200).send({
+        records: records
+    });
+}
+async function getRecordsStatics(req, res, next) {
+    console.log("getRecordsStatics");
+    let clients = await Record.find().distinct('client');
+    let fcms = await Record.find().distinct('fcm');
+    let traders = await Record.find().distinct('trader');
+    let exchs = await Record.find().distinct('exch');
+    let algos = await Record.find().distinct('algo');
+    let instruments = await Record.find().distinct('instrument');
+    console.log(instruments);
+
+    return res.status(200).send({
+        clients: clients,
+        fcms: fcms,
+        traders: traders,
+        exchs: exchs,
+        algos: algos,
+        instruments: instruments
+    });
+}
+
 
 
 async function deleteRecordById(req, res, next) {
@@ -47,5 +120,6 @@ async function deleteRecordById(req, res, next) {
 module.exports = {
     getMyRecords: getMyRecords,
     getAllRecords: getAllRecords,
-    deleteRecordById: deleteRecordById
+    deleteRecordById: deleteRecordById,
+    getRecordsStatics: getRecordsStatics
 }

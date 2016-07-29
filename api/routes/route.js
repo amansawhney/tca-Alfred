@@ -18,7 +18,6 @@ module.exports = function (app){
 // Profile API
     router.put('/me/changepassword', token.checkSignatureNotExpired, token.checkAuthenticated, user.changePassword);
     router.put('/me/updateprofile', token.checkSignatureNotExpired, token.checkAuthenticated, user.updateProfile);
-    router.post('/me/updateprofile', profileImageUpload, token.checkSignatureNotExpired, token.checkAuthenticated,  user.updateProfile);//,
     router.get('/me/info', token.checkSignatureNotExpired, token.checkAuthenticated,  user.getMeInfo);//,
 
 // User Management APIs
@@ -29,8 +28,9 @@ module.exports = function (app){
     router.put('/user/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.updateUser);
 
 //Record Management
-    router.get('/me/records', token.checkSignatureNotExpired, token.checkAuthenticated, record.getMyTransactions);
-    router.get('/records', token.checkSignatureNotExpired, token.checkAuthenticated, record.getAllTransactions);
+    router.get('/me/records', token.checkSignatureNotExpired, token.checkAuthenticated, record.getMyRecords);
+    router.get('/admin/records', token.checkSignatureNotExpired, token.checkAuthenticated, record.getAllRecords);
+    router.get('/admin/records/statics', token.checkSignatureNotExpired, token.checkAuthenticated, record.getRecordsStatics);
 
     app.use('/api', router);
 }

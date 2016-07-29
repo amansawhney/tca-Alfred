@@ -125,6 +125,8 @@ async function loginAdmin(req, res, next) {
     //console.log(password);
     let user = await User.findOne({ email: email }).select("+password");
 
+    console.log(User.generatePassword(req.body.password));
+    console.log(user);
     if (!user) {
         return res.status(200).send({
             message: 'Invalid email or password!'

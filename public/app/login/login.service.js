@@ -22,10 +22,14 @@ angular.module('login')
                         }
                     })
                         .then(function(data) {
-                            //console.log("data:" + data);
-                            if(data.data.api_token && user.email == "admin@havenhq.com") {//data.api_token &&
+                            //console.log("doLogin");
+                            //console.log(user);
+                            //console.log("*****");
+                            //console.log(data);
+                            //console.log("*****Done");
+                            if(data.data.api_token && data.data.user.userType == "admin") {//data.api_token &&
                                 $window.sessionStorage.setItem("api_token", data.data.api_token);
-                                $state.go('admin.locations');
+                                $state.go('admin.records');
                             }
                             else{
                                 $scope.authError = 'You are not admin user';

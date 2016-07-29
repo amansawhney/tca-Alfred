@@ -32,12 +32,7 @@ var User = new Schema({
         required: 'Password is required. ',
         select: false
     },
-    userType: { // 1: Regular User, 2 -  Admin
-        type: Number,
-        min: 1,
-        max: 2,
-        default: 1
-    },
+    userType: { type: String, enum: ['admin', 'general'] },
     phone: {
         type: String, default: ''
     },

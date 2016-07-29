@@ -3,89 +3,164 @@
 </div>
 <div class="wrapper-md">
   <h4>Records Table</h4>
-  <div class="panel-body b-b b-light">
-    <div class="pull-left">
-      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
-    </div>
 
-    <div class="pull-right">
-      <button type="button" class="btn btn-primary" ng-click="showAddModal()">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        Add New Record
-      </button>
+
+  <!-- Navigation -->
+
+
+  <div id="page-wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- /.panel -->
+        <div class="panel panel-info" id="filterSection">
+          <div class="panel-heading">
+            Filter
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label>Date: </label>
+                  <select name="currDate" id="currDate" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>Begin Date: </label>
+                  <div class='input-group date' id='beginDateDiv'>
+                    <input type='text' name="beginDate" id="beginDate" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
+							                <span class="input-group-addon">
+							                    <span class="glyphicon glyphicon-calendar"></span>
+							                </span>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label>End Date: </label>
+                  <div class='input-group date' id='endDateDiv'>
+                    <input type='text' name="endDate" id="endDate" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
+							                <span class="input-group-addon">
+							                    <span class="glyphicon glyphicon-calendar"></span>
+							                </span>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <label>Min. Size: </label>
+                  <input type="text" name="minSize" id="minSize" class="form-control">
+                </div>
+                <div class="col-md-2">
+                  <label>Max. Size:</label>
+                  <input type="text" name="maxSize" id="maxSize" class="form-control">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-2">
+                  <label>Client: </label>
+                  <select name="client" id="client" class="form-control">
+                    <option value="all">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>FCM: </label>
+                  <select name="fcm" id="fcm" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>Trader: </label>
+                  <select name="trader" id="trader" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>Algo: </label>
+                  <select name="algo" id="algo" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>Exchange: </label>
+                  <select name="exchange" id="exchange" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>Class: </label>
+                  <select name="classId" id="classId" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-2">
+                  <label>Instrument: </label>
+                  <select name="instrument" id="instrument" class="form-control">
+                    <option value="">ALL</option>
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <label>&nbsp;</label>
+                  <input type="button" value="Apply" onclick="filterPivotTable()" class="btn btn-md btn-info form-control" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <div class="row" style="display: none;">
+      <div class="col-lg-12">
+        <!-- Pivote Table -->
+        <div class="panel panel-info" id="#filteredSection">
+          <div class="panel-heading">
+            Filtered Data
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="table-responsive" id="tableDiv" style="overflow-y: scroll">
+            </div>
+          </div>
+        </div>
+        <!-- End of Pivot table -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Pivote Table -->
+        <div class="panel panel-info" id="avgSection">
+          <div class="panel-heading">
+            Averages
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="table-responsive" id="avgTableDiv">
+            </div>
+          </div>
+        </div>
+        <!-- End of Pivot table -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Pivote Table -->
+        <div class="panel panel-info" id="pivoteSection">
+          <div class="panel-heading">
+            Pivot Table
+          </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div id="pgrid"  style="overflow-x: scroll"></div>
+          </div>
+        </div>
+        <!-- End of Pivot table -->
+      </div>
+      <!-- /.row -->
     </div>
   </div>
-
-  <table class="table table-bordered table-hover table-condensed bg-white-only footable"  data-filter="#filter"  data-page-size="20">
-    <thead>
-      <tr style="font-weight: bold">
-        <th style="width:10%">ID</th>
-        <th style="width:15%">Name</th>
-        <th style="width:20%">Address</th>
-        <th style="width:10%">City</th>
-        <th style="width:20%">State</th>
-        <th style="width:20%">Zipcode</th>
-        <th style="width:20%">Phone No</th>
-        <th style="width:15%">Created</th>
-        <th style="width:10%">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="record in records" footable-directive>
-        <td class="v-middle">
-          {{ record._id  || '_'}}
-        </td>
-
-        <td class="v-middle">
-          {{ record.recordName || '_' }}
-        </td>
-
-        <td class="v-middle">
-          {{ record.address || '_' }}
-        </td>
-
-        <td class="v-middle">
-          {{ record.city || '_' }}
-        </td>
-
-
-        <td class="v-middle">
-          {{ record.state || '_' }}
-        </td>
-
-
-        <td class="v-middle">
-          {{ record.zipcode || '_' }}
-        </td>
-
-
-        <td class="v-middle">
-          {{ record.phoneNo || '_' }}
-        </td>
-
-        <td class="v-middle">
-          {{ record.createdAt || 'empty' | date:'yyyy-MM-dd HH:mm' }}
-        </td>
-
-        <td style="white-space: nowrap">
-          <div class="buttons btn-group" dropdown="" ng-show="!rowform.$visible">
-            <button id="single-button" type="button" class="btn btn-success btn-sm" dropdown-toggle ng-disabled="disabled">
-              Action <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-              <li role="menuitem"><a ng-click="showUpdateModal(record)">Edit</a></li>
-              <li role="menuitem"><a ng-click="removeRecord(record._id)"  confirm="Are you sure to remove this record?">Delete</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot class="hide-if-no-paging">
-      <tr>
-        <td colspan="10" class="text-center">
-          <ul class="pagination"></ul>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
+  <!-- /#page-wrapper -->
 </div>
