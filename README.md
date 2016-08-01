@@ -19,3 +19,9 @@ npm start
 For the live deployment to the server, you should follow guide lines.
 https://www.terlici.com/2015/04/20/hosting-deploying-nodejs-centos.html
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-centos-7
+
+
+
+When there's an code update, 
+1. Update the code. You can pull from git.
+2. Take Step 5 to Step 7 again.
