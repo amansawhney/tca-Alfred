@@ -73,6 +73,7 @@ var j = schedule.scheduleJob('*/15 * * * *', function(){
     //console.log('The answer to life, the universe, and everything!');
     scheduler.refreshDatabaseFromSource();
 });
+scheduler.refreshDatabaseFromSource();
 //scheduler.sendPriorNotice();
 
 if (process.env.PORT === undefined) {
