@@ -27,55 +27,55 @@ var config = {
         { name: '8', caption: 'Filled'},
         { name: '9', caption: 'Duration' },
         { name: '10', caption: '%Volume', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '11', caption: '%iVolume', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '12', caption: '%Passive' , dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '13', caption: '%Cleanup', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '14', caption: 'AP' , dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '15', caption: 'STF', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         } },
         { name: '16', caption: 'IVWAP', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '17', caption: 'VWAP' , dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
         { name: '18', caption: 'TWAP', dataSettings: {
-            aggregateFunc: 'sum',
+            aggregateFunc: 'avg',
             formatFunc: function(value) {
                 return parseFloat(value);
             }
