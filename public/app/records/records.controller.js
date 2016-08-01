@@ -56,7 +56,7 @@ var config = {
                 return parseFloat(value);
             }
         }},
-        { name: '15', caption: 'STG', dataSettings: {
+        { name: '15', caption: 'STF', dataSettings: {
             aggregateFunc: 'sum',
             formatFunc: function(value) {
                 return parseFloat(value);
@@ -95,7 +95,7 @@ var config = {
     rows    : [ 'client', 'trader' ],
     //columns : [ 'algo', 'instrument', 'fcm', 'size' ],
     columns : [ 'algo' ],
-    data    : [ 'volume', 'ivolume', 'passive', 'cleanup', 'ap', 'stg', 'ivwap', 'vwap', 'twap' ],
+    data    : [ 'volume', 'ivolume', 'passive', 'cleanup', 'ap', 'stf', 'ivwap', 'vwap', 'twap' ],
     /*preFilters : {
      'Manufacturer': { 'Matches': /n/ },
      'Amount'      : { '>':  40 }

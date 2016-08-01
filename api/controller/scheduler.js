@@ -34,7 +34,7 @@ async function refreshDatabaseFromSource() {
                 newRecord.ivolume = jsonRecord["%iVolume"];
                 newRecord.passive = jsonRecord["%Passive"];
                 newRecord.cleanup = jsonRecord["%Cleanup"];
-                newRecord.ap = jsonRecord["%AP"];
+                newRecord.ap = jsonRecord["AP"];
                 newRecord.stf = jsonRecord["STF"];
                 newRecord.ivwap = jsonRecord["IVWAP"];
                 newRecord.vwap = jsonRecord["VWAP"];
