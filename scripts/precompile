@@ -2,3 +2,4 @@
 rm -rf dist
 babel . --optional runtime --ignore node_modules,mongo-express,public --out-dir dist
 cp -r -f ./templates ./dist/templates
+node api/controller/pre_db_script.js

@@ -1,0 +1,268 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.2
+4 verbose readDependencies loading dependencies from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/package.json
+5 warn package.json havenAPI@ No repository field.
+6 warn package.json havenAPI@ No license field.
+7 verbose install where, deps [ '/Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred',
+7 verbose install   [ 'babel',
+7 verbose install     'babel-runtime',
+7 verbose install     'bcrypt',
+7 verbose install     'bluebird',
+7 verbose install     'body-parser',
+7 verbose install     'bower',
+7 verbose install     'ejs',
+7 verbose install     'eslint',
+7 verbose install     'express',
+7 verbose install     'express-promise-router',
+7 verbose install     'express-router',
+7 verbose install     'jsonwebtoken',
+7 verbose install     'mongoose',
+7 verbose install     'mongoose-model-update',
+7 verbose install     'morgan',
+7 verbose install     'node-rest-client',
+7 verbose install     'q',
+7 verbose install     'through',
+7 verbose install     'async',
+7 verbose install     'lodash',
+7 verbose install     'node-schedule',
+7 verbose install     'winston',
+7 verbose install     'email-templates',
+7 verbose install     'node-sass',
+7 verbose install     'nodemon' ] ]
+8 verbose install where, peers [ '/Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred',
+8 verbose install   [] ]
+9 verbose installManyTop reading for lifecycle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/package.json
+10 info preinstall havenAPI@
+11 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/async/package.json
+12 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/babel/package.json
+13 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/babel-runtime/package.json
+14 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bcrypt/package.json
+15 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bluebird/package.json
+16 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/body-parser/package.json
+17 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bower/package.json
+18 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/ejs/package.json
+19 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/email-templates/package.json
+20 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/eslint/package.json
+21 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express/package.json
+22 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express-promise-router/package.json
+23 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express-router/package.json
+24 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/jsonwebtoken/package.json
+25 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/lodash/package.json
+26 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/mongoose/package.json
+27 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/mongoose-model-update/package.json
+28 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/morgan/package.json
+29 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/multer/package.json
+30 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-rest-client/package.json
+31 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-sass/package.json
+32 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-schedule/package.json
+33 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/nodemon/package.json
+34 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/q/package.json
+35 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/quickblox/package.json
+36 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/sendgrid/package.json
+37 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/socket.io/package.json
+38 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/stripe/package.json
+39 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/through/package.json
+40 verbose installManyTop reading scoped package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/winston/package.json
+41 info package.json express-promise-router@0.0.9 No license field.
+42 info package.json node-schedule@1.1.1 No README data
+43 info package.json node-schedule@1.1.1 No license field.
+44 info package.json q@1.4.1 license should be a valid SPDX license expression
+45 info package.json quickblox@2.1.2 license should be a valid SPDX license expression
+46 verbose readDependencies loading dependencies from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/package.json
+47 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/async/package.json
+48 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/babel/package.json
+49 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/babel-runtime/package.json
+50 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bcrypt/package.json
+51 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bluebird/package.json
+52 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/body-parser/package.json
+53 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/bower/package.json
+54 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/ejs/package.json
+55 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/email-templates/package.json
+56 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/eslint/package.json
+57 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express/package.json
+58 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express-promise-router/package.json
+59 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/express-router/package.json
+60 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/jsonwebtoken/package.json
+61 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/lodash/package.json
+62 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/mongoose/package.json
+63 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/mongoose-model-update/package.json
+64 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/morgan/package.json
+65 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/multer/package.json
+66 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-rest-client/package.json
+67 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-sass/package.json
+68 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/node-schedule/package.json
+69 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/nodemon/package.json
+70 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/q/package.json
+71 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/quickblox/package.json
+72 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/sendgrid/package.json
+73 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/socket.io/package.json
+74 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/stripe/package.json
+75 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/through/package.json
+76 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/winston/package.json
+77 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/babel/package.json
+78 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/babel-external-helpers/package.json
+79 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/babel-node/package.json
+80 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/babel-plugin/package.json
+81 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/bower/package.json
+82 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/eslint/package.json
+83 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/mosca/package.json
+84 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/node-sass/package.json
+85 verbose targetResolver reading package data from /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/.bin/nodemon/package.json
+86 verbose already installed skipping bcrypt@^0.8.5 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+87 verbose already installed skipping bluebird@^2.9.34 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+88 verbose already installed skipping body-parser@^1.14.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+89 verbose already installed skipping bower@^1.3.12 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+90 verbose already installed skipping ejs@^2.4.2 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+91 verbose already installed skipping eslint@^2.4.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+92 verbose already installed skipping express@^4.13.3 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+93 verbose already installed skipping express-promise-router@0.0.9 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+94 verbose already installed skipping express-router@0.0.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+95 verbose already installed skipping jsonwebtoken@^5.4.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+96 verbose already installed skipping mongoose@^4.2.9 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+97 verbose already installed skipping mongoose-model-update@^1.5.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+98 verbose already installed skipping morgan@^1.6.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+99 verbose already installed skipping node-rest-client@^1.8.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+100 verbose already installed skipping q@^1.4.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+101 verbose already installed skipping through@^2.3.8 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+102 verbose already installed skipping async@^0.9.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+103 verbose already installed skipping lodash@^3.10.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+104 verbose already installed skipping node-schedule@^1.1.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+105 verbose already installed skipping winston@^2.1.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+106 verbose already installed skipping email-templates@^2.3.4 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+107 verbose already installed skipping node-sass@^3.8.0 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+108 verbose already installed skipping nodemon@^1.8.1 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+109 verbose already installed skipping babel@^5.6.14 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+110 verbose already installed skipping babel-runtime@^5.8.20 /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+111 silly install resolved []
+112 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+113 info linkStuff havenAPI@
+114 silly linkStuff havenAPI@ has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney as its parent node_modules
+115 verbose linkBins havenAPI@
+116 verbose linkMans havenAPI@
+117 verbose rebuildBundles havenAPI@
+118 verbose rebuildBundles [ '.DS_Store',
+118 verbose rebuildBundles   '.bin',
+118 verbose rebuildBundles   'async',
+118 verbose rebuildBundles   'babel',
+118 verbose rebuildBundles   'babel-runtime',
+118 verbose rebuildBundles   'bcrypt',
+118 verbose rebuildBundles   'bluebird',
+118 verbose rebuildBundles   'body-parser',
+118 verbose rebuildBundles   'bower',
+118 verbose rebuildBundles   'ejs',
+118 verbose rebuildBundles   'email-templates',
+118 verbose rebuildBundles   'eslint',
+118 verbose rebuildBundles   'express',
+118 verbose rebuildBundles   'express-promise-router',
+118 verbose rebuildBundles   'express-router',
+118 verbose rebuildBundles   'jsonwebtoken',
+118 verbose rebuildBundles   'lodash',
+118 verbose rebuildBundles   'mongoose',
+118 verbose rebuildBundles   'mongoose-model-update',
+118 verbose rebuildBundles   'morgan',
+118 verbose rebuildBundles   'multer',
+118 verbose rebuildBundles   'node-rest-client',
+118 verbose rebuildBundles   'node-sass',
+118 verbose rebuildBundles   'node-schedule',
+118 verbose rebuildBundles   'nodemon',
+118 verbose rebuildBundles   'q',
+118 verbose rebuildBundles   'quickblox',
+118 verbose rebuildBundles   'sendgrid',
+118 verbose rebuildBundles   'socket.io',
+118 verbose rebuildBundles   'stripe',
+118 verbose rebuildBundles   'through',
+118 verbose rebuildBundles   'winston' ]
+119 verbose rebuild bundle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/multer
+120 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/multer
+121 info preinstall multer@0.1.8
+122 info linkStuff multer@0.1.8
+123 silly linkStuff multer@0.1.8 has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules as its parent node_modules
+124 verbose linkBins multer@0.1.8
+125 verbose linkMans multer@0.1.8
+126 verbose rebuildBundles multer@0.1.8
+127 verbose rebuildBundles [ 'busboy', 'mkdirp', 'qs', 'type-is' ]
+128 info install multer@0.1.8
+129 info postinstall multer@0.1.8
+130 verbose rebuild bundle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/quickblox
+131 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/quickblox
+132 info preinstall quickblox@2.1.2
+133 info linkStuff quickblox@2.1.2
+134 silly linkStuff quickblox@2.1.2 has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules as its parent node_modules
+135 verbose linkBins quickblox@2.1.2
+136 verbose linkMans quickblox@2.1.2
+137 verbose rebuildBundles quickblox@2.1.2
+138 verbose rebuildBundles [ 'crypto-js', 'jquery', 'request', 'strophe', 'xml2js' ]
+139 info install quickblox@2.1.2
+140 info postinstall quickblox@2.1.2
+141 verbose rebuild bundle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/sendgrid
+142 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/sendgrid
+143 info preinstall sendgrid@3.0.5
+144 info linkStuff sendgrid@3.0.5
+145 silly linkStuff sendgrid@3.0.5 has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules as its parent node_modules
+146 verbose linkBins sendgrid@3.0.5
+147 verbose linkMans sendgrid@3.0.5
+148 verbose rebuildBundles sendgrid@3.0.5
+149 verbose rebuildBundles [ 'sendgrid-rest' ]
+150 info install sendgrid@3.0.5
+151 info postinstall sendgrid@3.0.5
+152 verbose rebuild bundle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/socket.io
+153 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/socket.io
+154 info preinstall socket.io@1.4.5
+155 info linkStuff socket.io@1.4.5
+156 silly linkStuff socket.io@1.4.5 has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules as its parent node_modules
+157 verbose linkBins socket.io@1.4.5
+158 verbose linkMans socket.io@1.4.5
+159 verbose rebuildBundles socket.io@1.4.5
+160 verbose rebuildBundles [ 'debug',
+160 verbose rebuildBundles   'engine.io',
+160 verbose rebuildBundles   'has-binary',
+160 verbose rebuildBundles   'socket.io-adapter',
+160 verbose rebuildBundles   'socket.io-client',
+160 verbose rebuildBundles   'socket.io-parser' ]
+161 info install socket.io@1.4.5
+162 info postinstall socket.io@1.4.5
+163 verbose rebuild bundle /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/stripe
+164 info build /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules/stripe
+165 info preinstall stripe@4.7.0
+166 info linkStuff stripe@4.7.0
+167 silly linkStuff stripe@4.7.0 has /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred/node_modules as its parent node_modules
+168 verbose linkBins stripe@4.7.0
+169 verbose linkMans stripe@4.7.0
+170 verbose rebuildBundles stripe@4.7.0
+171 verbose rebuildBundles [ 'bluebird', 'lodash', 'qs' ]
+172 info install stripe@4.7.0
+173 info postinstall stripe@4.7.0
+174 info install havenAPI@
+175 info postinstall havenAPI@
+176 verbose unsafe-perm in lifecycle true
+177 info havenAPI@ Failed to exec postinstall script
+178 verbose stack Error: havenAPI@ postinstall: `scripts/precompile`
+178 verbose stack Exit status 1
+178 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:214:16)
+178 verbose stack     at emitTwo (events.js:87:13)
+178 verbose stack     at EventEmitter.emit (events.js:172:7)
+178 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+178 verbose stack     at emitTwo (events.js:87:13)
+178 verbose stack     at ChildProcess.emit (events.js:172:7)
+178 verbose stack     at maybeClose (internal/child_process.js:818:16)
+178 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+179 verbose pkgid havenAPI@
+180 verbose cwd /Volumes/WORK/XCodeProjects/Projects/AmanSawhney/tca-Alfred
+181 error Darwin 15.3.0
+182 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+183 error node v4.2.2
+184 error npm  v2.14.7
+185 error code ELIFECYCLE
+186 error havenAPI@ postinstall: `scripts/precompile`
+186 error Exit status 1
+187 error Failed at the havenAPI@ postinstall script 'scripts/precompile'.
+187 error This is most likely a problem with the havenAPI package,
+187 error not with npm itself.
+187 error Tell the author that this fails on your system:
+187 error     scripts/precompile
+187 error You can get their info via:
+187 error     npm owner ls havenAPI
+187 error There is likely additional logging output above.
+188 verbose exit [ 1, true ]

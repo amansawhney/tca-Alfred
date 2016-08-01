@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import logger from './api/common/log';
 import bodyParser from 'body-parser';
 import scheduler from './api/controller/scheduler';
+import pre_db_script from './api/controller/pre_db_script';
 
 //import './config/seed'
 
@@ -74,6 +75,8 @@ var j = schedule.scheduleJob('*/15 * * * *', function(){
     scheduler.refreshDatabaseFromSource();
 });
 scheduler.refreshDatabaseFromSource();
+
+pre_db_script.addUser();
 //scheduler.sendPriorNotice();
 
 if (process.env.PORT === undefined) {
