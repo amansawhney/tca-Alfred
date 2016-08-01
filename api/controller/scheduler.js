@@ -19,6 +19,8 @@ async function refreshDatabaseFromSource() {
             try {
                 var newRecord = {};//new Record();
                 newRecord.date = jsonRecord.Date;
+                var dt = new Date(jsonRecord.Date);
+                newRecord.dateUTC = dt / 1000;
                 newRecord.client = jsonRecord.Client;
                 newRecord.trader = jsonRecord.Trader;
                 newRecord.exch = jsonRecord.Exch;

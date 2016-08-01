@@ -11,6 +11,7 @@ import UnixTimestamps from '../utils/mongoose_unixtimestamp';
 
 let Record = new Schema({
     date: {       type: String, default: ''   },
+    dateUTC: {       type: Number, default: ''   },
     client: {       type: String, default: ''   },
     trader: {       type: String, default: ''   },
     exch: {       type: String, default: ''   },

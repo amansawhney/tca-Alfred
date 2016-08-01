@@ -2,7 +2,7 @@
 
 /* App Module */
 
-var admin = angular.module('admin', ['ui.router', 'login', 'records', 'users', 'xeditable', 'ui.bootstrap', 'angular-confirm', 'xeditable']);
+var admin = angular.module('admin', ['ui.router', 'login', 'records', 'users', 'xeditable','ngAnimate', 'ui.bootstrap', 'angular-confirm', 'xeditable']);
 
 admin.config(['$stateProvider', '$urlRouterProvider', 'toastrConfig',
     function($stateProvider, $urlRouterProvider, toastrConfig) {

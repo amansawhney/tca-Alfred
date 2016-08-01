@@ -1,3 +1,17 @@
+<style>
+  .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+</style>
+
 <div class="bg-light lter b-b wrapper-md">
   <h1 class="m-n font-thin h3">Records</h1>
 </div>
@@ -8,7 +22,7 @@
   <!-- Navigation -->
 
 
-  <div id="page-wrapper">
+  <div id="page-wrapper" ng-controller="RecordsController">
     <div class="row">
       <div class="col-lg-12">
         <!-- /.panel -->
@@ -22,71 +36,68 @@
               <div class="form-group row">
                 <div class="col-md-4">
                   <label>Date: </label>
-                  <select name="currDate" id="currDate" class="form-control">
+                  <select name="currDate" id="currDate" class="form-control"  ng-model="currDate">
                     <option value="">ALL</option>
                   </select>
                 </div>
+
                 <div class="col-md-2">
                   <label>Begin Date: </label>
-                  <div class='input-group date' id='beginDateDiv'>
-                    <input type='text' name="beginDate" id="beginDate" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
-							                <span class="input-group-addon">
-							                    <span class="glyphicon glyphicon-calendar"></span>
-							                </span>
-                  </div>
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptionsStart" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" max-date="endDate"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                  </p>
                 </div>
+
                 <div class="col-md-2">
                   <label>End Date: </label>
-                  <div class='input-group date' id='endDateDiv'>
-                    <input type='text' name="endDate" id="endDate" class="form-control datepicker" data-date-format="yyyy-mm-dd" />
-							                <span class="input-group-addon">
-							                    <span class="glyphicon glyphicon-calendar"></span>
-							                </span>
-                  </div>
+                  <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptionsEnd" ng-required="true" close-text="Close" min-date="startDate"/>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                  </p>
                 </div>
+
                 <div class="col-md-2">
                   <label>Min. Size: </label>
-                  <input type="text" name="minSize" id="minSize" class="form-control">
+                  <input type="text" name="minSize" id="minSize" class="form-control"  ng-model="minSize">
                 </div>
                 <div class="col-md-2">
                   <label>Max. Size:</label>
-                  <input type="text" name="maxSize" id="maxSize" class="form-control">
+                  <input type="text" name="maxSize" id="maxSize" class="form-control" ng-model="maxSize">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-md-2">
                   <label>Client: </label>
-                  <select name="client" id="client" class="form-control">
+                  <select name="client" id="client" class="form-control" ng-model="client">
                     <option value="all">ALL</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <label>FCM: </label>
-                  <select name="fcm" id="fcm" class="form-control">
+                  <select name="fcm" id="fcm" class="form-control" ng-model="fcm">
                     <option value="">ALL</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <label>Trader: </label>
-                  <select name="trader" id="trader" class="form-control">
+                  <select name="trader" id="trader" class="form-control" ng-model="trader">
                     <option value="">ALL</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <label>Algo: </label>
-                  <select name="algo" id="algo" class="form-control">
+                  <select name="algo" id="algo" class="form-control" ng-model="algo">
                     <option value="">ALL</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <label>Exchange: </label>
-                  <select name="exchange" id="exchange" class="form-control">
-                    <option value="">ALL</option>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label>Class: </label>
-                  <select name="classId" id="classId" class="form-control">
+                  <select name="exchange" id="exchange" class="form-control" ng-model="exchange">
                     <option value="">ALL</option>
                   </select>
                 </div>
@@ -94,13 +105,13 @@
               <div class="form-group row">
                 <div class="col-md-2">
                   <label>Instrument: </label>
-                  <select name="instrument" id="instrument" class="form-control">
+                  <select name="instrument" id="instrument" class="form-control" ng-model="instrument">
                     <option value="">ALL</option>
                   </select>
                 </div>
                 <div class="col-md-2">
                   <label>&nbsp;</label>
-                  <input type="button" value="Apply" onclick="filterPivotTable()" class="btn btn-md btn-info form-control" />
+                  <input type="button" value="Apply" ng-click="filterPivotTable()" class="btn btn-md btn-info form-control" />
                 </div>
               </div>
             </form>
@@ -111,33 +122,18 @@
       </div>
       <!-- /.row -->
     </div>
-    <div class="row" style="display: none;">
-      <div class="col-lg-12">
-        <!-- Pivote Table -->
-        <div class="panel panel-info" id="#filteredSection">
-          <div class="panel-heading">
-            Filtered Data
-          </div>
-          <!-- /.panel-heading -->
-          <div class="panel-body">
-            <div class="table-responsive" id="tableDiv" style="overflow-y: scroll">
-            </div>
-          </div>
-        </div>
-        <!-- End of Pivot table -->
-      </div>
-      <!-- /.row -->
-    </div>
+
     <div class="row">
       <div class="col-lg-12">
         <!-- Pivote Table -->
         <div class="panel panel-info" id="avgSection">
           <div class="panel-heading">
-            Averages
+            Stats
           </div>
           <!-- /.panel-heading -->
           <div class="panel-body">
             <div class="table-responsive" id="avgTableDiv">
+              <p ng-bind="total_records">Total : 0 Records</p>
             </div>
           </div>
         </div>

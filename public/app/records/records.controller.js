@@ -106,7 +106,7 @@ var config = {
 
 
 
-function RecordsController($scope,   $filter,   $http,   editableOptions,   editableThemes ,  RecordsService,   LoginService,   $modal, toastr){
+function RecordsController($scope,   $filter,   $http,   editableOptions,   editableThemes ,  RecordsService,   LoginService,   $uibModal, toastr){
 
     LoginService.ensureLogin();
 
@@ -121,6 +121,8 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
                 $scope.records = data;
                 // instantiate and show the pivot grid
                 config.dataSource = data;
+                $scope.total_records = "Total : " + data.length + " Records";
+
                 //console.log(data[999]);
                 new orb.pgridwidget(config).render(document.getElementById('pgrid'));
             }
@@ -154,8 +156,119 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
     editableOptions.theme = 'bs3';
 
 
+    //var checkin = $('#beginDateDiv').datepicker({
+    //    format: 'mm/dd/yyyy',
+    //    onRender : function(date) {
+    //        return date.valueOf() < now1.valueOf() ? 'disabled' : '';
+    //    }
+    //}).on('changeDate', function(ev) {
+    //    // if (ev.date.valueOf() > date.valueOf()) {
+    //    var newDate = new Date(ev.date);
+    //    newDate.setDate(newDate.getDate() + 1);
+    //    checkout.setValue(newDate);
+    //    // }
+    //    checkin.hide();
+    //    // setTimeout(function(){
+    //    $('#endDateDiv').focus();
+    //    // }, 1000);
+    //
+    //}).data('datepicker');
+    //var checkout = $('#endDateDiv').datepicker({
+    //    format: 'mm/dd/yyyy',
+    //    onRender : function(date) {
+    //        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    //    }
+    //}).on('changeDate', function(ev) {
+    //    checkout.hide();
+    //}).data('datepicker');
     //$('.footable').footable();
     //$('.footable').trigger('footable_redraw');
+
+
+
+    $scope.dateOptionsStart = {
+        dateDisabled: disabledStart,
+        formatYear: 'yy',
+        //maxDate: new Date(2020, 5, 22),
+        //minDate: new Date(),
+        startingDay: 1
+    };
+    $scope.dateOptionsEnd = {
+        dateDisabled: disabledEnd,
+        formatYear: 'yy',
+        //maxDate: new Date(2020, 5, 22),
+        //minDate: new Date(),
+        startingDay: 1
+    };
+    //// Disable weekend selection
+    function disabledStart(data) {
+        var date = data.date,
+            mode = data.mode;
+        if (!$scope.endDate)
+        {
+            return false;
+        }
+
+        return mode === 'day' && (date > $scope.endDate);
+    }
+    function disabledEnd(data) {
+        var date = data.date,
+            mode = data.mode;
+        if (!$scope.startDate)
+        {
+            return false;
+        }
+        return mode === 'day' && (date < $scope.startDate);
+    }
+
+    $scope.open1 = function() {
+        $scope.popup1.opened = true;
+    };
+
+    $scope.open2 = function() {
+        $scope.popup2.opened = true;
+    };
+
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+    $scope.altInputFormats = ['M!/d!/yyyy'];
+
+    $scope.popup1 = {
+        opened: false
+    };
+
+    $scope.popup2 = {
+        opened: false
+    };
+
+    $scope.filterPivotTable = function() {
+
+        console.log("filterPivotTable");
+
+        var params = {"filter":"filter", "currDate": $scope.currDate, "startDate": $scope.startDate, "endDate": $scope.endDate, "minSize": $scope.minSize, "maxSize": $scope.maxSize,
+            "client": $scope.client, "fcm": $scope.fcm,  "trader": $scope.trader, "algo": $scope.algo, "exchange": $scope.exchange, "instrument": $scope.instrument};
+
+        RecordsService.getRecords(params, function(err, data){
+            console.log("RecordsService.getRecords")
+
+            if(err){
+                console.log(err);
+            }
+            else{
+                $scope.records = data;
+                // instantiate and show the pivot grid
+                config.dataSource = data;
+                //console.log(data.length);
+                $scope.total_records = "Total : " + data.length + " Records";
+                $("#pgrid").empty();
+                var pgridw = new orb.pgridwidget(config);
+                pgridw.render(document.getElementById('pgrid'));
+                pgridw.refreshData(data);
+                //new orb.pgridwidget(config).render(document.getElementById('pgrid'));
+            }
+        });
+    };
 }
 
 function refreshControlls(stats)
@@ -166,17 +279,18 @@ function refreshControlls(stats)
     refreshComponents(stats.exchs, "#exchange");
     refreshComponents(stats.instruments, "#instrument");
     refreshComponents(stats.algos, "#algo");
+    refreshComponents(stats.dates, "#currDate");
 }
 
 function refreshComponents(arrData, component)
 {
-    console.log("refreshComponents: " + component);
+    //console.log("refreshComponents: " + component);
     var arrayLength = arrData.length;
     var allHTML = "<option value='all'>ALL</option>";
     for (var i = 0; i < arrayLength; i++) {
         allHTML += "<option value='"+arrData[i]+"'>"+arrData[i]+"</option>";
     }
-    console.log(allHTML);
+    //console.log(allHTML);
     $(component).html(allHTML);
 }
 records.controller('RecordsController', RecordsController);
@@ -184,7 +298,7 @@ records.controller('RecordsController', RecordsController);
 records.directive('footableDirective', function(){
     return function(scope, element){
         var footableTable = element.parents('table');
-        console.log("records.directive")
+        //console.log("records.directive")
 
         if( !scope.$last ) {
             return false;

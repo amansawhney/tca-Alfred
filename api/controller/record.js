@@ -18,10 +18,88 @@ async function getMyRecords(req, res, next) {
 
 async function getAllRecords(req, res, next) {
 
-    var search_keyword = req.query.search_keyword;
+    //var search_keyword = req.query.search_keyword;
     var offset = 0; //req.query.offset
-    var limit = 10;
-    let records = await Record.findAsync({}, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
+    var limit = 10000;
+
+    var querySet = {};
+    if (req.query.filter == "filter")
+    {
+        try {
+            if (req.query.currDate && req.query.currDate != "all")
+            {
+                querySet.date = req.query.currDate;
+            }
+            if (req.query.client && req.query.client != "all")
+            {
+                querySet.client = req.query.client;
+            }
+            if (req.query.fcm && req.query.fcm != "all")
+            {
+                querySet.fcm = req.query.fcm;
+            }
+            if (req.query.trader && req.query.trader != "all")
+            {
+                querySet.trader = req.query.trader;
+            }
+            if (req.query.algo && req.query.algo != "all")
+            {
+                querySet.algo = req.query.algo;
+            }
+            if (req.query.exchange && req.query.exchange != "all")
+            {
+                querySet.exchange = req.query.exchange;
+            }
+            if (req.query.instrument && req.query.instrument != "all")
+            {
+                querySet.instrument = req.query.instrument;
+            }
+
+            if ((req.query.minSize && req.query.minSize != "") && (req.query.maxSize && req.query.maxSize != ""))
+            {
+                querySet.size = {$gt: req.query.minSize, $lt: req.query.maxSize};
+            }
+            else if(req.query.minSize && req.query.minSize != "")
+            {
+                querySet.size = {$gt: req.query.minSize};
+            }
+            else if(req.query.maxSize && req.query.maxSize != "")
+            {
+                querySet.size = {$lt: req.query.maxSize};
+            }
+
+            if (req.query.startDate && req.query.endDate)
+            {
+                var dtStart = new Date(req.query.startDate);
+                var startUnixTimestamp = dtStart / 1000;
+                var dtEnd = new Date(req.query.endDate);
+                var endUnixTimestamp = dtEnd / 1000 + 60 * 60 * 24;
+                querySet.dateUTC = {$gt: startUnixTimestamp, $lt: endUnixTimestamp};
+            }
+            else if(req.query.startDate)
+            {
+                var dtStart = new Date(req.query.startDate);
+                var startUnixTimestamp = dtStart / 1000;
+                querySet.dateUTC = {$gt: startUnixTimestamp};
+            }
+            else if(req.query.endDate)
+            {
+                var dtEnd = new Date(req.query.endDate) + 60 * 60 * 24;
+                var endUnixTimestamp = dtEnd / 1000;
+                querySet.dateUTC = {$lt: endUnixTimestamp};
+            }
+            //console.log(req.query);
+            //console.log(querySet);
+        }catch(err)
+        {
+            console.log(err);
+        }
+
+
+    }
+
+    let records = await Record.findAsync(querySet, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
+    //console.log(records);
 
     //let clients = await Record.find().distinct('client');
     //console.log(clients);
@@ -36,6 +114,7 @@ async function getRecordsWithFilters(req, res, next) {
     var limit = 10;
 
     var querySet = {};
+
     if (req.query.client != "all")
     {
         querySet.client = req.query.client;
@@ -78,14 +157,15 @@ async function getRecordsWithFilters(req, res, next) {
     });
 }
 async function getRecordsStatics(req, res, next) {
-    console.log("getRecordsStatics");
+    //console.log("getRecordsStatics");
     let clients = await Record.find().distinct('client');
     let fcms = await Record.find().distinct('fcm');
     let traders = await Record.find().distinct('trader');
     let exchs = await Record.find().distinct('exch');
     let algos = await Record.find().distinct('algo');
     let instruments = await Record.find().distinct('instrument');
-    console.log(instruments);
+    let dates = await Record.find().distinct('date');
+    //console.log(instruments);
 
     return res.status(200).send({
         clients: clients,
@@ -93,7 +173,8 @@ async function getRecordsStatics(req, res, next) {
         traders: traders,
         exchs: exchs,
         algos: algos,
-        instruments: instruments
+        instruments: instruments,
+        dates: dates
     });
 }
 
