@@ -11,7 +11,7 @@ async function signUp(req, res, next) {
     var email = req.body.email;
 
     let user = await User.findOneAsync({ $or:[{username: username},{email: email}]});
-    console.log("signup called111");
+    //console.log("signup called111");
 
     if (user)
     {
@@ -29,7 +29,6 @@ async function signUp(req, res, next) {
     //console.log("signup called1");
 
     newUser.password = User.generatePassword(req.body.password);
-    newUser.settings = {push:"1", email:"1", notice: "60"};
 
     await newUser.save();
 
@@ -49,6 +48,56 @@ async function signUp(req, res, next) {
         api_token: token,
         user: plainUserObject
     });
+}
+
+
+async function createUser(req, res, next) {
+    console.log("createUser called");
+    //console.log(req.body);
+    try {
+        var newUser = new User(req.body);
+        var username = req.body.username;
+        var email = req.body.email;
+
+        let user = await User.findOneAsync({ $or:[{username: username},{email: email}]});
+
+        if (user)
+        {
+            if(user.email == email)
+            {
+                return res.status(200).send({
+                    message: 'Email address already exists. Try another email address.'
+                });
+            }
+            return res.status(200).send({
+                message: 'Username already exists. Try another username.'
+            });
+        }
+
+        newUser.password = User.generatePassword(req.body.password);
+        newUser.userType = "general";
+        //console.log(newUser);
+
+        await newUser.save();
+
+        var plainUserObject = newUser.toObject();
+        delete plainUserObject['password'];
+
+
+
+        return res.status(200).send({
+            message: 'Successfully created',
+            user: plainUserObject
+        });
+    }catch(err)
+    {
+        console.log(err);
+        return res.status(200).send({
+            message: err.message
+        });
+
+    }
+
 }
 
 
@@ -91,6 +140,7 @@ async function logIn(req, res, next) {
         user: plainUserObject
     });
 }
+
 async function getMeInfo(req, res, next) {
 
     var userId = req.decoded._id;
@@ -125,8 +175,8 @@ async function loginAdmin(req, res, next) {
     //console.log(password);
     let user = await User.findOne({ email: email }).select("+password");
 
-    console.log(User.generatePassword(req.body.password));
-    console.log(user);
+    //console.log(User.generatePassword(req.body.password));
+    //console.log(user);
     if (!user) {
         return res.status(200).send({
             message: 'Invalid email or password!'
@@ -217,6 +267,16 @@ async function resetPassword(req, res, next) {
 async function users(req, res, next) {
 
     var userId = req.decoded._id;
+
+    //console.log(userId);
+    if(req.decoded.userType != "admin")
+    {
+        return res.status(200).send({
+            message: "You don't have permission",
+            users: {}
+        });
+    }
+
     //var searchKeyword = req.query.searchKeyword;
 
 
@@ -283,11 +343,6 @@ async function changePassword(req, res, next) {
     });
 }
 
-async function createUser(req, res, next) {
-
-    return this.signUp(req, res, next);
-}
-
 async function getUser(req, res, next) {
 
     var userId = req.params.id;
@@ -308,9 +363,24 @@ async function getUser(req, res, next) {
 async function updateUser(req, res, next) {
 
     var userId = req.params.id;
-    var changeSet = JSON.parse(req.body.updatelist);
+    console.log(userId);
+    try {
+        var changeSet = {firstName: req.body.firstName, lastName: req.body.lastName};
+        if (req.body.password && req.body.password != "")
+        {
+            var hashedPassword = User.generatePassword(req.body.password);
+            changeSet.password = hashedPassword;
+        }
 
-    await User.update({_id: userId}, { $set: changeSet }, {upsert:false, runValidators:true});
+        await User.update({_id: userId}, { $set: changeSet }, {upsert:false, runValidators:true});
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.status(200).send({
+            message: err.message
+        });
+    }
     return res.status(200).send({
         message: 'Your profile has been successfully updated'
     });

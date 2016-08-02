@@ -27,12 +27,15 @@ angular.module('login')
                             //console.log("*****");
                             //console.log(data);
                             //console.log("*****Done");
-                            if(data.data.api_token && data.data.user.userType == "admin") {//data.api_token &&
+                            if(data.data.api_token) {//data.api_token &&// && data.data.user.userType == "admin"
                                 $window.sessionStorage.setItem("api_token", data.data.api_token);
+                                $window.sessionStorage.setItem("userType", data.data.user.userType);
+
+                                $scope.$root.userType = $window.sessionStorage.getItem("userType");
                                 $state.go('admin.records');
                             }
                             else{
-                                $scope.authError = 'You are not admin user';
+                                $scope.authError = 'Login Failed';
                             }
                         }, function(x) {
                             if(x.data.status && x.data.status == "401")

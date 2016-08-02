@@ -21,10 +21,10 @@ module.exports = function (app){
     router.get('/me/info', token.checkSignatureNotExpired, token.checkAuthenticated,  user.getMeInfo);//,
 
 // User Management APIs
-    router.post('/user', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.signUp);
-    //router.get('/users', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.users);
-    router.get('/user/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.getUser);
-    router.delete('/user/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.deleteUser);
+    router.post('/users', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.createUser);
+    router.get('/users', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.users);
+    router.get('/users/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.getUser);
+    router.delete('/users/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.deleteUser);
     router.put('/user/:id', token.checkSignatureNotExpired, token.checkAuthenticated, token.checkManagerAdmin, user.updateUser);
 
 //Record Management

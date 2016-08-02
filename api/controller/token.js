@@ -9,7 +9,7 @@ import { User } from '../model';
 
 async function checkManagerAdmin(req, res, next){
     var id = req.decoded._id || req.body.id || req.query.id;
-    console.log(req.decoded);
+    //console.log(req.decoded);
     if (req.decoded.userType == "admin")
     {
         next();

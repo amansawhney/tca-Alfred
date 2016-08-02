@@ -8,5 +8,7 @@ module.exports = {
 	admin_username: 'admin',
 	check_max_interval: 240,
 	check_min_interval: 15,
-	json_file_path: '/Volumes/WORK/XCodeProjects/Projects/AmanSawhney/data.json'
+	encryption_algorithm:'aes-256-ctr',
+	encryption_password:'a1e31f3q',
+	json_file_path: '/Volumes/WORK/XCodeProjects/Projects/AmanSawhney/data.json',
 };

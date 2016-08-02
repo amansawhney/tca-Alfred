@@ -10,7 +10,12 @@
       <span class="font-bold" translate="aside.nav.CATEGORIES">Records</span>
     </a>
   </li>
-
+  <li ui-sref-active="active" id="nav_li_users" ng-show="$root.userType=='admin'">
+    <a ui-sref="admin.users">
+      <i class="glyphicon glyphicon-map-marker icon text-info-dker"></i>
+      <span class="font-bold" translate="aside.nav.USERS">Users</span>
+    </a>
+  </li>
   <li ui-sref-active="active">
     <a ui-sref="login" ng-click="logout()">
       <i class="glyphicon glyphicon-log-out icon text-info-dker"></i>

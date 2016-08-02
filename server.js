@@ -75,7 +75,6 @@ var j = schedule.scheduleJob('*/15 * * * *', function(){
     scheduler.refreshDatabaseFromSource();
 });
 scheduler.refreshDatabaseFromSource();
-
 pre_db_script.addUser();
 //scheduler.sendPriorNotice();
 

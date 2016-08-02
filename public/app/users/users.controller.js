@@ -1,6 +1,6 @@
 var users = angular.module('users', ['toastr']);
 
-function UsersController($scope, $filter, $http, editableOptions, editableThemes ,UsersService, LoginService, $modal, toastr){
+function UsersController($scope, $filter, $http, editableOptions, editableThemes ,UsersService, LoginService, $uibModal, toastr){
 
     LoginService.ensureLogin();
 
@@ -16,7 +16,7 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
     }
 
     $scope.showAddModal = function() {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl: 'app/users/add.modal/add.modal.html',
             controller: 'AddUsersModalController',
             controllerAs: 'addModalCtrl',
@@ -30,7 +30,8 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
     }
 
     $scope.showUpdateModal = function(user) {
-        var modalInstance = $modal.open({
+        console.log("showUpdateModal");
+        var modalInstance = $uibModal.open({
             templateUrl: 'app/users/edit.modal/edit.modal.html',
             controller: 'EditUsersModalController',
             controllerAs: 'editModalCtrl',
@@ -50,9 +51,9 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
 
     $scope.removeUser = function(id){
         UsersService.removeUser(id).then(function(data) {
-            if ( data.data.success ) {
+            //if ( data.data.success ) {
                 toastr.success('User #:' + id + ' Removed', '');
-            }
+            //}
             $scope.getUsers();
         }, function(x) {
             toastr.error('Server Error');

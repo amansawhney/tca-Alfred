@@ -27,7 +27,7 @@
     "angular-toastr": "~1.4.1",
     "angular-ui-router": "~0.2.15",
     "angular-xeditable": "~0.1.9",
-    "angular-confirm-modal": "1.1.0",
+    "angular-confirm-modal": "~1.2.5",
     "bootstrap": "~3.3.5",
     "bootstrap-datepicker": "latest",
     "lodash": "~4.0.0",

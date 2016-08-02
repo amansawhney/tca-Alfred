@@ -27,12 +27,39 @@ angular.module('users')
 
             },
 
-            updateUser: function(user){
-                var url = '/api/v1/users/' + user._id;
+            addUser: function(user, callback){
+                var url = '/api/users';
                 var data = user;
 
                 $http({
-                    method: 'patch',
+                    method: 'post',
+                    url: url,
+                    headers: {
+                        'X-Auth-Token': $window.sessionStorage.getItem('api_token')
+                    },
+                    data:data
+                })
+                    .then(function(data) {
+                            //alert(JSON.stringify(data.data));
+                            if ( data.data.user ) {
+                                toastr.success('User Created');
+                            }else{
+                                $state.go('app.dashboard');
+                            }
+                        callback(data);
+                        }, function(x) {
+                            toastr.error('Server Error');
+                        callback(x);
+                        }
+                    );
+            },
+
+            updateUser: function(user, callback){
+                var url = '/api/user/' + user._id;
+                var data = user;
+
+                $http({
+                    method: 'put',
                     url: url,
                     headers: {
                         'X-Auth-Token': $window.sessionStorage.getItem('api_token')
@@ -41,19 +68,21 @@ angular.module('users')
                 })
                     .then(function(data) {
                         //alert(JSON.stringify(data.data));
-                        if ( data.data.success ) {
+                        //if ( data.data.success ) {
                             toastr.success('User updated');
-                        }else{
-                            $state.go('app.dashboard');
-                        }
+                        //}else{
+                        //    $state.go('app.dashboard');
+                        //}
+                        callback(data);
                     }, function(x) {
                         toastr.error('Server Error');
+                        callback(x);
                     }
                 );
             },
 
             removeUser: function(id){
-                var url = '/api/v1/users/' + id;
+                var url = '/api/users/' + id;
 
                 return $http({
                     method: 'delete',

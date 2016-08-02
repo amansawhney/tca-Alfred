@@ -1,6 +1,7 @@
 angular.module('admin')
-    .controller('AdminController', function($scope ,  $state,   LoginService) {
-
+    .controller('AdminController', function($scope ,  $state,   LoginService , $window) {
+        $scope.$root.userType = $window.sessionStorage.getItem("userType");
+        console.log($scope.userType);
         $scope.logout = function(){
             LoginService.doLogout();
         }

@@ -7,7 +7,7 @@
         .module('users')
         .controller('EditUsersModalController', EditUsersModalController);
 
-    function EditUsersModalController($http, $scope, UsersService, $modalInstance, user){
+    function EditUsersModalController($http, $scope, UsersService, $uibModalInstance, user){
 
         var vm = this;
         vm.showError = false;
@@ -16,8 +16,9 @@
 
         $scope.updateUser = function(user){
             $scope.isDisabled = true;
-            UsersService.updateUser(user);
-            $modalInstance.close();
+            UsersService.updateUser(user, function(err){
+                $uibModalInstance.close();
+            });
         }
     }
 

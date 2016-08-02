@@ -7,12 +7,20 @@
         .module('users')
         .controller('AddUsersModalController', AddUsersModalController);
 
-    function AddUsersModalController($http, $scope,  MenuitemsService, $modalInstance){
+    function AddUsersModalController($http, $scope, UsersService, $uibModalInstance){
 
         var vm = this;
         vm.showError = false;
 
-        $scope.menuitem = {};
+        $scope.user = {};
+
+        $scope.addUser = function(user){
+            $scope.isDisabled = true;
+            UsersService.addUser(user, function(err){
+                $uibModalInstance.close();
+            });
+        }
+
     }
 
 })()

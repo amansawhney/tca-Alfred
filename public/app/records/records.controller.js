@@ -12,70 +12,79 @@ var config = {
         columnsvisible: true
     },
     subTotal: {
-        visible: true,
+        visible: false,
         collapsed: true
     },
     fields: [
-        { name: '0', caption: 'Date' },
-        { name: '1', caption: 'Client' },
-        { name: '2', caption: 'Trader' },
-        { name: '3', caption: 'Exch'},
-        { name: '4', caption: 'Algo' },
-        { name: '5', caption: 'Instrument'},
-        { name: '6', caption: 'FCM' },
-        { name: '7', caption: 'Size' },
-        { name: '8', caption: 'Filled'},
-        { name: '9', caption: 'Duration' },
-        { name: '10', caption: '%Volume', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'date', caption: 'Date' },
+        { name: 'client', caption: 'Client' },
+        { name: 'trader', caption: 'Trader' },
+        { name: 'exch', caption: 'Exch'},
+        { name: 'algo', caption: 'Algo' },
+        { name: 'instrument', caption: 'Instrument'},
+        { name: 'fcm', caption: 'FCM' },
+        { name: 'size', caption: 'Size' },
+        { name: 'filled', caption: 'Filled'},
+        { name: 'duration', caption: 'Duration' },
+        { name: 'volume', caption: '%Volume', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '11', caption: '%iVolume', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'ivolume', caption: '%iVolume', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '12', caption: '%Passive' , dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'passive', caption: 'Passive' , dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '13', caption: '%Cleanup', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'cleanup', caption: 'Cleanup', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '14', caption: 'AP' , dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'ap', caption: 'AP' , dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '15', caption: 'STF', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'stf', caption: 'STF', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         } },
-        { name: '16', caption: 'IVWAP', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'ivwap', caption: 'IVWAP', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '17', caption: 'VWAP' , dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'vwap', caption: 'VWAP' , dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
         }},
-        { name: '18', caption: 'TWAP', dataSettings: {
-            aggregateFunc: 'avg',
+        { name: 'twap', caption: 'TWAP', dataSettings: {
+            aggregateFunc: weightedAverage,
+            aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
@@ -92,10 +101,10 @@ var config = {
          }*/
     ],
     //rows    : [ 'client', 'trader', 'exch' ],
-    rows    : [ 'client', 'trader' ],
+    rows    : [ 'Client', 'Trader' ],
     //columns : [ 'algo', 'instrument', 'fcm', 'size' ],
-    columns : [ 'algo' ],
-    data    : [ 'volume', 'ivolume', 'passive', 'cleanup', 'ap', 'stf', 'ivwap', 'vwap', 'twap' ],
+    columns : [ 'Algo' ],
+    data    : [ '%Volume', '%iVolume', 'Passive', 'Cleanup', 'AP', 'STF', 'IVWAP', 'VWAP', 'TWAP' ],
     /*preFilters : {
      'Manufacturer': { 'Matches': /n/ },
      'Amount'      : { '>':  40 }
@@ -104,8 +113,40 @@ var config = {
     height: 645
 };
 
+var weightedAverage = function(datafield, intersection, datasource, rowIndexes, colIndexes){
+    var avg = 0;
+    var len = (intersection === 'all' ? datasource : intersection).length;
+    var overallWeight = 0;
+    //console.log(datafield);
+    if (len > 0) {
+        forEachIntersection(datafield, intersection, datasource, function(val, weight) {
+            //console.log(val);
+            avg += val * weight;
+            overallWeight += weight;
+        });
+        //console.log(avg, len);
+        if(overallWeight > 0)
+        {
+            avg /= overallWeight;
+        }
+        else {
+            avg = 0;
+        }
 
+    }
+    return avg;
+}
 
+function forEachIntersection(datafield, intersection, datasource, callback) {
+    var all = intersection === 'all';
+    intersection = all ? datasource : intersection;
+    if (intersection.length > 0) {
+        for (var i = 0; i < intersection.length; i++) {
+            //console.log(intersection[i][datafield]);
+            callback((all ? intersection[i] : datasource[intersection[i]])[datafield], (all ? intersection[i] : datasource[intersection[i]])["filled"]);
+        }
+    }
+}
 function RecordsController($scope,   $filter,   $http,   editableOptions,   editableThemes ,  RecordsService,   LoginService,   $uibModal, toastr){
 
     LoginService.ensureLogin();
