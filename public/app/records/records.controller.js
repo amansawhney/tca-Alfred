@@ -16,11 +16,7 @@ var weightedAverage = function(datafield, intersection, datasource, rowIndexes, 
 
             }
         });
-        //console.log(avg, len);
-        if(datafield == "volume")
-        {
-            console.log("Average:" + avg + " Weight: " + overallWeight);
-        }
+
         if(overallWeight > 0)
         {
             avg /= overallWeight;
@@ -33,7 +29,17 @@ var weightedAverage = function(datafield, intersection, datasource, rowIndexes, 
     return avg;
 };
 
-
+var formattedValue = function(value)
+{
+    if (value)
+    {
+        return parseFloat(value).toFixed(3);
+    }
+    else
+    {
+        return "";
+    }
+}
 var config = {
     dataSource: records,
     dataHeadersLocation: 'columns',
@@ -62,66 +68,48 @@ var config = {
         { name: 'duration', caption: 'Duration' },
         { name: 'volume', caption: '%Volume', dataSettings: {
             aggregateFunc: weightedAverage,
-            //aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            aggregateFuncName: "weighted avg",
+            formatFunc: formattedValue
         }},
         { name: 'ivolume', caption: '%iVolume', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'passive', caption: 'Passive' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'cleanup', caption: 'Cleanup', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'ap', caption: 'AP' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'stf', caption: 'STF', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         } },
         { name: 'ivwap', caption: 'IVWAP', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'vwap', caption: 'VWAP' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         { name: 'twap', caption: 'TWAP', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "weighted avg",
-            formatFunc: function(value) {
-                return parseFloat(value);
-            }
+            formatFunc: formattedValue
         }},
         /*{
          name: '19',
