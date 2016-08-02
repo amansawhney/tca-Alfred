@@ -1,5 +1,39 @@
 var records = angular.module('records', ['toastr']);
 
+
+var weightedAverage = function(datafield, intersection, datasource, rowIndexes, colIndexes){
+    var avg = 0;
+    var len = (intersection === 'all' ? datasource : intersection).length;
+    var overallWeight = 0;
+    //console.log(datafield);
+    if (len > 0) {
+        forEachIntersection(datafield, intersection, datasource, function(val, weight) {
+            //console.log(val);
+            if(val)
+            {
+                avg += val * weight;
+                overallWeight += weight;
+
+            }
+        });
+        //console.log(avg, len);
+        if(datafield == "volume")
+        {
+            console.log("Average:" + avg + " Weight: " + overallWeight);
+        }
+        if(overallWeight > 0)
+        {
+            avg /= overallWeight;
+        }
+        else {
+            avg = 0;
+        }
+
+    }
+    return avg;
+};
+
+
 var config = {
     dataSource: records,
     dataHeadersLocation: 'columns',
@@ -28,7 +62,7 @@ var config = {
         { name: 'duration', caption: 'Duration' },
         { name: 'volume', caption: '%Volume', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            //aggregateFuncName: "weighted avg",
             formatFunc: function(value) {
                 return parseFloat(value);
             }
@@ -112,30 +146,6 @@ var config = {
     width: 1500,
     height: 645
 };
-
-var weightedAverage = function(datafield, intersection, datasource, rowIndexes, colIndexes){
-    var avg = 0;
-    var len = (intersection === 'all' ? datasource : intersection).length;
-    var overallWeight = 0;
-    //console.log(datafield);
-    if (len > 0) {
-        forEachIntersection(datafield, intersection, datasource, function(val, weight) {
-            //console.log(val);
-            avg += val * weight;
-            overallWeight += weight;
-        });
-        //console.log(avg, len);
-        if(overallWeight > 0)
-        {
-            avg /= overallWeight;
-        }
-        else {
-            avg = 0;
-        }
-
-    }
-    return avg;
-}
 
 function forEachIntersection(datafield, intersection, datasource, callback) {
     var all = intersection === 'all';
