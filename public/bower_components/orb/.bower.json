@@ -1,0 +1,14 @@
+{
+  "name": "orb",
+  "homepage": "https://github.com/nnajm/orb",
+  "version": "1.0.9",
+  "_release": "1.0.9",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.9",
+    "commit": "1c4438fd428f6b0cf2b421cfd5ed0cce436ab580"
+  },
+  "_source": "https://github.com/nnajm/orb.git",
+  "_target": "*",
+  "_originalSource": "orb"
+}
