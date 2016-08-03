@@ -10,5 +10,5 @@ module.exports = {
 	check_min_interval: 15,
 	encryption_algorithm:'aes-256-ctr',
 	encryption_password:'a1e31f3q',
-	json_file_path: '/Volumes/WORK/XCodeProjects/Projects/AmanSawhney/data.json',
+	json_file_path: '/Users/gagandeepsawhney/Development/miscProjects/tca-Alfred/sample/data_encrypted.json',
 };

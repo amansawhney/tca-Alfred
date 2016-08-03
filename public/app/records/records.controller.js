@@ -43,7 +43,7 @@ var formattedValue = function(value)
 var config = {
     dataSource: records,
     dataHeadersLocation: 'columns',
-    theme: 'blue',
+    theme: 'green',
     toolbar: {
         visible: true
     },
@@ -63,52 +63,55 @@ var config = {
         { name: 'algo', caption: 'Algo' },
         { name: 'instrument', caption: 'Instrument'},
         { name: 'fcm', caption: 'FCM' },
-        { name: 'size', caption: 'Size' },
+        { name: 'size', caption: 'Size', dataSettings: {
+            aggregateFunc: 'avg',
+            formatFunc: formattedValue
+        }},
         { name: 'filled', caption: 'Filled'},
         { name: 'duration', caption: 'Duration' },
         { name: 'volume', caption: '%Volume', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'ivolume', caption: '%iVolume', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'passive', caption: 'Passive' , dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'cleanup', caption: 'Cleanup', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'ap', caption: 'AP' , dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'stf', caption: 'STF', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         } },
         { name: 'ivwap', caption: 'IVWAP', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'vwap', caption: 'VWAP' , dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         { name: 'twap', caption: 'TWAP', dataSettings: {
             aggregateFunc: weightedAverage,
-            aggregateFuncName: "weighted avg",
+            aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
         /*{

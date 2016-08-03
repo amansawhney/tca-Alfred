@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"   data-ng-app="admin" >
+<html lang="en" data-ng-app="admin">
+
 <head>
     <meta charset="UTF-8">
-    <title>Pivot Dashboard</title>
+    <title>Quantitative Brokers</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css" type="text/css">
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
@@ -13,11 +14,14 @@
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.min.css">
     <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="bower_components/orb/dist/orb.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
 
 </head>
-<body ng-controller="AdminController" >
 
-<div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+<body ng-controller="AdminController">
+
+    <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
 
     <!-- Bower Components -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -53,4 +57,5 @@
 
 
 </body>
+
 </html>
