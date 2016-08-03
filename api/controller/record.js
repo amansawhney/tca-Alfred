@@ -159,22 +159,22 @@ async function getRecordsWithFilters(req, res, next) {
 async function getRecordsStatics(req, res, next) {
     //console.log("getRecordsStatics");
     let clients = await Record.find().distinct('client');
-    let fcms = await Record.find().distinct('fcm');
     let traders = await Record.find().distinct('trader');
-    let exchs = await Record.find().distinct('exch');
-    let algos = await Record.find().distinct('algo');
-    let instruments = await Record.find().distinct('instrument');
-    let dates = await Record.find().distinct('date');
+    //let fcms = await Record.find().distinct('fcm');
+    //let exchs = await Record.find().distinct('exch');
+    //let algos = await Record.find().distinct('algo');
+    //let instruments = await Record.find().distinct('instrument');
+    //let dates = await Record.find().distinct('date');
     //console.log(instruments);
 
     return res.status(200).send({
         clients: clients,
-        fcms: fcms,
         traders: traders,
-        exchs: exchs,
-        algos: algos,
-        instruments: instruments,
-        dates: dates
+        //fcms: fcms,
+        //exchs: exchs,
+        //algos: algos,
+        //instruments: instruments,
+        //dates: dates
     });
 }
 

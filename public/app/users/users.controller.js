@@ -4,6 +4,9 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
 
     LoginService.ensureLogin();
 
+    $scope.clientList = [];
+    $scope.traderList = [];
+
     $scope.getUsers = function(){
         UsersService.getUsers({}, function(err, data){
             if(err){
@@ -49,6 +52,20 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
         });
     }
 
+    $scope.getStatics = function(){
+        RecordsService.getStatics({}, function(err, data){
+            console.log("RecordsService.getStatics")
+
+            if(err){
+                console.log(err);
+            }
+            else{
+                $scope.clientList = data.clients;
+                $scope.traderList = data.traders;
+            }
+        });
+    }
+
     $scope.removeUser = function(id){
         UsersService.removeUser(id).then(function(data) {
             //if ( data.data.success ) {
@@ -61,6 +78,7 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
     }
 
     $scope.getUsers();
+    $scope.getStatics();
 
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
