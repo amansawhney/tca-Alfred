@@ -42,3 +42,8 @@ bower_components
 .bower-cache
 .bower-registry
 .bower-tmp
+
+.idea
+dist/
+
+api/common/config.js
