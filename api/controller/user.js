@@ -75,7 +75,7 @@ async function createUser(req, res, next) {
         }
 
         newUser.password = User.generatePassword(req.body.password);
-        newUser.userType = "general";
+        //newUser.userType = "general";
         //console.log(newUser);
 
         await newUser.save();
@@ -371,6 +371,12 @@ async function updateUser(req, res, next) {
             var hashedPassword = User.generatePassword(req.body.password);
             changeSet.password = hashedPassword;
         }
+
+        if (req.body.userType && req.body.userType != "")
+        {
+            changeSet.userType = req.body.userType;
+        }
+
 
         await User.update({_id: userId}, { $set: changeSet }, {upsert:false, runValidators:true});
     }

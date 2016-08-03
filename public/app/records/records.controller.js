@@ -188,7 +188,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         });
     }
     $scope.getRecords();
-    $scope.getStatics();
+    //$scope.getStatics();
 
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
@@ -248,7 +248,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             return false;
         }
 
-        return mode === 'day' && (date > $scope.endDate);
+        return mode === 'day' && (date >= $scope.endDate);
     }
     function disabledEnd(data) {
         var date = data.date,
@@ -257,7 +257,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         {
             return false;
         }
-        return mode === 'day' && (date < $scope.startDate);
+        return mode === 'day' && (date <= $scope.startDate);
     }
 
     $scope.open1 = function() {
@@ -268,10 +268,45 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         $scope.popup2.opened = true;
     };
 
+    $scope.dateRangeOptionChange = function() {
+        console.log($scope.dateRangeOption);
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth(); //January is 0!
+        var yyyy = today.getFullYear();
+        //var hours = today.getHours();
+        //console.log(hours);
+        $scope.endDate = new Date();
+        if($scope.dateRangeOption == "lastday")
+        {
+            today.setDate(dd - 1);
+        }
+        else if($scope.dateRangeOption == "lastweek")
+        {
+            today.setDate(dd - 7);
+
+        }
+        else if($scope.dateRangeOption == "lastmonth")
+        {
+            today.setMonth(mm - 1);
+
+        }
+        else if($scope.dateRangeOption == "lastquarter")
+        {
+            today.setMonth(mm - 3);
+
+        }
+        else if($scope.dateRangeOption == "lastyear")
+        {
+            today.setYear(yyyy - 1);
+        }
+        $scope.startDate = today;
+    };
 
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
-    $scope.altInputFormats = ['M!/d!/yyyy'];
+    $scope.altInputFormats = $scope.formats[0];//['M!/d!/yyyy'];
 
     $scope.popup1 = {
         opened: false

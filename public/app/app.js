@@ -3,7 +3,11 @@
 /* App Module */
 
 var admin = angular.module('admin', ['ui.router', 'login', 'records', 'users', 'xeditable','ngAnimate', 'ui.bootstrap', 'angular-confirm', 'xeditable']);
-
+admin.filter('capitalize', function() {
+    return function(input) {
+        return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 admin.config(['$stateProvider', '$urlRouterProvider', 'toastrConfig',
     function($stateProvider, $urlRouterProvider, toastrConfig) {
         angular.extend(toastrConfig, {
