@@ -94,12 +94,31 @@ async function getAllRecords(req, res, next) {
         {
             console.log(err);
         }
+    }
 
+    if(req.decoded.userType != "admin")
+    {
+        var userId = req.decoded._id;
+        let user = await User.findOne({ _id: userId });
 
+        if (!user) {
+            return res.status(200).send({
+                records: []
+            });
+        }
+        if(user.clients && user.clients.length > 0)
+        {
+            querySet.client = {$in: user.clients};
+        }
+        if(user.traders && user.traders.length > 0)
+        {
+            querySet.trader = {$in: user.traders};
+        }
+        //console.log(querySet);
     }
 
     let records = await Record.findAsync(querySet, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
-    //console.log(records);
+    //console.log(records.length);
 
     //let clients = await Record.find().distinct('client');
     //console.log(clients);

@@ -1,11 +1,11 @@
-var users = angular.module('users', ['toastr']);
+var users = angular.module('users', ['toastr', 'ui.select']);
 
 function UsersController($scope, $filter, $http, editableOptions, editableThemes ,UsersService, LoginService, $uibModal, toastr){
 
     LoginService.ensureLogin();
 
-    $scope.clientList = [];
-    $scope.traderList = [];
+    $scope.$root.clientList = ["Any"];
+    $scope.$root.traderList = ["Any"];
 
     $scope.getUsers = function(){
         UsersService.getUsers({}, function(err, data){
@@ -60,8 +60,8 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
                 console.log(err);
             }
             else{
-                $scope.clientList = data.clients;
-                $scope.traderList = data.traders;
+                $scope.$root.clientList = data.clients;
+                $scope.$root.traderList = data.traders;
             }
         });
     }

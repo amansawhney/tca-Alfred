@@ -9,16 +9,6 @@
             <form role="form" id="cardForm" method="POST" ng-submit="updateUser(user)" class="form-horizontal">
 
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">User Type</label>
-                    <div class="col-sm-8">
-                        <select  id="user-userType" class="form-control"  ng-model="user.userType" required>
-                            <option value="trader">Trader</option>
-                            <option value="client">Client</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="col-sm-4 control-label">User email</label>
                     <div class="col-sm-8">
                         <input id="user-email" type="email" class="form-control" ng-model="user.email" placeholder="Email" disabled>
@@ -53,6 +43,30 @@
                     </div>
                 </div>
 
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Clients</label>
+                    <div class="col-sm-8">
+                        <ui-select multiple ng-model="user.clients" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose clients">
+                            <ui-select-match placeholder="Select clients...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="client in $root.clientList">
+                                {{client}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Traders</label>
+                    <div class="col-sm-8">
+                        <ui-select multiple ng-model="user.traders" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false"  title="Choose traders">
+                            <ui-select-match placeholder="Select traders...">{{$item}}</ui-select-match>
+                            <ui-select-choices repeat="trader in $root.traderList">
+                                {{trader}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-4">
                         <div id="cardFormError" class="alert alert-danger" ng-show="showError" role="alert">

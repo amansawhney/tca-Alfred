@@ -56,7 +56,6 @@ var config = {
         collapsed: true
     },
     fields: [
-        { name: 'date', caption: 'Date' },
         { name: 'client', caption: 'Client' },
         { name: 'trader', caption: 'Trader' },
         { name: 'exch', caption: 'Exch'},
