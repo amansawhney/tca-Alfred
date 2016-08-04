@@ -53,7 +53,7 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
     }
 
     $scope.getStatics = function(){
-        RecordsService.getStatics({}, function(err, data){
+        UsersService.getStatics({}, function(err, data){
             console.log("RecordsService.getStatics")
 
             if(err){

@@ -1,13 +1,14 @@
 angular.module('admin')
     .controller('AdminController', function($scope ,  $state,   LoginService , $window) {
         $scope.$root.userType = $window.sessionStorage.getItem("userType");
+        $scope.$root.userDisplayName = $window.sessionStorage.getItem("displayName");//$scope.$root.userDisplayName;
         console.log($scope.userType);
         $scope.logout = function(){
             LoginService.doLogout();
         }
         // config
         $scope.app = {
-            name: 'Pivot Admin Panel',
+            name: 'Quantitative Brokers',
             version: '0.9',
             // for chart colors
             color: {

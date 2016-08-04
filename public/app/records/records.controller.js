@@ -39,7 +39,7 @@ var formattedValue = function(value)
     {
         return "";
     }
-}
+};
 var config = {
     dataSource: records,
     dataHeadersLocation: 'columns',
@@ -134,7 +134,7 @@ var config = {
      'Manufacturer': { 'Matches': /n/ },
      'Amount'      : { '>':  40 }
      },*/
-    width: 1500,
+    width: "100%",
     height: 645
 };
 

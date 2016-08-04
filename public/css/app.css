@@ -740,6 +740,7 @@ body {
 
 .app-content {
   height: 100%;
+  padding-top: 50px;
 }
 
 .app-content:before,
@@ -913,12 +914,15 @@ body {
 @media (min-width: 768px) {
   .app-aside,
   .navbar-header {
-    width: 200px;
+    width: 240px;
   }
-  .navbar-collapse,
+  .navbar-collapse
+  {
+    margin-left: 240px;
+  }
   .app-content,
   .app-footer {
-    margin-left: 200px;
+    margin-left: 0px;
   }
   .app-aside-right {
     position: absolute;
