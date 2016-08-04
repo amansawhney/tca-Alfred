@@ -165,8 +165,9 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
                 config.dataSource = data;
                 $scope.total_records = "Total : " + data.length + " Records";
 
-                //console.log(data[999]);
-                new orb.pgridwidget(config).render(document.getElementById('pgrid'));
+                //console.log(data[999])
+                $$("pivot").data.clearAll();
+                $$("pivot").parse(data);
             }
         });
     }
@@ -338,10 +339,8 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
                 config.dataSource = data;
                 //console.log(data.length);
                 $scope.total_records = "Total : " + data.length + " Records";
-                $("#pgrid").empty();
-                var pgridw = new orb.pgridwidget(config);
-                pgridw.render(document.getElementById('pgrid'));
-                pgridw.refreshData(data);
+                $$("pivot").data.clearAll();
+                $$("pivot").parse(data);
                 //new orb.pgridwidget(config).render(document.getElementById('pgrid'));
             }
         });

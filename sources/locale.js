@@ -1,0 +1,37 @@
+webix.i18n.pivot = webix.extend((webix.i18n.pivot||{}),{
+    apply: "Apply",
+    bar: "Bar",
+    cancel: "Cancel",
+    chartType: "Chart type",
+    columns: "Columns",
+    count: "count",
+    date: "date",
+    fields: "Fields",
+    filters: "Filters",
+    groupBy: "Group By",
+    line: "Line",
+    logScale: "Logarithmic scale",
+    max: "max",
+    min: "min",
+    multiselect: "multi-select",
+    operationNotDefined: "Operation is not defined",
+    layoutIncorrect: "pivotLayout should be an Array instance",
+    pivotMessage: "[Click to configure]",
+    popupHeader: "Pivot Settings",
+    radar: "Radar",
+    radarArea: "Area Radar",
+    rows: "Rows",
+    select: "select",
+    settings: "Settings",
+    stackedBar: "Stacked Bar",
+    sum: "sum",
+    text: "text",
+    total: "Total",
+    values: "Values",
+    valuesNotDefined: "Values or Group field are not defined",
+    windowTitle: "Pivot Configuration",
+    windowMessage: "move fields into a required sector"
+});
+
+
+

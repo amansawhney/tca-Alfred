@@ -98,6 +98,47 @@
                         <div class="panel-body">
                             <div id="pgrid" style="overflow-x: scroll"></div>
                         </div>
+                        <script type="text/javascript">
+                            webix.ui({
+                                view: "pivot",
+                                container: "pgrid",
+                                height: 600,
+                                id: "pivot",
+                                footer: true,
+                                totalColumn: true,
+                                max: true,
+                                structure: {
+                                    rows: ["client", "exch"],
+                                    columns: ["algo"],
+                                    values: [{
+                                        name: "size",
+                                        operation: "sum"
+                                    }, {
+                                        name: "duration",
+                                        operation: "sum"
+                                    }],
+                                    filters: [{
+                                        name: "client",
+                                        type: "multiselect"
+                                    }, {
+                                        name: "trader",
+                                        type: "multiselect"
+                                    }, {
+                                        name: "algo",
+                                        type: "multiselect"
+                                    }, {
+                                        name: "exch",
+                                        type: "multiselect"
+                                    }, {
+                                        name: "instrument",
+                                        type: "multiselect"
+                                    }, {
+                                        name: "fcm",
+                                        type: "multiselect"
+                                    }]
+                                }
+                            });
+                        </script>
                         <!-- End of Pivot table -->
                     </div>
                     <!-- /.row -->
