@@ -56,59 +56,59 @@ var config = {
         collapsed: true
     },
     fields: [
-        { name: 'client', caption: 'Client' },
-        { name: 'trader', caption: 'Trader' },
-        { name: 'exch', caption: 'Exch'},
-        { name: 'algo', caption: 'Algo' },
-        { name: 'instrument', caption: 'Instrument'},
-        { name: 'fcm', caption: 'FCM' },
-        { name: 'size', caption: 'Size', dataSettings: {
+        { name: 'client', caption: 'Client', dataRowColumn:'row column' },
+        { name: 'trader', caption: 'Trader', dataRowColumn:'row column' },
+        { name: 'exch', caption: 'Exch', dataRowColumn:'row column'},
+        { name: 'algo', caption: 'Algo', dataRowColumn:'row column' },
+        { name: 'instrument', caption: 'Instrument', dataRowColumn:'row column'},
+        { name: 'fcm', caption: 'FCM' , dataRowColumn:'row column'},
+        { name: 'size', caption: 'Size', dataRowColumn:'data', dataSettings: {
             aggregateFunc: 'avg',
             formatFunc: formattedValue
         }},
-        { name: 'filled', caption: 'Filled'},
-        { name: 'duration', caption: 'Duration' },
-        { name: 'volume', caption: '%Volume', dataSettings: {
+        { name: 'filled', caption: 'Filled', dataRowColumn:'data'},
+        { name: 'duration', caption: 'Duration', dataRowColumn:'data' },
+        { name: 'volume', caption: '%Volume', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'ivolume', caption: '%iVolume', dataSettings: {
+        { name: 'ivolume', caption: '%iVolume', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'passive', caption: 'Passive' , dataSettings: {
+        { name: 'passive', caption: 'Passive', dataRowColumn:'data' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'cleanup', caption: 'Cleanup', dataSettings: {
+        { name: 'cleanup', caption: 'Cleanup', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'ap', caption: 'AP' , dataSettings: {
+        { name: 'ap', caption: 'AP', dataRowColumn:'data' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'stf', caption: 'STF', dataSettings: {
+        { name: 'stf', caption: 'STF', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         } },
-        { name: 'ivwap', caption: 'IVWAP', dataSettings: {
+        { name: 'ivwap', caption: 'IVWAP', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'vwap', caption: 'VWAP' , dataSettings: {
+        { name: 'vwap', caption: 'VWAP', dataRowColumn:'data' , dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue
         }},
-        { name: 'twap', caption: 'TWAP', dataSettings: {
+        { name: 'twap', caption: 'TWAP', dataRowColumn:'data', dataSettings: {
             aggregateFunc: weightedAverage,
             aggregateFuncName: "wavg",
             formatFunc: formattedValue

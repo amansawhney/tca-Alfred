@@ -47,9 +47,9 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Clients</label>
                     <div class="col-sm-8">
-                        <ui-select multiple ng-model="user.clients" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false" title="Choose clients">
+                        <ui-select multiple ng-model="user.clients" theme="bootstrap" reset-search-input="false"  close-on-select="false" title="Choose clients">
                             <ui-select-match placeholder="Select clients...">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="client in $root.clientList">
+                            <ui-select-choices repeat="client in $root.clientList | filter:$select.search">
                                 {{client}}
                             </ui-select-choices>
                         </ui-select>
@@ -59,9 +59,9 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Traders</label>
                     <div class="col-sm-8">
-                        <ui-select multiple ng-model="user.traders" theme="bootstrap" ng-disabled="ctrl.disabled" close-on-select="false"  title="Choose traders">
+                        <ui-select multiple ng-model="user.traders" theme="bootstrap" reset-search-input="false"  close-on-select="false"  title="Choose traders">
                             <ui-select-match placeholder="Select traders...">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="trader in $root.traderList">
+                            <ui-select-choices repeat="trader in $root.traderList | filter:$select.search">
                                 {{trader}}
                             </ui-select-choices>
                         </ui-select>
