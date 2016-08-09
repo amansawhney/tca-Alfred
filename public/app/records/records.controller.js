@@ -25,7 +25,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             else{
                 $scope.records = data;
                 // instantiate and show the pivot grid
-                config.dataSource = data;
+                //config.dataSource = data;
                 $scope.total_records = "Total : " + data.length + " Records";
 
                 //console.log(data[999])
@@ -199,7 +199,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             else{
                 $scope.records = data;
                 // instantiate and show the pivot grid
-                config.dataSource = data;
+                //config.dataSource = data;
                 //console.log(data.length);
                 $scope.total_records = "Total : " + data.length + " Records";
                 $$("pivot").data.clearAll();
@@ -228,11 +228,15 @@ function setupPivotTable()
         totalColumn: true,
         max: true,
         structure: {
-            rows: ["client", "exch"],
-            columns: ["algo", "trader"],
+            rows: ["client", "trader"],
+            columns: ["algo"],
             values: [{
                 name: "twap",
                 operation: "wavg"
+                },
+                {
+                    name: "size",
+                    operation: "wavg"
                 }
             ],
             filters: [{
