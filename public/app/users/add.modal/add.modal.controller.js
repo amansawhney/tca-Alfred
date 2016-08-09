@@ -23,11 +23,6 @@
         $scope.user = {};
 
         $scope.addUser = function(user){
-            if(!user.userType || user.userType == "")
-            {
-                toastr.error('User Type not selected');
-                return;
-            }
 
             $scope.isDisabled = true;
             UsersService.addUser(user, function(err){

@@ -1,143 +1,6 @@
 var records = angular.module('records', ['toastr']);
 
 
-var weightedAverage = function(datafield, intersection, datasource, rowIndexes, colIndexes){
-    var avg = 0;
-    var len = (intersection === 'all' ? datasource : intersection).length;
-    var overallWeight = 0;
-    //console.log(datafield);
-    if (len > 0) {
-        forEachIntersection(datafield, intersection, datasource, function(val, weight) {
-            //console.log(val);
-            if(val)
-            {
-                avg += val * weight;
-                overallWeight += weight;
-
-            }
-        });
-
-        if(overallWeight > 0)
-        {
-            avg /= overallWeight;
-        }
-        else {
-            avg = 0;
-        }
-
-    }
-    return avg;
-};
-
-var formattedValue = function(value)
-{
-    if (value)
-    {
-        return parseFloat(value).toFixed(3);
-    }
-    else
-    {
-        return "";
-    }
-};
-var config = {
-    dataSource: records,
-    dataHeadersLocation: 'columns',
-    theme: 'green',
-    toolbar: {
-        visible: true
-    },
-    grandTotal: {
-        rowsvisible: true,
-        columnsvisible: true
-    },
-    subTotal: {
-        visible: false,
-        collapsed: true
-    },
-    fields: [
-        { name: 'date', caption: 'Date' },
-        { name: 'client', caption: 'Client' },
-        { name: 'trader', caption: 'Trader' },
-        { name: 'exch', caption: 'Exch'},
-        { name: 'algo', caption: 'Algo' },
-        { name: 'instrument', caption: 'Instrument'},
-        { name: 'fcm', caption: 'FCM' },
-        { name: 'size', caption: 'Size', dataSettings: {
-            aggregateFunc: 'avg',
-            formatFunc: formattedValue
-        }},
-        { name: 'filled', caption: 'Filled'},
-        { name: 'duration', caption: 'Duration' },
-        { name: 'volume', caption: '%Volume', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'ivolume', caption: '%iVolume', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'passive', caption: 'Passive' , dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'cleanup', caption: 'Cleanup', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'ap', caption: 'AP' , dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'stf', caption: 'STF', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        } },
-        { name: 'ivwap', caption: 'IVWAP', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'vwap', caption: 'VWAP' , dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        { name: 'twap', caption: 'TWAP', dataSettings: {
-            aggregateFunc: weightedAverage,
-            aggregateFuncName: "wavg",
-            formatFunc: formattedValue
-        }},
-        /*{
-         name: '19',
-         caption: 'Amount',
-         dataSettings: {
-         aggregateFunc: 'avg',
-         formatFunc: function(value) {
-         return Number(value).toFixed(0);
-         }
-         }
-         }*/
-    ],
-    //rows    : [ 'client', 'trader', 'exch' ],
-    rows    : [ 'Client', 'Trader' ],
-    //columns : [ 'algo', 'instrument', 'fcm', 'size' ],
-    columns : [ 'Algo' ],
-    data    : [ '%Volume', '%iVolume', 'Passive', 'Cleanup', 'AP', 'STF', 'IVWAP', 'VWAP', 'TWAP' ],
-    /*preFilters : {
-     'Manufacturer': { 'Matches': /n/ },
-     'Amount'      : { '>':  40 }
-     },*/
-    width: "100%",
-    height: 645
-};
-
 function forEachIntersection(datafield, intersection, datasource, callback) {
     var all = intersection === 'all';
     intersection = all ? datasource : intersection;
@@ -162,7 +25,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             else{
                 $scope.records = data;
                 // instantiate and show the pivot grid
-                config.dataSource = data;
+                //config.dataSource = data;
                 $scope.total_records = "Total : " + data.length + " Records";
 
                 //console.log(data[999])
@@ -328,7 +191,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             "client": $scope.client, "fcm": $scope.fcm,  "trader": $scope.trader, "algo": $scope.algo, "exchange": $scope.exchange, "instrument": $scope.instrument};
 
         RecordsService.getRecords(params, function(err, data){
-            console.log("RecordsService.getRecords")
+            console.log("RecordsService.getRecords");
 
             if(err){
                 console.log(err);
@@ -336,7 +199,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             else{
                 $scope.records = data;
                 // instantiate and show the pivot grid
-                config.dataSource = data;
+                //config.dataSource = data;
                 //console.log(data.length);
                 $scope.total_records = "Total : " + data.length + " Records";
                 $$("pivot").data.clearAll();
@@ -345,7 +208,113 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             }
         });
     };
+
+    if(!$scope.isPivotSetup)
+    {
+        $scope.isPivotSetup = true;
+        setupPivotTable();
+    }
 }
+
+
+function setupPivotTable()
+{
+    grida = webix.ui({
+        view: "pivot",
+        container: "pgrid",
+        height: 600,
+        id: "pivot",
+        footer: "wavg",
+        totalColumn: true,
+        max: true,
+        structure: {
+            rows: ["client", "trader"],
+            columns: ["algo"],
+            values: [{
+                name: "twap",
+                operation: "wavg"
+                },
+                {
+                    name: "size",
+                    operation: "wavg"
+                }
+            ],
+            filters: [{
+                name: "client",
+                type: "multiselect"
+            }, {
+                name: "trader",
+                type: "multiselect"
+            }, {
+                name: "algo",
+                type: "multiselect"
+            }, {
+                name: "exch",
+                type: "multiselect"
+            }, {
+                name: "instrument",
+                type: "multiselect"
+            }, {
+                name: "fcm",
+                type: "multiselect"
+            }]
+        }
+    });
+
+
+    grida.operations.wavg = function(args, args2, args3, args4) {
+        var sum = 0;
+        var filledSum = 0;
+        for (var i = 0; i < args.length; i++) {
+            var arg = window.parseFloat(args[i], 10);
+            var filled = NaN;
+            if(args3['filled_' + args4] && i < args3['filled_' + args4].length)
+            {
+                filled = args3['filled_' + args4][i];
+            }
+            else
+            {
+                return "Hello";
+                filled = 0;
+            }
+
+            if(args3.data)
+            {
+                var aa = 0;
+                aa = 5;
+            }
+            if (!window.isNaN(arg) && !window.isNaN(filled))
+            {
+                sum += arg * filled;
+                filledSum += filled;
+            }
+        }
+        if(filledSum > 0)
+        {
+            return sum / filledSum;
+        }
+        if(sum > 0)
+        {
+            return sum;
+        }
+        return "";
+    };
+    //
+    //grida.datafilter.avgColumn = webix.extend({
+    //    refresh:function(master, node, value){
+    //        var result = 0;
+    //        master.mapCells(null, value.columnId, null, 1, function(value){
+    //            value = value*1;
+    //            if (!isNaN(value))
+    //                result+=value;
+    //            return value;
+    //        });
+    //
+    //        node.firstChild.innerHTML = Math.round(result/master.count());
+    //    }
+    //}, webix.ui.datafilter.summColumn);
+}
+
 
 function refreshControlls(stats)
 {

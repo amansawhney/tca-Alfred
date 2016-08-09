@@ -32,6 +32,8 @@ var User = new Schema({
         required: 'Password is required. ',
         select: false
     },
+    clients: {type: [String]},
+    traders: {type: [String]},
     userType: { type: String, enum: ['admin', 'trader', 'client', 'general'] },
     phone: {
         type: String, default: ''

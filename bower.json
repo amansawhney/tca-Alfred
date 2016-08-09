@@ -32,7 +32,7 @@
     "bootstrap-datepicker": "latest",
     "lodash": "~4.0.0",
     "react": "latest",
-    "orb": "latest"
+    "angular-ui-select": "~0.18.1"
   },
   "resolutions": {
     "angular": "~1.x"
