@@ -1,47 +1,6 @@
 var records = angular.module('records', ['toastr']);
 
 
-var weightedAverage = function(datafield, intersection, datasource, rowIndexes, colIndexes){
-    var avg = 0;
-    var len = (intersection === 'all' ? datasource : intersection).length;
-    var overallWeight = 0;
-    //console.log(datafield);
-    if (len > 0) {
-        forEachIntersection(datafield, intersection, datasource, function(val, weight) {
-            //console.log(val);
-            if(val)
-            {
-                avg += val * weight;
-                overallWeight += weight;
-
-            }
-        });
-
-        if(overallWeight > 0)
-        {
-            avg /= overallWeight;
-        }
-        else {
-            avg = 0;
-        }
-
-    }
-    return avg;
-};
-
-var formattedValue = function(value)
-{
-    if (value)
-    {
-        return parseFloat(value).toFixed(3);
-    }
-    else
-    {
-        return "";
-    }
-};
-
-
 function forEachIntersection(datafield, intersection, datasource, callback) {
     var all = intersection === 'all';
     intersection = all ? datasource : intersection;

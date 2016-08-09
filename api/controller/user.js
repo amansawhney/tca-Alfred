@@ -108,7 +108,7 @@ async function logIn(req, res, next) {
 
     //console.log(req.body);
     //console.log(password);
-    let user = await User.findOne({ username: username }).select("+password +payment_info");
+    let user = await User.findOne({ username: username }).select("+password");
 
     if (!user) {
         return res.status(200).send({
@@ -144,7 +144,7 @@ async function logIn(req, res, next) {
 async function getMeInfo(req, res, next) {
 
     var userId = req.decoded._id;
-    let user = await User.findOne({ _id: userId }).select("+payment_info");
+    let user = await User.findOne({ _id: userId });
 
     if (!user) {
         return res.status(200).send({
@@ -365,7 +365,7 @@ async function updateUser(req, res, next) {
     var userId = req.params.id;
     console.log(userId);
     try {
-        var changeSet = {firstName: req.body.firstName, lastName: req.body.lastName};
+        var changeSet = {firstName: req.body.firstName, lastName: req.body.lastName, clients: req.body.clients, traders: req.body.traders};
         if (req.body.password && req.body.password != "")
         {
             var hashedPassword = User.generatePassword(req.body.password);
