@@ -19,7 +19,7 @@ angular.module('records')
                             callback(false, response.records);
                          }else{
                             toastr.error(response);
-                            $state.go('app.dashboard');
+                            //$state.go('app.dashboard');
                          }
                     }, function(x) {
                         callback(x);
@@ -44,7 +44,7 @@ angular.module('records')
                             callback(false, response);
                         }else{
                             toastr.error(response);
-                            $state.go('app.dashboard');
+                            //$state.go('app.dashboard');
                         }
                     }, function(x) {
                         callback(x);

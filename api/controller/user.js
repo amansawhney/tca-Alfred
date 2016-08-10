@@ -122,7 +122,7 @@ async function logIn(req, res, next) {
             message: 'Invalid username or password!'
         });
     }
-    var userInfoToToken = {_id: user._id, email: user.email, username: user.username};
+    var userInfoToToken = {_id: user._id, email: user.email, username: user.username, userType: user.userType};
     var token = jwt.sign(userInfoToToken, config.secret, {
         expiresIn: 17280000 // expires in 100 days hours
     });
@@ -190,7 +190,9 @@ async function loginAdmin(req, res, next) {
         });
     }
 
-    var token = jwt.sign(user, config.secret, {
+    var userInfoToToken = {_id: user._id, email: user.email, username: user.username, userType: user.userType};
+    //console.log(userInfoToToken);
+    var token = jwt.sign(userInfoToToken, config.secret, {
         expiresIn: 17280000 // expires in 100 days
     });
 

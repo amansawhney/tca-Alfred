@@ -18,7 +18,7 @@ angular.module('users')
                         if ( response.users) {
                             callback(false, response.users);
                          }else{
-                            $state.go('app.dashboard');
+                            //$state.go('app.dashboard');
                          }
                     }, function(x) {
                         callback(x);
@@ -44,7 +44,8 @@ angular.module('users')
                             if ( data.data.user ) {
                                 toastr.success('User Created');
                             }else{
-                                $state.go('app.dashboard');
+                                toastr.error('Server Error');
+                                //$state.go('app.dashboard');
                             }
                         callback(data);
                         }, function(x) {
@@ -109,7 +110,7 @@ angular.module('users')
                             callback(false, response);
                         } else {
                             toastr.error(response);
-                            $state.go('app.dashboard');
+                            //$state.go('app.dashboard');
                         }
                     }, function (x) {
                         callback(x);
