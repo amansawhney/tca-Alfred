@@ -240,7 +240,7 @@
             render: function render(without_filters) {
                 var data = this._process_data(this.data.pull, this.data.order);
 
-                if (this.config.footer) this._add_footer(data.header);
+                if (this.config.footer) this._add_footer(data.header, data.footer);
 
                 if (!without_filters) {
                     data.filters = this._process_filters();
@@ -266,35 +266,35 @@
                 this.$$("data").clearAll();
                 this.$$("data").parse(data.data);
             },
-            _add_footer: function _add_footer(columns) {
+            _add_footer: function _add_footer(columns, footer) {
                 var config, grid, i, names;
 
                 grid = this.$$("data");
                 grid.define("footer", true);
 
-                if (columns.length) columns[0].footer = this._apply_locale("total");
+                //if (columns.length) columns[0].footer = this._apply_locale("total");
 
-                for (i = 1; i < columns.length; i++) {
+                for (i = 0; i < columns.length; i++) {
                     config = null;
 
-                    if (this.config.footer == "sumOnly") {
-                        names = columns[i].id.split(this.$divider);
-                        if (names[names.length - 2] != "sum") config = " ";
-                    }
+                    //if (this.config.footer == "sumOnly") {
+                    //    names = columns[i].id.split(this.$divider);
+                    //    if (names[names.length - 2] != "sum") config = " ";
+                    //}
 
-                    if (!config) config = {
-                        content: "pivotSumColumn",
-                        template: webix.bind(function (data) {
-                            var value = data.value;
-                            return value && value != "0" && !this.format ? parseFloat(value).toFixed(3) : value;
-                        }, columns[i])
-                    };
+                    //if (!config) config = {
+                    //    content: "pivotSumColumn",
+                    //    template: webix.bind(function (data, data1, data2) {
+                    //        var value = data.value;
+                    //        return value && value != "0" && !this.format ? parseFloat(value).toFixed(3) : value;
+                    //    }, columns[i])
+                    //};
 
-                    columns[i].footer = config;
-
-                    if (_typeof(this.config.footer) == "object") {
-                        webix.extend(columns[i].footer, this.config.footer, true);
-                    }
+                    columns[i].footer = footer[i];
+                    //
+                    //if (_typeof(this.config.footer) == "object") {
+                    //    webix.extend(columns[i].footer, this.config.footer, true);
+                    //}
                 }
             },
             $exportView: function $exportView(options) {
@@ -406,7 +406,56 @@
                     items = [];
                 }
                 header = this._process_header(header);
-                return { header: header, data: items };
+
+                var footer_info = [];
+
+                var values = structure._header;
+                footer_info.push("Total");
+                for (var k = 1; k < header.length; k++) {
+                    var value = header[k].id;
+                    var filledSum = 0;
+                    var totalSum = 0;
+
+                    var tmp = value.split(this.$divider);
+                    var column_name = tmp[0];
+                    if(tmp.length == 2)
+                    {
+                        column_name = "";
+                    }
+                    if(column_name == "total")
+                    {
+                        column_name = "";
+                    }
+                    for(var kk = 1; kk < tmp.length - 2; kk ++)
+                    {
+                        if (column_name == "")
+                        {
+                            column_name += tmp[kk];
+                        }
+                        else
+                        {
+                            column_name += this.$divider + tmp[kk];
+                        }
+                    }
+
+                    for (var zz = 0; zz < items.length; zz ++)
+                    {
+                        var item = items[zz];
+
+
+                        if(item[value] && item['filled_' + column_name])
+                        {
+                            totalSum += item[value] * item['filled_' + column_name];
+                            filledSum += item['filled_' + column_name];
+                        }
+                    }
+                    if(filledSum > 0)
+                    {
+                        totalSum = totalSum / filledSum;
+                    }
+                    footer_info.push(parseFloat(totalSum).toFixed(3));
+                }
+                return { header: header, data: items , footer: footer_info};
             },
             _groupItem: function _groupItem(hash, item, fields) {
                 if (fields.length) {
@@ -450,6 +499,11 @@
                                 var tmp = value.split(this.$divider);
 
                                 var column_name = tmp[0];
+                                if(tmp.length == 2)
+                                {
+                                    column_name = "";
+                                }
+
                                 for(var kk = 1; kk < tmp.length - 2; kk ++)
                                 {
                                     column_name += this.$divider + tmp[kk];
@@ -457,10 +511,11 @@
                                 var filled_sum = 0;
                                 if(item.data[j]["filled_" + column_name])
                                 {
-                                    for(var mm = 0; mm < item.data[j]["filled_" + column_name].length; mm ++)
-                                    {
-                                        filled_sum = filled_sum + item.data[j]["filled_" + column_name][mm];
-                                    }
+                                    filled_sum = item.data[j]["filled_" + column_name];
+                                    //for(var mm = 0; mm < item.data[j]["filled_" + column_name].length; mm ++)
+                                    //{
+                                    //    filled_sum = filled_sum + item.data[j]["filled_" + column_name][mm];
+                                    //}
                                 }
 
                                 if(!item['filled_' + column_name])
@@ -480,11 +535,93 @@
                         items.push(item);
                     }
                 } else {
+                    var _values = structure._header;
                     for (var _i3 in data) {
+
                         var _item = this._process_columns(data[_i3], this.config.structure.columns, structure, header);
                         _item.name = _i3;
                         _item = this._calculate_item(_item, structure);
+
                         _item = this._minmax_in_row(_item, structure);
+                        // TO DO
+                        // Weighted Average Column Total To be Calculated Here and save it to certain key and use it some where elase
+                        var tmpTotalFieldArr = [];
+                        var tmpTotalFieldFilledArr = [];
+                        for (var _k = 0; _k < _values.length; _k++) {
+                            var _value = _values[_k];
+                            //if (webix.isUndefined(_item[value])) item[value] = [];
+                            //item[value].push(item.data[j][value]);
+
+                            var _tmp = _value.split(this.$divider);
+
+                            var _column_name = _tmp[0];
+                            var _column_name_total_filled = "";
+                            if(_tmp.length == 2)
+                            {
+                                _column_name = "";
+                            }
+                            var _column_name_sec = 'total';
+                            for(var _kk = 1; _kk < _tmp.length - 2; _kk ++)
+                            {
+                                _column_name += this.$divider + _tmp[_kk];
+                                _column_name_sec += this.$divider + _tmp[_kk];
+                                if(_column_name_total_filled == "")
+                                {
+                                    _column_name_total_filled = _tmp[_kk];
+                                }
+                                else
+                                {
+                                    _column_name_total_filled += this.$divider + _tmp[_kk];
+                                }
+                            }
+                            _column_name_sec += this.$divider + _tmp[_tmp.length - 2] + this.$divider + _tmp[_tmp.length - 1];
+
+                            var _filled_sum = 0;
+
+                            if(_item["filled_" + _column_name])
+                            {
+                                if(_item["filled_" + _column_name] instanceof Array)
+                                {
+                                    for(var _mm = 0; _mm < _item["filled_" + _column_name].length; _mm ++)
+                                    {
+                                        _filled_sum = _filled_sum + _item["filled_" + _column_name][_mm];
+                                    }
+                                }
+                                else
+                                {
+                                    _filled_sum = _item["filled_" + _column_name];
+                                }
+                            }
+
+                            if(_filled_sum != 0)
+                            {
+                                _item['filled_' + _column_name] = _filled_sum;
+                            }
+                            if(_item[_value])
+                            {
+                                if(_item[_column_name_sec])
+                                {
+                                    _item[_column_name_sec] += _filled_sum * _item[_value];
+                                    _item["filled_" + _column_name_total_filled] += _filled_sum;
+                                }
+                                else
+                                {
+                                    _item[_column_name_sec] = _filled_sum * _item[_value];
+                                    _item["filled_" + _column_name_total_filled] = _filled_sum;
+                                    tmpTotalFieldArr.push(_column_name_sec);
+                                    tmpTotalFieldFilledArr.push("filled_" + _column_name_total_filled);
+                                }
+                            }
+                        }
+                        for(var pp = 0; pp < tmpTotalFieldArr.length; pp++)
+                        {
+                            if(_item[tmpTotalFieldFilledArr[pp]] > 0)
+                            {
+                                _item[tmpTotalFieldArr[pp]] = _item[tmpTotalFieldArr[pp]] / _item[tmpTotalFieldFilledArr[pp]];
+                            }
+                        }
+                        // The Total Header needs to be changed. The ID and something else maybe
+                        // Need to be careful when there are two or more column field
                         items.push(_item);
                     }
                 }
@@ -501,6 +638,7 @@
                         data[i] = this._process_columns(data[i], columns.slice(1), structure, header[i], item, (name.length > 0 ? name + this.$divider : "") + i);
                     }
                 } else {
+                    name = name || "";
                     var values = this.config.structure.values;
                     item['filled_' + name] = [];
                     for (var id in data) {
@@ -654,7 +792,7 @@
                         for (j = c + 1; j < header.length + 1; j += header.length - index) {
                             arr.push("[$r,:" + j + "]");
                         }
-                        h.math = arr.join("+");
+                        //h.math = arr.join("+");
 
                         if (!h.format) h.format = function (value) {
                             return value && value != "0" ? parseFloat(value).toFixed(3) : value;
@@ -664,7 +802,8 @@
                             webix.extend(h, this.config.totalColumn, true);
                         }
 
-                        h.id = h.id.replace(h.header[0].name, "$webixtotal");
+                        //h.id = h.id.replace(h.header[0].name, "$webixtotal");
+                        h.id = h.id.replace(h.header[0].name, "total");
                         h.header[0].name = "total";
                         h.header[0].text = this._apply_locale("total");
                         totalCols.push(h);
@@ -768,6 +907,10 @@
                         if (data.length)
                         {
                             var column_name = tmp[0];
+                            if(tmp.length == 2)
+                            {
+                                column_name = "";
+                            }
                             for(var kk = 1; kk < tmp.length - 2; kk ++)
                             {
                                 column_name += this.$divider + tmp[kk];
@@ -1112,11 +1255,11 @@
 
         webix.ui.datafilter.pivotSumColumn = webix.extend({
             refresh: function refresh(master, node, value) {
-                var result = 0;
-                master.mapCells(null, value.columnId, null, 1, function (value, id) {
-                    if (!isNaN(value) && master.getItem(id).$level == 1) result += value * 1;
-                    return value;
-                });
+                var result = "50";
+                //master.mapCells(null, value.columnId, null, 1, function (value, id) {
+                //    if (!isNaN(value) && master.getItem(id).$level == 1) result += value * 1;
+                //    return value;
+                //});
 
                 if (value.format) result = value.format(result);
                 if (value.template) result = value.template({ value: result });
