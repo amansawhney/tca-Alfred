@@ -228,14 +228,13 @@ function setupPivotTable()
         totalColumn: true,
         max: true,
         structure: {
-            rows: ["client", "trader"],
-            columns: ["algo"],
+            rows: ["client"],
+            columns: ["trader", "algo"],
             values: [{
                 name: "twap",
                 operation: "wavg"
                 },
-                {
-                    name: "size",
+                {name: "size",
                     operation: "wavg"
                 }
             ],
