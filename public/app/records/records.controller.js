@@ -238,6 +238,10 @@ function setupPivotTable()
                     operation: "wavg"
                 }
             ],
+            fields_all: ["client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"],
+            rows_all: ["client", "trader", "exch", "algo", "instrument", "fcm"],
+            columns_all: ["client", "trader", "exch", "algo", "instrument", "fcm"],
+            values_all: ["size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"],
             filters: [{
                 name: "client",
                 type: "multiselect"
