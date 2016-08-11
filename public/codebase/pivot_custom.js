@@ -320,7 +320,10 @@
                 }
                 return items;
             },
-
+            doubleClickedEvent: function doubleClickedEvent(data)
+            {
+                console.log("_doubleClickedEvent");
+            },
             _distinct_values: function _distinct_values(field, empty) {
                 var values = [];
                 if (empty) values.push({ value: "", id: "" });
@@ -1356,7 +1359,7 @@
                                                     }
                                                 }] }, {
                                                 rows: [{ id: "columnsHeader", data: { value: "columns", icon: "columns" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 },
-                                                    { id: "columns", view: "list", scroll: false, drag: true, type: { height: 35 }, template: "#text#" ,
+                                                    { id: "columns", view: "list", scroll: true, drag: true, type: { height: 35 }, template: "#text#" ,
                                                     on: {
                                                         onBeforeDrop: webix.bind(this._copy_columns_field, this)
                                                     }}]
@@ -1364,7 +1367,7 @@
                                             type: "wide",
                                             cols: [{
                                                 rows: [{ id: "rowsHeader", data: { value: "rows", icon: "list" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 },
-                                                    { id: "rows", view: "list", true: false, drag: true, template: "#text#", type: { height: 35 },
+                                                    { id: "rows", view: "list", scroll: true, drag: true, template: "#text#", type: { height: 35 },
                                                         on: {
                                                             onBeforeDrop: webix.bind(this._copy_rows_field, this),
                                                             //onBeforeDropOut: webix.bind(this._check_values_drag, this)
@@ -2473,6 +2476,9 @@
                 p.show(e);
                 p.getBody().attachEvent("onSelect", function () {
                     p.hide();
+                });
+                p.getBody().attachEvent("doubleClickedEvent", function () {
+                    console.log("doubleClickedEvent");
                 });
                 p.attachEvent("onHide", webix.bind(function () {
                     var index = webix.html.locate(e, "webix_operation");
