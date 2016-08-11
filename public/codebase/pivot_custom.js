@@ -1005,18 +1005,23 @@
             getFields: function getFields() {
                 var fields = [];
                 var fields_hash = {};
+                var str = this.config.structure;
+                var result = { fields: [], rows: [], columns: [], values: [], filters: [] };
+
+
                 for (var i = 0; i < Math.min(this.data.count() || 5); i++) {
                     var item = this.data.getItem(this.data.getIdByIndex(i));
                     for (var field in item) {
-                        if (!fields_hash[field]) {
-                            fields.push(field);
-                            fields_hash[field] = webix.uid();
+                        if(str.fields_all.includes(field))
+                        {
+                            if (!fields_hash[field]) {
+                                fields.push(field);
+                                fields_hash[field] = webix.uid();
+                            }
                         }
                     }
                 }
 
-                var str = this.config.structure;
-                var result = { fields: [], rows: [], columns: [], values: [], filters: [] };
 
                 for (var _i7 = 0; _i7 < (str.filters || []).length; _i7++) {
                     var _field = str.filters[_i7];
@@ -1053,8 +1058,13 @@
 
                 for (var _i11 = 0; _i11 < fields.length; _i11++) {
                     var _field5 = fields[_i11];
-                    if (!webix.isUndefined(fields_hash[_field5])) result.fields.push({ name: _field5, text: this._apply_map(_field5), id: fields_hash[_field5] });
+                    if (!webix.isUndefined(fields_hash[_field5]))
+                    {
+
+                        result.fields.push({ name: _field5, text: this._apply_map(_field5), id: fields_hash[_field5] });
+                    }
                 }
+                // Here we set the available fields, columns and rows, values and also filters
                 return result;
             },
             _init_filters: function _init_filters() {
@@ -1331,7 +1341,7 @@
                                             type: "wide",
                                             cols: [{
 
-                                                rows: [{ id: "filtersHeader", data: { value: "filters", icon: "filter" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 }, { id: "filters", view: "list", scroll: false, drag: true, css: "webix_pivot_values",
+                                                rows: [{ id: "filtersHeader", data: { value: "filters", icon: "filter" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 }, { id: "filters", view: "list", scroll: true, drag: false, css: "webix_pivot_values",
                                                     template: function template(obj) {
                                                         obj.type = obj.type || "select";
                                                         return "<a class='webix_pivot_link'>" + obj.text + " <span class='webix_link_selection'>" + obj.type + "</span></a> ";
@@ -1345,13 +1355,24 @@
                                                         onBeforeDropOut: webix.bind(this._check_filter_drag, this)
                                                     }
                                                 }] }, {
-                                                rows: [{ id: "columnsHeader", data: { value: "columns", icon: "columns" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 }, { id: "columns", view: "list", scroll: false, drag: true, type: { height: 35 }, template: "#text#" }]
+                                                rows: [{ id: "columnsHeader", data: { value: "columns", icon: "columns" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 },
+                                                    { id: "columns", view: "list", scroll: false, drag: true, type: { height: 35 }, template: "#text#" ,
+                                                    on: {
+                                                        onBeforeDrop: webix.bind(this._copy_columns_field, this)
+                                                    }}]
                                             }] }, {
                                             type: "wide",
                                             cols: [{
-                                                rows: [{ id: "rowsHeader", data: { value: "rows", icon: "list" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 }, { id: "rows", view: "list", scroll: false, drag: true, template: "#text#", type: { height: 35 } }]
+                                                rows: [{ id: "rowsHeader", data: { value: "rows", icon: "list" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 },
+                                                    { id: "rows", view: "list", true: false, drag: true, template: "#text#", type: { height: 35 },
+                                                        on: {
+                                                            onBeforeDrop: webix.bind(this._copy_rows_field, this),
+                                                            //onBeforeDropOut: webix.bind(this._check_values_drag, this)
+                                                        }
+                                                    }]
                                             }, {
-                                                rows: [{ id: "valuesHeader", data: { value: "values", icon: false, iconContent: "<b>&Sigma;</b>" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 }, { id: "values", view: "list", scroll: true, drag: true, css: "webix_pivot_values", type: { height: "auto" },
+                                                rows: [{ id: "valuesHeader", data: { value: "values", icon: false, iconContent: "<b>&Sigma;</b>" }, template: this._popup_templates.popupIconHeaders, css: "webix_pivot_popup_title", height: 40 },
+                                                    { id: "values", view: "list", scroll: true, drag: true, css: "webix_pivot_values", type: { height: "auto" },
                                                     template: webix.bind(this._function_template, this),
                                                     onClick: {
                                                         "webix_pivot_link": webix.bind(this._function_selector, this),
@@ -1410,20 +1431,76 @@
                 if (ctx.to && ctx.from != ctx.to) {
                     var id = ctx.source;
                     var item = ctx.from.getItem(id);
-                    if (ctx.from == this.$$("fields")) {
-                        if (ctx.to.getItem(id)) {
-                            this._function_add({}, id);
+                    if(grida.config.structure.values_all.includes(item.name))
+                    {
+                        if (ctx.from == this.$$("fields")) {
+                            if (ctx.to.getItem(id)) {
+                                this._function_add({}, id);
+                            } else {
+                                ctx.to.add(webix.copy(item), ctx.index);
+                            }
+                            return false;
                         } else {
-                            ctx.to.add(webix.copy(item), ctx.index);
+                            if (!this.$$("fields").getItem(id)) this.$$("fields").add(webix.copy(item));
                         }
+                    }
+                    else
+                    {
                         return false;
-                    } else {
-                        if (!this.$$("fields").getItem(id)) this.$$("fields").add(webix.copy(item));
+                    }
+                }
+                return true;
+            },
+            _copy_rows_field: function _copy_rows_field(ctx) {
+                if (ctx.to && ctx.from != ctx.to) {
+                    var id = ctx.source;
+                    var item = ctx.from.getItem(id);
+                    if(grida.config.structure.rows_all.includes(item.name))
+                    {
+                        //if (ctx.from == this.$$("fields")) {
+                        //    if (ctx.to.getItem(id)) {
+                        //        this._function_add({}, id);
+                        //    } else {
+                        //        ctx.to.add(webix.copy(item), ctx.index);
+                        //    }
+                        //    return false;
+                        //} else {
+                        //    if (!this.$$("fields").getItem(id)) this.$$("fields").add(webix.copy(item));
+                        //}
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            _copy_columns_field: function _copy_columns_field(ctx) {
+                if (ctx.to && ctx.from != ctx.to) {
+                    var id = ctx.source;
+                    var item = ctx.from.getItem(id);
+                    if(grida.config.structure.columns_all.includes(item.name))
+                    {
+                        //if (ctx.from == this.$$("fields")) {
+                        //    if (ctx.to.getItem(id)) {
+                        //        this._function_add({}, id);
+                        //    } else {
+                        //        ctx.to.add(webix.copy(item), ctx.index);
+                        //    }
+                        //    return false;
+                        //} else {
+                        //    if (!this.$$("fields").getItem(id)) this.$$("fields").add(webix.copy(item));
+                        //}
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
                 return true;
             },
             _copy_filter_field: function _copy_filter_field(ctx) {
+                return false;
                 if (ctx.from != ctx.to) {
                     var item = webix.copy(ctx.from.getItem(ctx.start));
                     var name = item.name;
