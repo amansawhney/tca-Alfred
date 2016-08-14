@@ -184,6 +184,11 @@
                 this.$view.className += " webix_pivot";
                 webix.extend(config, this._get_ui(config));
                 this.$ready.push(this.render);
+
+                this.attachEvent("doubleClickedEvent", function (e, rowColumn) {
+                    this.doubleClickedEvent(e, rowColumn);
+                });
+
                 this.data.attachEvent("onStoreUpdated", webix.bind(function () {
                     // call render if pivot is initialized
                     if (this.$$("data")) this.render();
@@ -222,6 +227,10 @@
                     this._config_popup = webix.ui(config);
                     this.callEvent("onPopup", [this._config_popup]);
                     this._config_popup.attachEvent("onApply", webix.bind(function (structure) {
+                        structure.fields_all = grida.config.structure.fields_all;
+                        structure.values_all = grida.config.structure.values_all;
+                        structure.columns_all = grida.config.structure.columns_all;
+                        structure.rows_all = grida.config.structure.rows_all;
                         this.define("structure", structure);
                         this.render();
                     }, this));
@@ -320,9 +329,49 @@
                 }
                 return items;
             },
-            doubleClickedEvent: function doubleClickedEvent(data)
+            doubleClickedEvent: function doubleClickedEvent(e, data)
             {
-                console.log("_doubleClickedEvent");
+                console.log("_doubleClickedEvent with data" + data);
+
+                var columns = [];
+
+                for (var _i = 0; _i < this.config.structure.columns.length; _i++) {
+                    columns[_i] = _typeof(this.config.structure.columns[_i]) == "object" ? this.config.structure.columns[_i].id || _i : this.config.structure.columns[_i];
+                }
+
+
+                var column_values = [];
+
+                var _tmp = data.column.split(this.$divider);
+
+                var _column_name = _tmp[0];
+                var _column_name_total_filled = "";
+                if(_tmp.length > 2)
+                {
+                    if(_tmp[0] != "total")
+                    {
+                        column_values.push(_tmp[0]);
+                    }
+                    else
+                    {
+                        columns.splice(0, 1);
+                    }
+
+                    for(var _kk = 1; _kk < _tmp.length - 2; _kk ++)
+                    {
+                        column_values.push(_tmp[_kk]);
+                    }
+                }
+
+                var values = data.rowIds.concat(column_values);
+                var fields = this.config.structure.rows.concat(columns);
+
+                var itemsForPopup = this._getItemsForPopup(this.data.pull, this.data.order, fields, values);
+
+                console.log(itemsForPopup.length);
+                this.onDoubleClicked(itemsForPopup, values);
+                //Here we need to display those items to user
+                //console.log(data);
             },
             _distinct_values: function _distinct_values(field, empty) {
                 var values = [];
@@ -480,6 +529,41 @@
                     item = data[id];
                     if (item && this._filter_item(item)) {
                         this._groupItem(hash, item, fields);
+                    }
+                }
+                return hash;
+            },
+            _checkValidityForPopup: function _groupItem(hash, item, fields) {
+                if (fields.length) {
+                    var value = item[fields[0]];
+                    if (webix.isUndefined(hash[value])) hash[value] = {};
+                    this._groupItem(hash[value], item, fields.slice(1));
+                } else hash[item.id] = item;
+            },
+            _getItemsForPopup: function _group(data, order, fields, values) {
+                var id,
+                    item,
+                    i,
+                    j,
+                    value,
+                    hash = [];
+
+                for (i = 0; i < order.length; i++) {
+                    id = order[i];
+                    item = data[id];
+                    if (item && this._filter_item(item)) {
+                        for(j = 0; j < fields.length; j++)
+                        {
+                            if(item[fields[j]] != values[j])
+                            {
+                                break;
+                            }
+                        }
+                        if(j == fields.length)
+                        {
+                            hash.push(item);
+                        }
+                        //this._groupItem(hash, item, fields);
                     }
                 }
                 return hash;
@@ -2476,9 +2560,6 @@
                 p.show(e);
                 p.getBody().attachEvent("onSelect", function () {
                     p.hide();
-                });
-                p.getBody().attachEvent("doubleClickedEvent", function () {
-                    console.log("doubleClickedEvent");
                 });
                 p.attachEvent("onHide", webix.bind(function () {
                     var index = webix.html.locate(e, "webix_operation");
