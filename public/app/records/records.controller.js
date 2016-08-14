@@ -62,33 +62,6 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
     editableOptions.theme = 'bs3';
 
 
-    //var checkin = $('#beginDateDiv').datepicker({
-    //    format: 'mm/dd/yyyy',
-    //    onRender : function(date) {
-    //        return date.valueOf() < now1.valueOf() ? 'disabled' : '';
-    //    }
-    //}).on('changeDate', function(ev) {
-    //    // if (ev.date.valueOf() > date.valueOf()) {
-    //    var newDate = new Date(ev.date);
-    //    newDate.setDate(newDate.getDate() + 1);
-    //    checkout.setValue(newDate);
-    //    // }
-    //    checkin.hide();
-    //    // setTimeout(function(){
-    //    $('#endDateDiv').focus();
-    //    // }, 1000);
-    //
-    //}).data('datepicker');
-    //var checkout = $('#endDateDiv').datepicker({
-    //    format: 'mm/dd/yyyy',
-    //    onRender : function(date) {
-    //        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-    //    }
-    //}).on('changeDate', function(ev) {
-    //    checkout.hide();
-    //}).data('datepicker');
-    //$('.footable').footable();
-    //$('.footable').trigger('footable_redraw');
 
 
 
@@ -209,15 +182,57 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         });
     };
 
+    $scope.items = [];
+    $scope.fields_arr = ["date", "client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"];
+    $scope.modalTitle = "Modal";
+
     if(!$scope.isPivotSetup)
     {
         $scope.isPivotSetup = true;
-        setupPivotTable();
+        setupPivotTable($scope);
+
+
+        grida.onDoubleClicked = function(data, field_values) {
+            console.log("Grida On Double Clicked");
+            $scope.modalTitle = field_values.join(' / ');
+            $scope.items = data;
+            $scope.open();
+        };
     }
+
+
+
+    $scope.open = function () {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            size: "xlg",
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                },
+                modalTitle: function () {
+                    return $scope.modalTitle;
+                },
+                fields_arr: function () {
+                    return $scope.fields_arr;
+                }
+            }
+        });
+
+        //modalInstance.result.then(function (selectedItem) {
+        //    $scope.selected = selectedItem;
+        //}, function () {
+        //    $log.info('Modal dismissed at: ' + new Date());
+        //});
+    };
+
 }
 
 
-function setupPivotTable()
+function setupPivotTable($scope)
 {
     grida = webix.ui({
         view: "pivot",
@@ -265,6 +280,7 @@ function setupPivotTable()
     });
 
 
+
     grida.operations.wavg = function(args, args2, args3, args4) {
         var sum = 0;
         var filledSum = 0;
@@ -277,7 +293,7 @@ function setupPivotTable()
             }
             else
             {
-                return "Hello";
+                //return "Hello";
                 filled = 0;
             }
 
@@ -302,20 +318,9 @@ function setupPivotTable()
         }
         return "";
     };
-    //
-    //grida.datafilter.avgColumn = webix.extend({
-    //    refresh:function(master, node, value){
-    //        var result = 0;
-    //        master.mapCells(null, value.columnId, null, 1, function(value){
-    //            value = value*1;
-    //            if (!isNaN(value))
-    //                result+=value;
-    //            return value;
-    //        });
-    //
-    //        node.firstChild.innerHTML = Math.round(result/master.count());
-    //    }
-    //}, webix.ui.datafilter.summColumn);
+
+
+
 }
 
 
@@ -343,6 +348,16 @@ function refreshComponents(arrData, component)
 }
 records.controller('RecordsController', RecordsController);
 
+records.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items, fields_arr, modalTitle) {
+
+    $scope.items = items;
+    $scope.fields_arr = fields_arr;
+    $scope.modalTitle = modalTitle;
+
+    $scope.ok = function () {
+        $uibModalInstance.close();
+    };
+});
 records.directive('footableDirective', function(){
     return function(scope, element){
         var footableTable = element.parents('table');

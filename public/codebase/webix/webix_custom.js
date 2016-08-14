@@ -19763,6 +19763,7 @@ webix.extend(webix.ui.datatable, {
                 this._reinit_selection();
 
                 this.on_click.webix_cell = webix.bind(this._click_before_select, this);
+                this.on_dblclick.webix_cell = webix.bind(this._dblclick_before_select, this);
 
                 //temporary stab, actual handlers need to be created
                 this._data_cleared = this._data_filtered = function(){
@@ -19949,6 +19950,25 @@ webix.extend(webix.ui.datatable, {
                     else
                         this._select({ row: id.row, column:id.column }, preserve);
                 }
+            },
+            fetchIds:function(item, rowIds)
+            {
+                //var rowIds = [];
+                if(item)
+                {
+                    if(item && item.$parent != 0)
+                    {
+                        this.fetchIds(this.getItem(item.$parent), rowIds);
+                    }
+                    rowIds.push(item.name);
+                }
+                return rowIds;
+            },
+            _dblclick_before_select:function(e, id){
+                //This "id" tells the row and column selected. from here we need to figure out how to present data
+                var item = this.getItem(id.row);
+                var rowIds = this.fetchIds(item, []);
+                this.getTopParentView().callEvent("doubleClickedEvent", [e, { rowIds: rowIds, column:id.column }]);
             },
             _mapSelection:function(callback, column, row){
                 var cols = this._settings.columns;
