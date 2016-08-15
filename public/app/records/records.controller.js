@@ -108,6 +108,14 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         $scope.popup2.opened = true;
     };
 
+    $scope.openInstruction = function() {
+        $('.webix_pivot_config_msg').attr("data-intro", "Click to configure Fields for Row, Column and Value").attr("data-position", "bottom");
+        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm").attr("data-position", "bottom");
+
+        //webix_layout_toolbar
+        $('body').chardinJs('start');
+    };
+
     $scope.dateRangeOptionChange = function() {
         console.log($scope.dateRangeOption);
 
@@ -125,17 +133,14 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         else if($scope.dateRangeOption == "lastweek")
         {
             today.setDate(dd - 7);
-
         }
         else if($scope.dateRangeOption == "lastmonth")
         {
             today.setMonth(mm - 1);
-
         }
         else if($scope.dateRangeOption == "lastquarter")
         {
             today.setMonth(mm - 3);
-
         }
         else if($scope.dateRangeOption == "lastyear")
         {
@@ -234,10 +239,21 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 
 function setupPivotTable($scope)
 {
+
+    var pivoHeight = $(window).innerHeight() - 410;
+    if (pivoHeight < 300)
+    {
+        pivoHeight = 300;
+    }
+    //grida.define("height", pivoHeight);
+    //grida.height = pivoHeight;
+    //grida.adjust();
+
     grida = webix.ui({
         view: "pivot",
         container: "pgrid",
-        height: 600,
+        height: pivoHeight,
+        //autoheight:false,
         id: "pivot",
         footer: "wavg",
         totalColumn: true,
@@ -319,7 +335,17 @@ function setupPivotTable($scope)
         return "";
     };
 
-
+    webix.event(window, "resize", function() {
+        console.log("resize");
+        var pivoHeight = $(window).innerHeight() - 410;
+        if (pivoHeight < 300)
+        {
+            pivoHeight = 300;
+        }
+        grida.define("height", pivoHeight);
+        //grida.height = pivoHeight;
+        grida.adjust();
+    });
 
 }
 
