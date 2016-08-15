@@ -24,6 +24,11 @@
         font-variant: normal;
         font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
     }
+
+    body
+    {
+        height:100%;
+    }
 </style>
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
@@ -55,7 +60,8 @@
     <br />
     <br />
     <br />
-    <h4>Help Desk: 1-646-293-1850</h4>
+    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4" style="width: 250px; float: right;"><input type="button" value="Show Instruction" ng-click="openInstruction()" class="btn btn-md btn-success form-control" /></div>
+
 </div>
 <div class="wrapper-md qb-adjust">
     <div id="page-wrapper" ng-controller="RecordsController">
@@ -63,7 +69,7 @@
             <div class="col-lg-12">
                 <form role="form">
                     <div class="form-group row">
-                        <div class="col-md-4">
+                        <div class="col-md-4" data-intro="Default date range options." data-position="top">
                             <label>Date: </label>
                             <select name="dateRangeOption" id="dateRangeOption" class="form-control" ng-model="dateRangeOption" ng-change="dateRangeOptionChange()">
                                 <option value="">ALL</option>
@@ -75,7 +81,7 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2" data-intro="Filter by begin date." data-position="top">
                             <label>Begin Date: </label>
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptionsStart" ng-required="true" close-text="Close" max-date="endDate" />
@@ -85,7 +91,7 @@
                             </p>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2" data-intro="Filter by end date." data-position="top">
                             <label>End Date: </label>
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptionsEnd" ng-required="true" close-text="Close" min-date="startDate" />
@@ -95,19 +101,20 @@
                             </p>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-1" data-intro="Filter by min size." data-position="top">
                             <label>Min. Size: </label>
                             <input type="number" name="minSize" id="minSize" class="form-control" ng-model="minSize">
                         </div>
-                        <div class="col-md-1">
+                        <div class="col-md-1" data-intro="Filter by max size." data-position="top">
                             <label>Max. Size:</label>
                             <input type="number" name="maxSize" id="maxSize" class="form-control" ng-model="maxSize">
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2" data-intro="Apply Filter." data-position="top">
                             <label>&nbsp;</label>
                             <input type="button" value="Apply" ng-click="filterPivotTable()" class="btn btn-md btn-success form-control" />
                         </div>
+                    </div>
                 </form>
 
                 <!-- /.row -->
@@ -119,7 +126,7 @@
 
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div id="pgrid" style="overflow-x: scroll"></div>
+                            <div id="pgrid" style="overflow-x: scroll;"></div>
                         </div>
 
                         <!-- End of Pivot table -->
@@ -129,3 +136,4 @@
             </div>
             <!-- /#page-wrapper -->
         </div>
+    </div>
