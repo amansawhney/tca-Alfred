@@ -260,13 +260,13 @@ function setupPivotTable($scope)
         max: true,
         structure: {
             rows: ["client"],
-            columns: ["trader", "algo"],
+            columns: ["trader"],
             values: [{
                 name: "twap",
                 operation: "wavg"
                 },
                 {name: "size",
-                    operation: "wavg"
+                    operation: "avg"
                 }
             ],
             fields_all: ["client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"],
@@ -313,15 +313,35 @@ function setupPivotTable($scope)
                 filled = 0;
             }
 
-            if(args3.data)
-            {
-                var aa = 0;
-                aa = 5;
-            }
             if (!window.isNaN(arg) && !window.isNaN(filled))
             {
                 sum += arg * filled;
                 filledSum += filled;
+            }
+        }
+        if(filledSum > 0)
+        {
+            return sum / filledSum;
+        }
+        if(sum > 0)
+        {
+            return sum;
+        }
+        return "";
+    };
+
+
+
+    grida.operations.avg = function(args, args2, args3, args4) {
+        var sum = 0;
+        var filledSum = 0;
+        for (var i = 0; i < args.length; i++) {
+            var arg = window.parseFloat(args[i], 10);
+
+            if (!window.isNaN(arg))
+            {
+                sum += arg;
+                filledSum = filledSum + 1;
             }
         }
         if(filledSum > 0)

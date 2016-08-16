@@ -439,7 +439,7 @@
                 structure._header_hash = {};
 
                 for (var i = 0; i < structure.values.length; i++) {
-                    structure.values[i].operation = structure.values[i].operation || ["sum"];
+                    structure.values[i].operation = structure.values[i].operation || ["wavg"];
                     if (!webix.isArray(structure.values[i].operation)) structure.values[i].operation = [structure.values[i].operation];
                 }
                 var columns = [];
@@ -466,6 +466,7 @@
                 for (var k = 1; k < header.length; k++) {
                     var value = header[k].id;
                     var filledSum = 0;
+                    var countSum = 0;
                     var totalSum = 0;
 
                     var tmp = value.split(this.$divider);
@@ -490,20 +491,54 @@
                         }
                     }
 
+                    var validCount =0;
+
                     for (var zz = 0; zz < items.length; zz ++)
                     {
                         var item = items[zz];
 
 
-                        if(item[value] && item['filled_' + column_name])
+                        if(item[value])
                         {
-                            totalSum += item[value] * item['filled_' + column_name];
-                            filledSum += item['filled_' + column_name];
+                            if(tmp[tmp.length - 2] == "wavg")
+                            {
+                                if(item['filled_' + column_name])
+                                {
+                                    totalSum += item[value] * item['filled_' + column_name];
+                                    filledSum += item['filled_' + column_name];
+                                }
+                            }
+                            else if(tmp[tmp.length - 2] == "avg")
+                            {
+                                if(item['count_' + column_name]) {
+                                    totalSum += item[value] * item['count_' + column_name];
+                                    countSum += item['count_' + column_name];
+                                }
+                            }
+                            else
+                            {
+                                totalSum += item[value];
+                            }
+                        }
+
+                    }
+
+                    if(tmp[tmp.length - 2] == "wavg")
+                    {
+                        if(filledSum > 0)
+                        {
+                            totalSum = totalSum / filledSum;
                         }
                     }
-                    if(filledSum > 0)
+                    else if(tmp[tmp.length - 2] == "avg")
                     {
-                        totalSum = totalSum / filledSum;
+                        if(countSum > 0)
+                        {
+                            totalSum = totalSum / countSum;
+                        }
+                    }
+                    else
+                    {
                     }
                     footer_info.push(parseFloat(totalSum).toFixed(3));
                 }
@@ -599,19 +634,34 @@
                                 if(item.data[j]["filled_" + column_name])
                                 {
                                     filled_sum = item.data[j]["filled_" + column_name];
-                                    //for(var mm = 0; mm < item.data[j]["filled_" + column_name].length; mm ++)
-                                    //{
-                                    //    filled_sum = filled_sum + item.data[j]["filled_" + column_name][mm];
-                                    //}
                                 }
 
                                 if(!item['filled_' + column_name])
                                 {
                                     item['filled_' + column_name] = [];
                                 }
+
                                 if(filled_sum != 0)
                                 {
                                     item['filled_' + column_name].push(filled_sum);
+                                }
+
+
+
+                                var count_sum = 0;
+                                if(item.data[j]["count_" + column_name])
+                                {
+                                    count_sum = item.data[j]["count_" + column_name];
+                                }
+
+                                if(!item['count_' + column_name])
+                                {
+                                    item['count_' + column_name] = [];
+                                }
+
+                                if(count_sum != 0)
+                                {
+                                    item['count_' + column_name].push(count_sum);
                                 }
                             }
                         }
@@ -632,7 +682,7 @@
                         _item = this._minmax_in_row(_item, structure);
                         // TO DO
                         // Weighted Average Column Total To be Calculated Here and save it to certain key and use it some where elase
-                        var tmpTotalFieldArr = [];
+/*                        var tmpTotalFieldArr = [];
                         var tmpTotalFieldFilledArr = [];
                         for (var _k = 0; _k < _values.length; _k++) {
                             var _value = _values[_k];
@@ -706,7 +756,7 @@
                             {
                                 _item[tmpTotalFieldArr[pp]] = _item[tmpTotalFieldArr[pp]] / _item[tmpTotalFieldFilledArr[pp]];
                             }
-                        }
+                        }*/
                         // The Total Header needs to be changed. The ID and something else maybe
                         // Need to be careful when there are two or more column field
                         items.push(_item);
@@ -728,6 +778,7 @@
                     name = name || "";
                     var values = this.config.structure.values;
                     item['filled_' + name] = [];
+                    item['count_' + name] = 0;
                     for (var id in data) {
                         for (var _i4 = 0; _i4 < values.length; _i4++) {
                             for (var j = 0; j < values[_i4].operation.length; j++) {
@@ -745,6 +796,7 @@
                             }
                         }
                         item['filled_' + name].push(data[id].filled);
+                        item['count_' + name] ++;
                     }
                 }
                 return item;
@@ -1009,6 +1061,162 @@
 
                     if (item[key]) item[key] = Math.round(item[key] * 100000) / 100000;
                 }
+
+                // Weighted Average Column Total To be Calculated Here and save it to certain key and use it some where elase
+                var tmpTotalFieldArr = [];
+                var tmpTotalFieldFilledArr = [];
+                var _values = structure._header;
+                for (var _k = 0; _k < _values.length; _k++) {
+                    var _value = _values[_k];
+                    //if (webix.isUndefined(_item[value])) item[value] = [];
+                    //item[value].push(item.data[j][value]);
+
+                    var _tmp = _value.split(this.$divider);
+
+                    var _column_name = _tmp[0];
+                    var _column_name_total_filled = "";
+                    if(_tmp.length == 2)
+                    {
+                        _column_name = "";
+                    }
+                    var _column_name_sec = 'total';
+                    for(var _kk = 1; _kk < _tmp.length - 2; _kk ++)
+                    {
+                        _column_name += this.$divider + _tmp[_kk];
+                        _column_name_sec += this.$divider + _tmp[_kk];
+                        if(_column_name_total_filled == "")
+                        {
+                            _column_name_total_filled = _tmp[_kk];
+                        }
+                        else
+                        {
+                            _column_name_total_filled += this.$divider + _tmp[_kk];
+                        }
+                    }
+                    _column_name_sec += this.$divider + _tmp[_tmp.length - 2] + this.$divider + _tmp[_tmp.length - 1];
+
+                    var _filled_sum = 0;
+
+                    if(item["filled_" + _column_name])
+                    {
+                        if(item["filled_" + _column_name] instanceof Array)
+                        {
+                            for(var _mm = 0; _mm < item["filled_" + _column_name].length; _mm ++)
+                            {
+                                _filled_sum = _filled_sum + item["filled_" + _column_name][_mm];
+                            }
+                        }
+                        else
+                        {
+                            _filled_sum = item["filled_" + _column_name];
+                        }
+                    }
+
+                    if(_filled_sum != 0)
+                    {
+                        item['filled_' + _column_name] = _filled_sum;
+                    }
+
+                    var _count_sum = 0;
+                    if(item["count_" + _column_name])
+                    {
+                        if(item["count_" + _column_name] instanceof Array)
+                        {
+                            for(var __mm = 0; __mm < item["count_" + _column_name].length; __mm ++)
+                            {
+                                _count_sum = _count_sum + item["count_" + _column_name][__mm];
+                            }
+                        }
+                        else
+                        {
+                            _count_sum = item["count_" + _column_name];
+                        }
+                    }
+
+                    if(_count_sum != 0)
+                    {
+                        item['count_' + _column_name] = _count_sum;
+                    }
+
+                    if(item[_value])
+                    {
+                        if(item[_column_name_sec])
+                        {
+                            //item[_column_name_sec] += _filled_sum * item[_value];
+                            if(_tmp[_tmp.length - 2] == "wavg")
+                            {
+                                item[_column_name_sec] += _filled_sum * item[_value];
+                            }
+                            else
+                            {
+                                item[_column_name_sec] += item[_value] * _count_sum;
+                            }
+
+
+                            //item["filled_" + _column_name_total_filled] += _filled_sum;
+                            //item["count_" + _column_name_total_filled] += _count_sum;
+                        }
+                        else
+                        {
+                            //item[_column_name_sec] = _filled_sum * item[_value];
+
+                            if(_tmp[_tmp.length - 2] == "wavg")
+                            {
+                                item[_column_name_sec] = _filled_sum * item[_value];
+                            }
+                            else
+                            {
+                                item[_column_name_sec] = item[_value] * _count_sum;
+                            }
+
+                            //item["filled_" + _column_name_total_filled] = _filled_sum;
+                            //item["count_" + _column_name_total_filled] = _count_sum;
+
+                            tmpTotalFieldArr.push(_column_name_sec);
+                            tmpTotalFieldFilledArr.push(_column_name_total_filled);
+                        }
+
+                        //if(_k == 0)
+                        //{
+                        if(!item["filled_" + _column_name_total_filled])
+                        {
+                            item["filled_" + _column_name_total_filled] = _filled_sum / structure.values.length;//0;
+                        }
+                        item["filled_" + _column_name_total_filled] += _filled_sum / structure.values.length;
+
+                        if(!item["count_" + _column_name_total_filled])
+                        {
+                            item["count_" + _column_name_total_filled] = _count_sum / structure.values.length;//0;
+                        }
+                        item["count_" + _column_name_total_filled] += _count_sum / structure.values.length;
+                        //}
+
+                    }
+                }
+
+                for(var pp = 0; pp < tmpTotalFieldArr.length; pp++)
+                {
+                    var __value = tmpTotalFieldArr[pp];
+                    if(item[__value] > 0)
+                    {
+
+                        var __tmp = __value.split(this.$divider);
+                        if(__tmp[__tmp.length - 2] == "wavg")
+                        {
+                            item[__value] = item[__value] / item["filled_" + tmpTotalFieldFilledArr[pp]];
+                        }
+                        else if(__tmp[__tmp.length - 2] == "avg")
+                        {
+                            item[__value] = item[__value] / item["count_" + tmpTotalFieldFilledArr[pp]];
+                        }
+                        else
+                        {
+                            //item[__value] = item[__value] / item[tmpTotalFieldFilledArr[pp]];
+                        }
+
+                    }
+                }
+
                 return item;
             },
             _minmax_in_row: function _minmax_in_row(item, structure) {
@@ -1635,7 +1843,7 @@
                 });
             },
             _function_template: function _function_template(obj) {
-                obj.operation = obj.operation || ["sum"];
+                obj.operation = obj.operation || ["wavg"];
                 if (!webix.isArray(obj.operation)) obj.operation = [obj.operation];
 
                 var ops = [];
@@ -1674,7 +1882,7 @@
 
             _function_add: function _function_add(e, id) {
                 var item = this.$$("values").getItem(id);
-                item.operation.push("sum");
+                item.operation.push("wavg");
                 this.$$("values").updateItem(id);
 
                 webix.delay(function () {
