@@ -1197,7 +1197,7 @@
                 for(var pp = 0; pp < tmpTotalFieldArr.length; pp++)
                 {
                     var __value = tmpTotalFieldArr[pp];
-                    if(item[__value] > 0)
+                    if(item[__value])
                     {
 
                         var __tmp = __value.split(this.$divider);
