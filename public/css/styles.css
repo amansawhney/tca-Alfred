@@ -2,3 +2,9 @@
   background-color: #DCDCDC;
 }
 .orb-green .orb-table td{text-align: right;}
+.webix_cell:hover {
+  background-color: #DCDCDC;
+}
+.webix_cell {
+  text-align: right;
+}
