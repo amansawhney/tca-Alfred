@@ -9,10 +9,10 @@ angular.module('admin')
         // config
         $scope.app = {
             name: 'Quantitative Brokers',
-            version: '0.9',
+            version: '1.1',
             // for chart colors
             color: {
-                primary: '#7266ba',
+                primary: '#27c24c',
                 info:    '#23b7e5',
                 success: '#27c24c',
                 warning: '#fad733',

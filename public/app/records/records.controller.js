@@ -347,11 +347,12 @@ function setupPivotTable($scope)
         }
         if(filledSum > 0)
         {
-            return sum / filledSum;
+          num = sum / filledSum;
+            return (Math.round(num * 1000) / 100) /10
         }
         if(sum > 0)
         {
-            return sum;
+            return (Math.round(sum * 1000) / 100) /10
         }
         return "";
     };

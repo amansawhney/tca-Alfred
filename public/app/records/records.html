@@ -24,6 +24,26 @@
         font-variant: normal;
         font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
     }
+    .astext {
+          font-family: 'Raleway', sans-serif;
+          color: #454545;
+          font-weight: 700;
+          font-size: 14px;
+          text-transform: uppercase;
+          padding: 17px 10px 20px;
+          padding-top: 17px;
+          padding-right: 10px;
+          padding-bottom: 20px;
+          padding-left: 10px;
+          transition: .35s;
+          background:none;
+          border:none;
+          margin:0;
+          padding:0;
+      }
+      .astext:hover {
+        color: #34b233;
+      }
 
     body
     {
@@ -60,7 +80,7 @@
     <br />
     <br />
     <br />
-    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4" style="width: 250px; float: right;"><input type="button" value="Show Instruction" ng-click="openInstruction()" class="btn btn-md btn-success form-control" /></div>
+    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4 "><input type="button" value="Show Instruction" ng-click="openInstruction()" class="astext pull-right" /></div>
 
 </div>
 <div class="wrapper-md qb-adjust">
@@ -69,7 +89,7 @@
             <div class="col-lg-12">
                 <form role="form">
                     <div class="form-group row">
-                        <div class="col-md-4" data-intro="Default date range options." data-position="top">
+                        <div class="col-md-5" data-intro="Default date range options." data-position="top">
                             <label>Date: </label>
                             <select name="dateRangeOption" id="dateRangeOption" class="form-control" ng-model="dateRangeOption" ng-change="dateRangeOptionChange()">
                                 <option value="">ALL</option>
@@ -110,9 +130,10 @@
                             <input type="number" name="maxSize" id="maxSize" class="form-control" ng-model="maxSize">
                         </div>
 
-                        <div class="col-md-2" data-intro="Apply Filter." data-position="top">
+                        <div class="col-md-1" data-intro="Apply Filter." data-position="top">
                             <label>&nbsp;</label>
-                            <input type="button" value="Apply" ng-click="filterPivotTable()" class="btn btn-md btn-success form-control" />
+                            <br>
+                            <input type="button" value="Apply Filter" ng-click="filterPivotTable()" class="astext text-center" />
                         </div>
                     </div>
                 </form>
