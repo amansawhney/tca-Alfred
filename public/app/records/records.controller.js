@@ -240,6 +240,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 function setupPivotTable($scope)
 {
 
+
     var pivoHeight = $(window).innerHeight() - 410;
     if (pivoHeight < 300)
     {
@@ -250,8 +251,8 @@ function setupPivotTable($scope)
     //grida.adjust();
 
     grida = webix.ui({
+      container: "pgrid",
         view: "pivot",
-        container: "pgrid",
         height: pivoHeight,
         //autoheight:false,
         id: "pivot",
@@ -260,7 +261,7 @@ function setupPivotTable($scope)
         max: true,
         structure: {
             rows: ["client", "algo"],
-            columns: ["fcm", "algo"],
+            columns: ["exch"],
             values: [{
                 name: "twap",
                 operation: "wavg"
@@ -325,11 +326,12 @@ function setupPivotTable($scope)
         }
         if(filledSum > 0)
         {
-            return sum / filledSum;
+            num = sum / filledSum
+            return (Math.round(num * 1000) / 100) /10
         }
         if(sum > 0)
         {
-            return sum;
+            return (Math.round(sum * 1000) / 100) /10
         }
         return "";
     };
