@@ -259,8 +259,8 @@ function setupPivotTable($scope)
         totalColumn: true,
         max: true,
         structure: {
-            rows: ["client"],
-            columns: ["trader", "algo"],
+            rows: ["client", "algo"],
+            columns: ["fcm", "algo"],
             values: [{
                 name: "twap",
                 operation: "wavg"
@@ -294,7 +294,6 @@ function setupPivotTable($scope)
             }]
         }
     });
-
 
 
     grida.operations.wavg = function(args, args2, args3, args4) {
