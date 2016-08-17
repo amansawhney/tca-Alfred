@@ -19,112 +19,121 @@ async function getMyRecords(req, res, next) {
 async function getAllRecords(req, res, next) {
 
     //var search_keyword = req.query.search_keyword;
-    var offset = 0; //req.query.offset
-    var limit = 10000;
+    try {
+        var offset = 0; //req.query.offset
+        var limit = 10000000;
 
-    var querySet = {};
-    if (req.query.filter == "filter")
-    {
-        try {
-            if (req.query.currDate && req.query.currDate != "all")
-            {
-                querySet.date = req.query.currDate;
-            }
-            if (req.query.client && req.query.client != "all")
-            {
-                querySet.client = req.query.client;
-            }
-            if (req.query.fcm && req.query.fcm != "all")
-            {
-                querySet.fcm = req.query.fcm;
-            }
-            if (req.query.trader && req.query.trader != "all")
-            {
-                querySet.trader = req.query.trader;
-            }
-            if (req.query.algo && req.query.algo != "all")
-            {
-                querySet.algo = req.query.algo;
-            }
-            if (req.query.exchange && req.query.exchange != "all")
-            {
-                querySet.exchange = req.query.exchange;
-            }
-            if (req.query.instrument && req.query.instrument != "all")
-            {
-                querySet.instrument = req.query.instrument;
-            }
+        var querySet = {};
+        if (req.query.filter == "filter")
+        {
+            try {
+                if (req.query.currDate && req.query.currDate != "all")
+                {
+                    querySet.date = req.query.currDate;
+                }
+                if (req.query.client && req.query.client != "all")
+                {
+                    querySet.client = req.query.client;
+                }
+                if (req.query.fcm && req.query.fcm != "all")
+                {
+                    querySet.fcm = req.query.fcm;
+                }
+                if (req.query.trader && req.query.trader != "all")
+                {
+                    querySet.trader = req.query.trader;
+                }
+                if (req.query.algo && req.query.algo != "all")
+                {
+                    querySet.algo = req.query.algo;
+                }
+                if (req.query.exchange && req.query.exchange != "all")
+                {
+                    querySet.exchange = req.query.exchange;
+                }
+                if (req.query.instrument && req.query.instrument != "all")
+                {
+                    querySet.instrument = req.query.instrument;
+                }
 
-            if ((req.query.minSize && req.query.minSize != "") && (req.query.maxSize && req.query.maxSize != ""))
-            {
-                querySet.size = {$gt: req.query.minSize, $lt: req.query.maxSize};
-            }
-            else if(req.query.minSize && req.query.minSize != "")
-            {
-                querySet.size = {$gt: req.query.minSize};
-            }
-            else if(req.query.maxSize && req.query.maxSize != "")
-            {
-                querySet.size = {$lt: req.query.maxSize};
-            }
+                if ((req.query.minSize && req.query.minSize != "") && (req.query.maxSize && req.query.maxSize != ""))
+                {
+                    querySet.size = {$gt: req.query.minSize, $lt: req.query.maxSize};
+                }
+                else if(req.query.minSize && req.query.minSize != "")
+                {
+                    querySet.size = {$gt: req.query.minSize};
+                }
+                else if(req.query.maxSize && req.query.maxSize != "")
+                {
+                    querySet.size = {$lt: req.query.maxSize};
+                }
 
-            if (req.query.startDate && req.query.endDate)
+                if (req.query.startDate && req.query.endDate)
+                {
+                    var dtStart = new Date(req.query.startDate);
+                    var startUnixTimestamp = dtStart / 1000;
+                    var dtEnd = new Date(req.query.endDate);
+                    var endUnixTimestamp = dtEnd / 1000 + 60 * 60 * 24;
+                    querySet.dateUTC = {$gt: startUnixTimestamp, $lt: endUnixTimestamp};
+                }
+                else if(req.query.startDate)
+                {
+                    var dtStart = new Date(req.query.startDate);
+                    var startUnixTimestamp = dtStart / 1000;
+                    querySet.dateUTC = {$gt: startUnixTimestamp};
+                }
+                else if(req.query.endDate)
+                {
+                    var dtEnd = new Date(req.query.endDate) + 60 * 60 * 24;
+                    var endUnixTimestamp = dtEnd / 1000;
+                    querySet.dateUTC = {$lt: endUnixTimestamp};
+                }
+                //console.log(req.query);
+                //console.log(querySet);
+            }catch(err)
             {
-                var dtStart = new Date(req.query.startDate);
-                var startUnixTimestamp = dtStart / 1000;
-                var dtEnd = new Date(req.query.endDate);
-                var endUnixTimestamp = dtEnd / 1000 + 60 * 60 * 24;
-                querySet.dateUTC = {$gt: startUnixTimestamp, $lt: endUnixTimestamp};
+                console.log(err);
             }
-            else if(req.query.startDate)
+        }
+
+        if(req.decoded.userType != "admin")
+        {
+            var userId = req.decoded._id;
+            let user = await User.findOne({ _id: userId });
+
+            if (!user) {
+                return res.status(200).send({
+                    records: []
+                });
+            }
+            if(user.clients && user.clients.length > 0)
             {
-                var dtStart = new Date(req.query.startDate);
-                var startUnixTimestamp = dtStart / 1000;
-                querySet.dateUTC = {$gt: startUnixTimestamp};
+                querySet.client = {$in: user.clients};
             }
-            else if(req.query.endDate)
+            if(user.traders && user.traders.length > 0)
             {
-                var dtEnd = new Date(req.query.endDate) + 60 * 60 * 24;
-                var endUnixTimestamp = dtEnd / 1000;
-                querySet.dateUTC = {$lt: endUnixTimestamp};
+                querySet.trader = {$in: user.traders};
             }
-            //console.log(req.query);
             //console.log(querySet);
-        }catch(err)
-        {
-            console.log(err);
         }
-    }
 
-    if(req.decoded.userType != "admin")
+        let records = await Record.findAsync(querySet, null, {skip: offset, limit: limit});//sort: {createdAt: -1},
+        console.log(records.length);
+
+        //let clients = await Record.find().distinct('client');
+        //console.log(clients);
+        return res.status(200).send({
+            records: records
+        });
+    }catch(err)
     {
-        var userId = req.decoded._id;
-        let user = await User.findOne({ _id: userId });
-
-        if (!user) {
-            return res.status(200).send({
-                records: []
-            });
-        }
-        if(user.clients && user.clients.length > 0)
-        {
-            querySet.client = {$in: user.clients};
-        }
-        if(user.traders && user.traders.length > 0)
-        {
-            querySet.trader = {$in: user.traders};
-        }
-        //console.log(querySet);
+        console.log(err);
+        return res.status(200).send({
+            records: []
+        });
     }
 
-    let records = await Record.findAsync(querySet, null, {sort: {createdAt: -1}, skip: offset, limit: limit});
-    //console.log(records.length);
-
-    //let clients = await Record.find().distinct('client');
-    //console.log(clients);
-    return res.status(200).send({
-        records: records
-    });
 }
 
 async function getRecordsWithFilters(req, res, next) {

@@ -54,7 +54,6 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             $scope.getRecords();
         });
     }
-    $scope.getRecords();
     //$scope.getStatics();
 
     editableThemes.bs3.inputClass = 'input-sm';
@@ -195,6 +194,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
     {
         $scope.isPivotSetup = true;
         setupPivotTable($scope);
+        $scope.getRecords();
 
 
         grida.onDoubleClicked = function(data, field_values) {
