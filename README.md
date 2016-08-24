@@ -30,3 +30,17 @@ When there's an code update,
 #Encrypt Json file
 
 node encrypt.js [realive path of json] [path of new encrypted json file]
+
+## Todo
+1. Log in fix 
+2. Added display name
+3. Help view smaller with the login as
+4. Double click into the help view
+5. Double click for agragation 
+6. Get rid of icons
+7. Make config column size dynamic 
+	* Check for the width of the largest item then add a couple charcters and make all of the collumns uniform
+8. Get rid of header and footer and copy the footer off the qb site
+9. Add viewer panel 
+10. Add option for admin user
+11. Display names
