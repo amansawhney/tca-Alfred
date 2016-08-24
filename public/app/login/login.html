@@ -1,22 +1,60 @@
-<div class="container w-xxl w-auto-xs" ng-controller="LoginController" ng-init="app.settings.container = false;">
-  <a href class="navbar-brand block m-t">{{app.name}}</a>
+<style type="text/css">
+  .login {
+    background-color: #eee;
+  }
+  .well {
+    background-color: #fff;
+  }
+  .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+  }
+  label {
+    line-height: 1.5em;
+    font-family: "Lucida Grande", "Lucida Sans", "Unicode", Helvetica, Arial, Verdana, sans-serif;
+  }
+  .col-centered{
+    float: none;
+    margin: 0 auto;
+}
+#auth_logo img {
+    max-width: 310px;
+  }
+
+  
+</style>
+
+<body class = "login">
+<div class= "vertical-center">
+<div class="container col-md-4 well" ng-controller="LoginController" ng-init="app.settings.container = false;">
+  <img id = "auth_logo" width="150%" height="150%" class="navbar-brand block m-t img-responsive center-block" src="image/logoqb.gif"></a>
   <div class="m-b-lg">
+  <br>
     <form name="form" class="form-validation">
       <div class="text-danger wrapper text-center" ng-show="authError">
           {{authError}}
       </div>
       <div class="list-group list-group-sm">
-        <div class="list-group-item">
+        <div class= "col-xs-10 col-centered">
+          <label> Email </label>
+          <br>
           <input type="email" placeholder="Email" class="form-control no-border" ng-model="user.email" required>
         </div>
-        <div class="list-group-item">
+        <br>
+        <div class= "col-xs-10 col-centered">
+          <label> Password </label>
+          <br>
            <input type="password" placeholder="Password" class="form-control no-border" ng-model="user.password" required>
         </div>
       </div>
+      <div class = "col-centered col-xs-5">
       <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>Log in</button>
+      </div>
     </form>
   </div>
-  <div class="text-center" ng-include="'templates/blocks/page_footer.html'">
-    {% include 'blocks/page_footer.html' %}
-  </div>
 </div>
+</div>
+</body>

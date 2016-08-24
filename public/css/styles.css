@@ -15,8 +15,11 @@
 .btn-primary:hover {
   background-color: #1C8A36;
 }
-.btn .btn-lg .btn-primary .btn-block {
-    background-color: #1C8A36;
+.btn-primary[disabled] {
+  background-color: #d9534f;
+}
+.btn-primary[disabled]:hover {
+  background-color: #CC0000;
 }
 .footable {
   border: 1px solid #27c24c;

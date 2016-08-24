@@ -44,3 +44,4 @@ node encrypt.js [realive path of json] [path of new encrypted json file]
 9. Add viewer panel 
 10. Add option for admin user
 11. Display names
+12. Export to csv
