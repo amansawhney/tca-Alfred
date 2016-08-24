@@ -12,6 +12,7 @@ npm install
 6. Install Bower modules
 Go to project directory and install bower modules.
 bower install
+note: bower install as root
 7. Test Run the Project
 npm start
 
@@ -22,6 +23,10 @@ https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-applica
 
 
 
-When there's an code update, 
+When there's an code update,
 1. Update the code. You can pull from git.
 2. Take Step 5 to Step 7 again.
+
+#Encrypt Json file
+
+node encrypt.js [realive path of json] [path of new encrypted json file]
