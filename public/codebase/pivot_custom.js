@@ -364,7 +364,14 @@
                 }
 
                 var values = data.rowIds.concat(column_values);
-                var fields = this.config.structure.rows.concat(columns);
+                var fields = [];
+                for(var kk = 0; kk < data.rowIds.length; kk++)
+                {
+                    fields.push(this.config.structure.rows[kk])
+
+                }
+                //this.config.structure.rows.concat(columns);
+                fields = fields.concat(columns);
 
                 var itemsForPopup = this._getItemsForPopup(this.data.pull, this.data.order, fields, values);
 
