@@ -1,46 +1,5 @@
 <style>
-    .applyButton {
-        font-size: 14px;
-        color: #454545;
-        font-weight: 700;
-        text-transform: uppercase;
-        transition: .35s;
-
-    }
-    .applyButton:hover {
-        color:#34b233;
-    }
-    .nav,
-    .pagination,
-    .carousel,
-    .panel-title a {
-        cursor: pointer;
-    }
-
-    .full button span {
-        background-color: limegreen;
-        border-radius: 32px;
-        color: black;
-    }
-
-    .partially button span {
-        background-color: orange;
-        border-radius: 32px;
-        color: black;
-    }
-
-    .qb-adjust {
-        background-color: white;
-        font-style: normal;
-        font-variant: normal;
-        font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
-    }
-
-    body
-    {
-        font-family: 'Raleway', sans-serif;
-        height:100%;
-    }
+    
 </style>
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
@@ -67,12 +26,8 @@
 </script>
 
 <div class="qb-adjust lter b-b wrapper-md">
-    <a href="#" class="pull-left"><img src="image/logoqb.gif"></a>
-    <br />
-    <br />
-    <br />
-    <br />
-    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4" style="width: 250px; float: right;"><a ng-click="openInstruction()" class="applyButton pull-right" >Show Instruction</a></div>
+    <div>
+    <div class="col-md-4" style="width: 250px; float: right;"><a ng-click="openInstruction()" class="applyButton pull-right" >Show Instruction</a></div>
 
 </div>
 <div class="wrapper-md qb-adjust">
@@ -141,9 +96,14 @@
                         <div class="panel-body">
                             <div id="pgrid" style="overflow-x: scroll;"></div>
                         </div>
+                        <br>
+                        <br>
+                        <br>
+
 
                         <!-- End of Pivot table -->
                     </div>
+
                     <!-- /.row -->
                 </div>
             </div>
