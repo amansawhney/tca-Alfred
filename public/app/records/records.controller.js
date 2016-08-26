@@ -109,7 +109,7 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 
     $scope.openInstruction = function() {
         $('.webix_pivot_config_msg').attr("data-intro", "Click to configure Fields for Row, Column and Value").attr("data-position", "bottom");
-        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm").attr("data-position", "bottom");
+        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm. \n \n \n Double click any cell for a detailed view").attr("data-position", "bottom");
 
         //webix_layout_toolbar
         $('body').chardinJs('start');
