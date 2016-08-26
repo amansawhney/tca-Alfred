@@ -1,3 +1,284 @@
+/*
+Theme Name: 	QB
+Author: 		Shahid Rafique
+Author URI: 	http://shahidrafique.com
+Tags: 			Designer, Developer, Digital Painter, Artist
+*/
+
+/*
+===========================
+CONTENTS:
+
+01 Sensible defaults
+02 Typography
+03 Media queries 
+===========================
+*/
+
+/* ---------------------------------------------------------------------------------------------------------- 
+01 Sensible defaults ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+
+
+
+/* ---------------------------------------------------------------------------------------------------------- 
+01 Custom ----------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------- */
+span {
+	text-align: center;
+	color: #000;
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    color: #000;
+    padding-top: 80px;
+}
+.bg-light {
+    background-color: #FFFFFF;
+}
+
+#trade-page .trade-box .image-holder img
+{
+    height: auto;
+    width: auto;
+    max-width: 250px;
+}
+
+#learn-page #learn .item .image img
+{
+    min-height: 191px;
+}
+
+.wpcf7 textarea
+{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.bgvid
+{
+	opacity:1!important;
+}
+
+#address
+{
+padding-top:0!important;
+}
+
+#trade-page h3
+{
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 100px;
+}
+
+#trade-page h5
+{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+#trade-page .exchange
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 60px;
+    margin-bottom: 80px;
+    display: block;
+    float: left;
+}
+#trade-page .exchange li
+{
+    font-size: 16px;
+    line-height: 60px;
+    display: inline-block;
+    /*    width: 30%;*/
+    box-sizing: border-box;
+    text-align: left;
+    text-transform: uppercase;
+    padding-left: 35px;
+}
+#trade-page .exchange li:before
+{
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background:#34b233;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+    margin-right: 10px;
+
+}
+
+
+
+/* The Roll Tracker CSS file */
+
+/* LINKS */
+a.rolltracker:link { 
+	color:#008FB8;
+	padding:2px; 
+	font-size:17px;
+}
+
+a.rolltracker:visited {
+	color:#008FB8;
+	padding:0;
+	font-size:17px;
+}
+
+a.rolltracker:active, a.rolltracker:hover {
+	color:#34b233;
+	background-color:#E8E8E8;
+	font-size:17px;
+}
+
+/* Individual Links */
+a.current:link { 
+	color:#FFFFFF;
+	padding:2px; 
+	font-size:17px;
+	background-color:#34b233;
+}
+
+a.current:visited {
+	color:#FFFFFF;
+	padding:0;
+	font-size:17px;
+}
+
+/* ROLL TRACKER TEXT */
+
+table {
+	width:54%;
+	border:1px solid #e5eff8;
+}
+
+td {
+	color:black;
+	border:1px solid #D0D0D0;
+	padding:5px 1em;
+}
+
+td.data { text-align:right; }
+td.impdata { text-align:right; background:#FDD017;}
+tr { border:1px solid #AFDCEC; }
+tr.even { background:#FFFFFF; }
+tr.odd { background:#f4f9fe; }
+th { background:AliceBlue; }
+
+/* The ROLL Tracker Table */
+.rolltable {
+	
+	position:relative;
+	left:2em;
+	top:20px;
+}
+
+
+.tab-pane > h2
+{
+	font-size:24px; font-weight:bold; text-align:left;
+}
+
+h2.completionTrack
+{
+	font-size:41px; text-align:center;
+}
+
+.rolltable td, .rolltable th
+{
+	text-align:center !important;
+	padding:10px;
+}
+
+/* Completion Tracker */
+.completionTrack {
+	float:left;
+	position:relative;
+	left:0px;
+	bottom:0em;
+	font-size:40px;
+	border:1px solid #D0D0D0;
+	padding-bottom:0px;
+	padding-top:12px;
+	text-align:center;
+	line-height:95%;
+}
+
+/* The Roll Overview */
+.rolloverview {
+	border-top:1px solid #ebebeb;
+	padding: 20px 20px 0 0;
+	margin-bottom:20px;
+	font-size:15px;
+	line-height:20px;
+	color:#666;
+}
+
+/* The Roll Tracker Module */
+.rollmodule { 
+	background-position:50px 1px;
+	background-repeat:no-repeat;
+	height:auto;
+	padding:20px 5px 0px 5px;
+	clear:both;
+}
+
+/* The Roll Picture */
+.rollpicture {
+	margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    right:12px;
+}
+
+/* Text Formatting */
+.smalltext {
+	position:relative;
+	left:0px;
+	font-size:12px;
+}
+
+.mediumtext {
+	font-size:15px;
+	color:#666;
+	position:relative;
+	right:0px;	
+}
+
+.rollvideo {
+	float:right;
+	position:relative;
+	left:20px;	
+}
+
+.rollvideolink {
+	width:350px;
+	height:200px;
+	position:relative;
+	right:10px;
+}
+
+.nav-tabs a
+{
+	color:black!important;
+	text-decoration:none;
+	border-radius: 0!important;
+}
+.nav-tabs .active a
+{
+	color:#34b233 !important;
+	border-radius: 0!important;
+}
 
 .webix_cell:hover {
   background-color: #DCDCDC;
@@ -23,4 +304,138 @@ body > div.webix_view.webix_window.webix_popup.webix_pivot > div > div.webix_win
 }
 body > div.webix_view.webix_window.webix_popup.webix_pivot > div > div.webix_win_body > div > div > div.webix_view.webix_layout_space > div > div > div > div.webix_view.webix_list > div > div:hover {
   background-color: #f5f5f5;
+}
+div.wpcf7 {
+	margin: 0;
+	padding: 0;
+}
+
+div.wpcf7-response-output {
+	margin: 2em 0.5em 1em;
+	padding: 0.2em 1em;
+}
+
+div.wpcf7 .screen-reader-response {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	width: 1px;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+div.wpcf7-mail-sent-ok {
+	border: 2px solid #398f14;
+}
+
+div.wpcf7-mail-sent-ng {
+	border: 2px solid #ff0000;
+}
+
+div.wpcf7-spam-blocked {
+	border: 2px solid #ffa500;
+}
+
+div.wpcf7-validation-errors {
+	border: 2px solid #f7e700;
+}
+
+.wpcf7-form-control-wrap {
+	position: relative;
+}
+
+span.wpcf7-not-valid-tip {
+	color: #f00;
+	font-size: 1em;
+	display: block;
+}
+
+.use-floating-validation-tip span.wpcf7-not-valid-tip {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	z-index: 100;
+	border: 1px solid #ff0000;
+	background: #fff;
+	padding: .2em .8em;
+}
+
+span.wpcf7-list-item {
+	margin-left: 0.5em;
+}
+
+.wpcf7-display-none {
+	display: none;
+}
+
+div.wpcf7 img.ajax-loader {
+	border: none;
+	vertical-align: middle;
+	margin-left: 4px;
+}
+
+div.wpcf7 div.ajax-error {
+	display: none;
+}
+
+div.wpcf7 .placeheld {
+	color: #888;
+}
+
+.wpcf7-recaptcha iframe {
+	margin-bottom: 0;
+}
+.copyrights {
+	letter-spacing: 2px;
+    margin-bottom: 10px;
+        font-size: 12px;
+
+}
+.footer-social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3;
+}
+.footer-social li {
+	  display: inline-block; 
+
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+    display: block;
+}
+.footer-p {
+    font-size: 12px;
+    text-align: center;
+    color: #000;
+}
+.list-inline {
+    padding-left: 0;
+    text-align:center;
+    list-style: none;
+    margin-left: -5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #9e9e9f;
+
+        font-size: 12px;
+}
+.list-inline a:hover {
+	color: #34b233;
+	text-decoration: underline;
 }

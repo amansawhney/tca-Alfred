@@ -1,4 +1,15 @@
 <style>
+    .applyButton {
+        font-size: 14px;
+        color: #454545;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: .35s;
+
+    }
+    .applyButton:hover {
+        color:#34b233;
+    }
     .nav,
     .pagination,
     .carousel,
@@ -27,6 +38,7 @@
 
     body
     {
+        font-family: 'Raleway', sans-serif;
         height:100%;
     }
 </style>
@@ -60,7 +72,7 @@
     <br />
     <br />
     <br />
-    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4" style="width: 250px; float: right;"><input type="button" value="Show Instruction" ng-click="openInstruction()" class="btn btn-md btn-success form-control" /></div>
+    <div><div class="col-md-8"><h4>Help Desk: 1-646-293-1850</h4></div><div class="col-md-4" style="width: 250px; float: right;"><a ng-click="openInstruction()" class="applyButton pull-right" >Show Instruction</a></div>
 
 </div>
 <div class="wrapper-md qb-adjust">
@@ -112,7 +124,8 @@
 
                         <div class="col-md-2" data-intro="Apply Filter." data-position="top">
                             <label>&nbsp;</label>
-                            <input type="button" value="Apply" ng-click="filterPivotTable()" class="btn btn-md btn-success form-control" />
+                            <br>
+                            <a value="" ng-click="filterPivotTable()" class="applyButton pull-right"> Apply Filters </a>
                         </div>
                     </div>
                 </form>
