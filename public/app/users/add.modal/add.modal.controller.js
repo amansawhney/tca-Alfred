@@ -20,7 +20,7 @@
         //}];
         //$scope.userTypes = {"Client", "Trader"};
 
-        $scope.user = {};
+        $scope.user = {userType:"general"};
 
         $scope.addUser = function(user){
 
@@ -29,6 +29,14 @@
                 $uibModalInstance.close();
             });
         }
+
+        //$scope.onUserTypeChange = function (user)
+        //{
+        //    if(user.userType == "admin")
+        //    {
+        //
+        //    }
+        //}
 
     }
 

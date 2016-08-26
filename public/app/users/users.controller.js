@@ -6,6 +6,7 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
 
     $scope.$root.clientList = ["Any"];
     $scope.$root.traderList = ["Any"];
+    $scope.$root.userTypes = ["admin", "general"];
 
     $scope.getUsers = function(){
         UsersService.getUsers({}, function(err, data){

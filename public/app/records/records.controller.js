@@ -186,6 +186,17 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         });
     };
 
+    $scope.expandAll = function()
+    {
+        $$("pivot").$$("data").openAll();
+    };
+
+    $scope.collapseAll = function()
+    {
+        $$("pivot").$$("data").closeAll();
+    };
+
+
     $scope.items = [];
     $scope.fields_arr = ["date", "client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"];
     $scope.modalTitle = "Modal";
@@ -259,8 +270,10 @@ function setupPivotTable($scope)
         footer: "wavg",
         totalColumn: true,
         max: true,
+        fieldMap: { client:"Client", trader:"Trader", exch:"Exchange", algo:"Algo", instrument:"Instrument", fcm: "FCM", size:"Size", filled:"Filled", duration:"Duration", volume:"Volume",
+            ivolume:"iVolume", passive:"Passive", cleanup:"CleanUp", "ap" : "AP", stf:"STF", ivwap:"IVWAP",vwap:"VWAP", twap:"TWAP"},
         structure: {
-            rows: ["client"],
+            rows: ["client", "algo"],
             columns: ["trader"],
             values: [{
                 name: "twap",
