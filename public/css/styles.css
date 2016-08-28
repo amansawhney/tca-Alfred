@@ -32,7 +32,7 @@ span {
 body {
 	font-family: 'Raleway', sans-serif;
 	color: #000;
-	padding-top: 80px;
+	padding-top: 20px;
 }
 .bg-light {
 	background-color: #FFFFFF;
@@ -442,11 +442,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 .applyButton {
 	font-size: 14px;
-	color: #454545;
-	font-weight: 700;
+	color: #000000;
 	text-transform: uppercase;
 	transition: .35s;
-
+	text-decoration: underline;
+	font-weight: bold;
 }
 .applyButton:hover {
 	color:#34b233;

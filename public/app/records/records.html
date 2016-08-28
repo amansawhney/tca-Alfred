@@ -25,13 +25,18 @@
     </div>
 </script>
 
-<div class="qb-adjust lter b-b wrapper-md">
-    <div>
-    <div class="col-md-4" style="width: 250px; float: right;"><a ng-click="openInstruction()" class="applyButton pull-right" >Show Instruction</a></div>
+<div class="qb-adjust lter b-b wrapper-md" style="padding-bottom:15px;border-bottom: none;">
+    <div class="col-md-2" data-intro="Expand All" data-position="top" style="    padding-left: 0px;">
+        <a type="button" value="Expand All" ng-click="expandAll()" class="applyButton" >Expand All</a>
+    </div>
+    <div class="col-md-2" data-intro="Collapse All" data-position="top">
+        <a type="button" value="Collapse All" ng-click="collapseAll()" class="applyButton" >Collapse All</a>
+    </div>
 
+    <div class="col-md-4" style="width: 250px; float: right; padding-right: 0px;text-align: right;"><a ng-click="openInstruction()" class="applyButton" >Show Instruction</a></div>
 </div>
 <div class="wrapper-md qb-adjust">
-    <div id="page-wrapper" ng-controller="RecordsController">
+    <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
                 <form role="form">
@@ -80,19 +85,11 @@
                         <div class="col-md-2" data-intro="Apply Filter." data-position="top">
                             <label>&nbsp;</label>
                             <br>
-                            <a value="" ng-click="filterPivotTable()" class="applyButton pull-right"> Apply Filters </a>
+                            <a value="" ng-click="filterPivotTable()" class="applyButton pull-right" style="line-height: 32px;"> Apply Filters </a>
                         </div>
                     </div>
                 </form>
 
-                <div>
-                    <div class="col-md-2" data-intro="Expand All" data-position="top">
-                        <input type="button" value="Expand All" ng-click="expandAll()" class="btn btn-md btn-success form-control" />
-                    </div>
-                    <div class="col-md-2" data-intro="Collapse All" data-position="top">
-                        <input type="button" value="Collapse All" ng-click="collapseAll()" class="btn btn-md btn-success form-control" />
-                    </div>
-                </div>
 
                 <!-- /.row -->
                 </div>
