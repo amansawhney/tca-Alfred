@@ -277,6 +277,7 @@ function setupPivotTable($scope)
         footer: "wavg",
         totalColumn: true,
         max: true,
+        columnWidth: 100,
         fieldMap: { client:"Client", trader:"Trader", exch:"Exchange", algo:"Algo", instrument:"Instrument", fcm: "FCM", size:"Size", filled:"Filled", duration:"Duration", volume:"Volume",
             ivolume:"iVolume", passive:"Passive", cleanup:"CleanUp", "ap" : "AP", stf:"STF", ivwap:"IVWAP",vwap:"VWAP", twap:"TWAP"},
         structure: {
