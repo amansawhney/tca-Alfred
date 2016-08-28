@@ -16,7 +16,7 @@
            <input type="password" placeholder="Password" class="form-control no-border" ng-model="user.password" required>
         </div>
       </div>
-      <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>Log in</button>
+      <a type="submit" class="btn applyButton" ng-click="login()" ng-disabled='form.$invalid'>Log in</a>
     </form>
   </div>
   <div class="text-center" ng-include="'templates/blocks/page_footer.html'">
