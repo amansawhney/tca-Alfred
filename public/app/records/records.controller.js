@@ -14,6 +14,8 @@ function forEachIntersection(datafield, intersection, datasource, callback) {
 function RecordsController($scope,   $filter,   $http,   editableOptions,   editableThemes ,  RecordsService,   LoginService,   $uibModal, toastr){
 
     LoginService.ensureLogin();
+    $scope.$root.recordButtonStyle = {'text-decoration': 'underline'};
+    $scope.$root.userButtonStyle = {};
 
     $scope.getRecords = function(){
         RecordsService.getRecords({}, function(err, data){
@@ -109,7 +111,8 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 
     $scope.openInstruction = function() {
         $('.webix_pivot_config_msg').attr("data-intro", "Click to configure Fields for Row, Column and Value").attr("data-position", "bottom");
-        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm. \n \n \n Double click any cell for a detailed view").attr("data-position", "bottom");
+        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm.").attr("data-position", "bottom");
+        $('.webix_ss_center .webix_first').attr("data-intro", "Double click any cell for a detailed view").attr("data-position", "right");
 
         //webix_layout_toolbar
         $('body').chardinJs('start');
@@ -203,6 +206,10 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 
     if(!$scope.isPivotSetup)
     {
+        //if($$("pivot"))
+        //{
+        //    $$("pivot").removeView();
+        //}
         $scope.isPivotSetup = true;
         setupPivotTable($scope);
         $scope.getRecords();

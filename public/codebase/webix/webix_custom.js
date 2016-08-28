@@ -4781,7 +4781,7 @@ webix.IdSpace = {
                 value = webix.ui._uid(this.name);
                 (this._prev_global_col || webix._global_collection)._translate_ids[value]=oldvalue;
             }
-            webix.assert(!webix.ui.views[value], "Non unique view id: "+value);
+            //webix.assert(!webix.ui.views[value], "Non unique view id: "+value);
             webix.ui.views[value] = this;
             this._viewobj.setAttribute("view_id", value);
             return value;

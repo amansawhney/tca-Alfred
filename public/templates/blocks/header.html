@@ -1,57 +1,78 @@
-      <!-- navbar header -->
-      <div class="navbar-header {{app.settings.navbarHeaderColor}}">
-        <!-- brand -->
-        <a href="#/" class="navbar-brand text-lt">
-          <span class="hidden-folded m-l-xs">{{app.name}}</span>
-        </a>
-        <!-- / brand -->
-      </div>
-      <!-- / navbar header -->
+  <style type="text/css">
+    #header {
+      border-right: 1px solid rgb(230,230,230);
+      border-left: 1px solid rgb(230,230,230);
+      background-color: rgb(255,255,255);
+      box-shadow: 0 7px 5px -5px rgb(217,217,217);
+    }
+    #rc-logo {
+      position: absolute;
+      top: 65px;
+      left: 68px;
+      line-height: 1em;
+    }
+    .user-message {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size:0.625em;
+      margin-right: 23px;
+    }
+    #header ul {
+      font-size: 0.75em;
+      list-style-type: none;
+      padding: 0;
+      margin: 2px 5px;
+    }
 
-      <!-- navbar collapse -->
-      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
-        <!-- buttons -->
-        <div class="nav navbar-nav hidden-xs">
-          <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
-            <i class="icon-user fa-fw"></i>
-          </a>
+    #header li {
+      text-transform: uppercase;
+    }
+    .container {
+      background-color: #FFFFFF;
+      width: 100%;
+    }
+    .nav-list li a {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #008fb8;
+    }
+  </style>
+  <div class = "container" id="header">
+      <div class="col-md-6 pull-left">
+        <img src="../../image/logoqb.gif" alt="QB">
+        <div id="rc-logo">
+          <img style="margin-top:5px" src="../../image/help-desk-text.png" alt="Help Desk"><span style="vertical-align:text-top" class="user-message">+1-646-293-1850</span>
+          <br>
+          <span style="vertical-align:text-top" class="user-message"><a href="mailto:qbtcawebsite@quantitativebrokers.com?subject=QB%20TCA%20Website">Comments</a></span>
         </div>
-        <!-- / buttons -->
-        <!-- nabar right -->
-        <ul class="nav navbar-nav navbar-right">
-          <li class="hidden-xs">
-            <a ui-fullscreen></a>
-          </li>
+      </div>
+      <div class = "col-md-6 ">
+        <ul class="nav-list pull-right" style="text-align: right">
 
-            <li ui-sref-active="active">
+          <li ui-sref-active="active" style="">
+              <p>Logged in as <span ng-bind="$root.userDisplayName" style="color: #7793a7;"></span></p>
+          </li>
+          <li ui-sref-active="active" id="nav_li_users" style="line-height: 40px;">
+              <div ng-show="$root.userType=='admin'">
               <a ui-sref="admin.records">
-                <i class="glyphicon glyphicon-briefcase icon text-info-dker"></i>
-                <span class="font-bold" translate="aside.nav.CATEGORIES">Records</span>
+                  <span class="user-message" translate="aside.nav.CATEGORIES" ng-style="$root.recordButtonStyle">Records</span>
               </a>
-            </li>
-            <li ui-sref-active="active" id="nav_li_users" ng-show="$root.userType=='admin'">
-              <a ui-sref="admin.users">
-                <i class="glyphicon glyphicon-user icon text-info-dker"></i>
-                <span class="font-bold" translate="aside.nav.USERS">Users</span>
-              </a>
-            </li>
-
-          <li class="dropdown" uib-dropdown>
-            <a href class="dropdown-toggle clear" uib-dropdown-toggle>
-              <span class="hidden-sm hidden-md" ng-bind="$root.userDisplayName"></span> <b class="caret"></b>
-            </a>
-            <!-- dropdown -->
-            <ul class="dropdown-menu animated fadeInRight w">
-              <li>
-                <a ui-sref="login" ng-click="logout()">
-                  <span class="font-bold" translate="aside.nav.LOGOUT">Logout</span>
+                <a ui-sref="admin.users">
+                  <span class="user-message" translate="aside.nav.USERS" style="margin-right: 0px;" ng-style="$root.userButtonStyle">Users</span>
                 </a>
-              </li>
-            </ul>
-            <!-- / dropdown -->
+              </div>
+              <div ng-show="$root.userType!='admin'">
+                  <span class="user-message"></span>
+              </div>
           </li>
+          <li>
+            <a ui-sref="login" ng-click="logout()">
+              <span class="user-message" translate="aside.nav.LOGOUT" style="margin-right: 0px; color: #0090b8;">Logout</span>
+            </a>
+          </li>
+        <br>
         </ul>
-        <!-- / navbar right -->
 
       </div>
-      <!-- / navbar collapse -->
+    </div>

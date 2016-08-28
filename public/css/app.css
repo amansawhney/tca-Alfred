@@ -740,7 +740,7 @@ body {
 
 .app-content {
   height: 100%;
-  padding-top: 50px;
+  padding-top: 1px;
 }
 
 .app-content:before,

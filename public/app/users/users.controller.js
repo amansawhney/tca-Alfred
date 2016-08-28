@@ -4,6 +4,10 @@ function UsersController($scope, $filter, $http, editableOptions, editableThemes
 
     LoginService.ensureLogin();
 
+    $scope.$root.userButtonStyle = {'text-decoration': 'underline'};
+    $scope.$root.recordButtonStyle = {};
+
+
     $scope.$root.clientList = ["Any"];
     $scope.$root.traderList = ["Any"];
     $scope.$root.userTypes = ["admin", "general"];
