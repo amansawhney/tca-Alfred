@@ -1,10 +1,10 @@
 <div class="container w-xxl w-auto-xs" ng-controller="LoginController" ng-init="app.settings.container = false;">
   <a href class="navbar-brand block m-t">{{app.name}}</a>
-  <div class="m-b-lg">
+  <div class="m-b-lg" style="text-align: center;">
     <div class="wrapper text-center">
       <strong>Login to admin panel</strong>
     </div>
-    <form name="form" class="form-validation">
+    <form name="form" class="form-validation" style="max-width: 400px; margin: 0 auto; ">
       <div class="text-danger wrapper text-center" ng-show="authError">
           {{authError}}
       </div>
