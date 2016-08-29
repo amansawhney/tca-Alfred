@@ -267,7 +267,6 @@ function setupPivotTable($scope)
     //grida.define("height", pivoHeight);
     //grida.height = pivoHeight;
     //grida.adjust();
-
     grida = webix.ui({
       container: "pgrid",
         view: "pivot",
@@ -285,10 +284,10 @@ function setupPivotTable($scope)
             columns: ["trader"],
             values: [{
                 name: "twap",
-                operation: "wavg"
+                operation: "wavg", format:webix.i18n.numberFormat
                 },
                 {name: "size",
-                    operation: "avg"
+                    operation: "avg", format:webix.i18n.numberFormat
                 }
             ],
             fields_all: ["client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"],
@@ -376,6 +375,8 @@ function setupPivotTable($scope)
         }
         return "";
     };
+    webix.i18n.decimalSize = 3;
+    webix.i18n.setLocale();
 
     webix.event(window, "resize", function() {
         console.log("resize");

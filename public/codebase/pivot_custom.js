@@ -231,6 +231,10 @@
                         structure.values_all = grida.config.structure.values_all;
                         structure.columns_all = grida.config.structure.columns_all;
                         structure.rows_all = grida.config.structure.rows_all;
+                        for(var kk=0; kk < structure.values.length; kk++)
+                        {
+                            structure.values[kk].format = webix.i18n.numberFormat;
+                        }
                         this.define("structure", structure);
                         this.render();
                     }, this));
