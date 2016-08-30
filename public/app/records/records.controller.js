@@ -270,7 +270,7 @@ function setupPivotTable($scope)
     grida = webix.ui({
       container: "pgrid",
         view: "pivot",
-        height: pivoHeight,
+        height: pivoHeight - 25,
         //autoheight:false,
         id: "pivot",
         footer: "wavg",
