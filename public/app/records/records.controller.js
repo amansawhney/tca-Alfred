@@ -270,7 +270,7 @@ function setupPivotTable($scope)
     grida = webix.ui({
       container: "pgrid",
         view: "pivot",
-        height: pivoHeight - 25,
+        height: pivoHeight,
         //autoheight:false,
         id: "pivot",
         footer: "wavg",
@@ -381,6 +381,9 @@ function setupPivotTable($scope)
     webix.event(window, "resize", function() {
         console.log("resize");
         var pivoHeight = $(window).innerHeight() - 410;
+        if (pivoHeight > grida.rows.length * 10) {
+            pivoHeight = grida.rows.length * 10;
+        }
         if (pivoHeight < 300)
         {
             pivoHeight = 300;

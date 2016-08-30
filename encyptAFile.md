@@ -1,6 +1,6 @@
 How to encypt a csv file
 ```
-sudo npm install -g cvs
+sudo npm install -g csvtojson
 
 csvtojson [path to bigcsvdata] > converted.json
 

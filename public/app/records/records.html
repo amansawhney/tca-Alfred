@@ -1,5 +1,7 @@
 <style>
-    
+    label {
+       font-family: 'Raleway', sans-serif;
+    }
 </style>
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
@@ -32,8 +34,6 @@
     <div class="col-md-2" data-intro="Collapse All" data-position="top">
         <a type="button" value="Collapse All" ng-click="collapseAll()" class="applyButton" >Collapse All</a>
     </div>
-
-    <div class="col-md-4" style="width: 250px; float: right; padding-right: 0px;text-align: right;"><a ng-click="openInstruction()" class="applyButton" >Show Instruction</a></div>
 </div>
 <div class="wrapper-md qb-adjust">
     <div id="page-wrapper">
@@ -85,7 +85,16 @@
                         <div class="col-md-2" data-intro="Apply Filter." data-position="top">
                             <label>&nbsp;</label>
                             <br>
-                            <a value="" ng-click="filterPivotTable()" class="applyButton pull-right" style="line-height: 32px;"> Apply Filters </a>
+                            <a value="" ng-click="filterPivotTable()" class="user-message" 
+                                style="font-size: 10px; color: #7793a7"
+                                onMouseOver="this.style.color='#007E33'"
+                                onMouseOut="this.style.color='#7793a7'"
+                            > Apply Filters </a>
+                            <a ng-click="openInstruction()" class="user-message" 
+                                style="font-size: 10px; color: #7793a7" 
+                                onMouseOver="this.style.color='#007E33'"
+                                onMouseOut="this.style.color='#7793a7'"
+                            >Show Instruction</a>
                         </div>
                     </div>
                 </form>
