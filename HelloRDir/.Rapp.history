@@ -1,0 +1,24 @@
+install.packages("plotly")
+install.packages("ggplot2")
+library(plotly)#
+set.seed(100)#
+d <- diamonds[sample(nrow(diamonds), 1000), ]#
+plot_ly(d, x = carat, y = price, text = paste("Clarity: ", clarity),#
+        mode = "markers", color = carat, size = carat)
+install.packages("devtools")
+## Install packages#
+library(devtools)#
+install_github("ramnathv/htmlwidgets") #
+install_github("smartinsightsfromdata/rpivotTable")#
+## Load rpivotTable#
+library(rpivotTable)#
+data(mtcars)#
+## One line to create pivot table#
+rpivotTable(mtcars, rows="gear", col="cyl", aggregatorName="Average", #
+vals="mpg", rendererName="Treemap")
+runApp(host="0.0.0.0",port=5050)
+libray("Shiny")
+library("Shiny")
+library("shiny")
+runApp(host="0.0.0.0",port=5050)
+runApp(host="0.0.0.0",port=5050)

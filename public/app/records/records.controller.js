@@ -259,10 +259,10 @@ function setupPivotTable($scope)
 {
 
 
-    var pivoHeight = $(window).innerHeight() - 410;
-    if (pivoHeight < 300)
+    var pivoHeight = $(window).innerHeight() - 410 - 600;
+    if (pivoHeight < 400)
     {
-        pivoHeight = 300;
+        pivoHeight = 400;
     }
     //grida.define("height", pivoHeight);
     //grida.height = pivoHeight;
@@ -452,3 +452,8 @@ records.directive('footableDirective', function(){
         });
     };
 });
+
+if ($("#myIFrame").src !== "http://127.0.0.1:7344/") {
+    document.getElementById("myIFrame").remove();
+  }
+ 
