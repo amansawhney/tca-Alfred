@@ -1,18 +1,36 @@
+<style type="text/css">
+  label {
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+  }
+</style>
+
 <div class="container w-xxl w-auto-xs" ng-controller="LoginController" ng-init="app.settings.container = false;">
-  <a href class="navbar-brand block m-t">{{app.name}}</a>
+<div class = "row">
+  <img src = "../../image/logoqb.gif" class="navbar-brand block m-t col-md-4 col-md-offset-4" />
+  </div>
   <div class="m-b-lg" style="text-align: center;">
-    <div class="wrapper text-center">
-      <strong>Login to admin panel</strong>
-    </div>
     <form name="form" class="form-validation" style="max-width: 400px; margin: 0 auto; ">
       <div class="text-danger wrapper text-center" ng-show="authError">
           {{authError}}
       </div>
-      <div class="list-group list-group-sm">
-        <div class="list-group-item">
+      <div class="list-group list-group-sm ">
+      <div class = "row">
+      <br>
+        <label class = "pull-left"> Email </label>
+      </div>
+      <br>
+        <div class="list-group-item row">
           <input type="email" placeholder="Email" class="form-control no-border" ng-model="user.email" required>
         </div>
-        <div class="list-group-item">
+        <div class = "row">
+        <br>
+        <label class = "pull-left"> Password </label>
+      </div>
+      <br>
+        <div class="list-group-item row">
            <input type="password" placeholder="Password" class="form-control no-border" ng-model="user.password" required>
         </div>
       </div>
