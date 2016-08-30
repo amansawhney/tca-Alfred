@@ -14,6 +14,8 @@ function forEachIntersection(datafield, intersection, datasource, callback) {
 function RecordsController($scope,   $filter,   $http,   editableOptions,   editableThemes ,  RecordsService,   LoginService,   $uibModal, toastr){
 
     LoginService.ensureLogin();
+    $scope.$root.recordButtonStyle = {'text-decoration': 'underline'};
+    $scope.$root.userButtonStyle = {};
 
     $scope.getRecords = function(){
         RecordsService.getRecords({}, function(err, data){
@@ -109,7 +111,8 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
 
     $scope.openInstruction = function() {
         $('.webix_pivot_config_msg').attr("data-intro", "Click to configure Fields for Row, Column and Value").attr("data-position", "bottom");
-        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm. \n \n \n Double click any cell for a detailed view").attr("data-position", "bottom");
+        $('.webix_layout_toolbar').attr("data-intro", "Choose filters for client, trader, algo, exch, instrument and fcm.").attr("data-position", "bottom");
+        $('.webix_ss_center .webix_first').attr("data-intro", "Double click any cell for a detailed view").attr("data-position", "right");
 
         //webix_layout_toolbar
         $('body').chardinJs('start');
@@ -186,12 +189,27 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
         });
     };
 
+    $scope.expandAll = function()
+    {
+        $$("pivot").$$("data").openAll();
+    };
+
+    $scope.collapseAll = function()
+    {
+        $$("pivot").$$("data").closeAll();
+    };
+
+
     $scope.items = [];
     $scope.fields_arr = ["date", "client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"];
     $scope.modalTitle = "Modal";
 
     if(!$scope.isPivotSetup)
     {
+        //if($$("pivot"))
+        //{
+        //    $$("pivot").removeView();
+        //}
         $scope.isPivotSetup = true;
         setupPivotTable($scope);
         $scope.getRecords();
@@ -249,7 +267,6 @@ function setupPivotTable($scope)
     //grida.define("height", pivoHeight);
     //grida.height = pivoHeight;
     //grida.adjust();
-
     grida = webix.ui({
       container: "pgrid",
         view: "pivot",
@@ -259,15 +276,18 @@ function setupPivotTable($scope)
         footer: "wavg",
         totalColumn: true,
         max: true,
+        columnWidth: 100,
+        fieldMap: { client:"Client", trader:"Trader", exch:"Exchange", algo:"Algo", instrument:"Instrument", fcm: "FCM", size:"Size", filled:"Filled", duration:"Duration", volume:"Volume",
+            ivolume:"iVolume", passive:"Passive", cleanup:"CleanUp", "ap" : "AP", stf:"STF", ivwap:"IVWAP",vwap:"VWAP", twap:"TWAP"},
         structure: {
-            rows: ["client"],
+            rows: ["client", "algo"],
             columns: ["trader"],
             values: [{
                 name: "twap",
-                operation: "wavg"
+                operation: "wavg", format:webix.i18n.numberFormat
                 },
                 {name: "size",
-                    operation: "avg"
+                    operation: "avg", format:webix.i18n.numberFormat
                 }
             ],
             fields_all: ["client", "trader", "exch", "algo", "instrument", "fcm", "size", "filled", "duration", "volume", "ivolume", "passive", "cleanup", "ap", "stf", "ivwap", "vwap", "twap"],
@@ -355,10 +375,15 @@ function setupPivotTable($scope)
         }
         return "";
     };
+    webix.i18n.decimalSize = 3;
+    webix.i18n.setLocale();
 
     webix.event(window, "resize", function() {
         console.log("resize");
         var pivoHeight = $(window).innerHeight() - 410;
+        if (pivoHeight > grida.rows.length * 10) {
+            pivoHeight = grida.rows.length * 10;
+        }
         if (pivoHeight < 300)
         {
             pivoHeight = 300;

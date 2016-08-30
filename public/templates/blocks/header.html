@@ -48,23 +48,29 @@
         </div>
       </div>
       <div class = "col-md-6 ">
-        <ul class="nav-list pull-right">
-          <li ui-sref-active="active">
-            <a ui-sref="admin.records">
-              <span class="user-message" translate="aside.nav.CATEGORIES">Records</span>
-            </a>
+        <ul class="nav-list pull-right" style="text-align: right">
+
+          <li ui-sref-active="active" style="">
+              <p>Logged in as <span ng-bind="$root.userDisplayName" style="color: #7793a7;"></span></p>
           </li>
-          <li ui-sref-active="active" id="nav_li_users" ng-show="$root.userType=='admin'">
-            <a ui-sref="admin.users">
-              <span class="user-message" translate="aside.nav.USERS">Users</span>
-            </a>
+          <li ui-sref-active="active" id="nav_li_users" style="line-height: 40px;">
+              <div ng-show="$root.userType=='admin'">
+              <a ui-sref="admin.records">
+                  <span class="user-message" translate="aside.nav.CATEGORIES" ng-style="$root.recordButtonStyle">Records</span>
+              </a>
+                <a ui-sref="admin.users">
+                  <span class="user-message" translate="aside.nav.USERS" style="margin-right: 0px;" ng-style="$root.userButtonStyle">Users</span>
+                </a>
+              </div>
+              <div ng-show="$root.userType!='admin'">
+                  <span class="user-message"></span>
+              </div>
           </li>
           <li>
             <a ui-sref="login" ng-click="logout()">
-              <span class="user-message" translate="aside.nav.LOGOUT">Logout</span>
+              <span class="user-message" translate="aside.nav.LOGOUT" style="margin-right: 0px; color: #0090b8;">Logout</span>
             </a>
           </li>
-          <br>
         <br>
         </ul>
 

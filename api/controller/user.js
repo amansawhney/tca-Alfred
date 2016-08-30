@@ -75,6 +75,11 @@ async function createUser(req, res, next) {
         }
 
         newUser.password = User.generatePassword(req.body.password);
+        if(newUser.userType == "admin")
+        {
+            newUser.clients = [];
+            newUser.traders = [];
+        }
         //newUser.userType = "general";
         //console.log(newUser);
 
@@ -377,6 +382,11 @@ async function updateUser(req, res, next) {
         if (req.body.userType && req.body.userType != "")
         {
             changeSet.userType = req.body.userType;
+            if(changeSet.userType == "admin")
+            {
+                changeSet.clients = [];
+                changeSet.traders = [];
+            }
         }
 
 

@@ -46,9 +46,21 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-4 control-label">User Type</label>
+                    <div class="col-sm-8">
+                        <ui-select ng-model="user.userType" theme="bootstrap" search-enabled="false" title="Choose User Type">
+                            <ui-select-match placeholder="Select User Type">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices repeat="userType in $root.userTypes">
+                                {{userType}}
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-4 control-label">Clients</label>
                     <div class="col-sm-8">
-                        <ui-select multiple ng-model="user.clients" theme="bootstrap" reset-search-input="false" close-on-select="false" title="Choose clients">
+                        <ui-select multiple ng-model="user.clients" theme="bootstrap" reset-search-input="false" close-on-select="false" title="Choose clients" ng-disabled="user.userType == 'admin'">
                             <ui-select-match placeholder="Select clients...(blank equal no filter)">{{$item}}</ui-select-match>
                             <ui-select-choices repeat="client in $root.clientList | filter:$select.search">
                                 {{client}}
@@ -60,7 +72,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">Traders</label>
                     <div class="col-sm-8">
-                        <ui-select multiple ng-model="user.traders" theme="bootstrap" reset-search-input="false"  close-on-select="false"  title="Choose traders">
+                        <ui-select multiple ng-model="user.traders" theme="bootstrap" reset-search-input="false"  close-on-select="false"  title="Choose traders" ng-disabled="user.userType == 'admin'">
                             <ui-select-match placeholder="Select traders...(blank equal no filter)">{{$item}}</ui-select-match>
                             <ui-select-choices repeat="trader in $root.traderList | filter:$select.search">
                                 {{trader}}

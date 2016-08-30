@@ -1,8 +1,4 @@
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3">Users</h1>
-</div>
 <div class="wrapper-md">
-  <h4>Users Table</h4>
   <div class="panel-body b-b b-light">
     <div class="pull-left">
       Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
@@ -16,14 +12,17 @@
     </div>
   </div>
 
-  <table class="table table-bordered table-hover table-condensed bg-white-only footable"  data-filter="#filter"  data-page-size="20">
+  <table class="table table-bordered table-hover table-condensed bg-white-only footable"  data-filter="#filter"  data-page-size="25">
     <thead>
       <tr style="font-weight: bold">
         <th style="width:20%">User ID</th>
         <th style="width:10%">Username</th>
         <th style="width:10%">Email</th>
+        <th style="width:10%">User Type</th>
         <th style="width:10%">First Name</th>
         <th style="width:10%">Last Name</th>
+        <th style="width:10%">Clients</th>
+        <th style="width:10%">Traders</th>
         <th style="width:10%">Created</th>
         <th style="width:15%">Action</th>
       </tr>
@@ -43,13 +42,22 @@
         </td>
 
         <td class="v-middle">
+          {{ user.userType }}
+        </td>
+
+        <td class="v-middle">
           {{ user.firstName || '_' }}
         </td>
 
         <td class="v-middle">
           {{ user.lastName || '_' }}
         </td>
-
+        <td class="v-middle">
+          {{ user.clients.join() || '_' }}
+        </td>
+        <td class="v-middle">
+          {{ user.traders.join() || '_' }}
+        </td>
         <td class="v-middle">
           {{ user.createdAt * 1000 || 'empty' | date:'yyyy-MM-dd HH:mm' }}
         </td>
