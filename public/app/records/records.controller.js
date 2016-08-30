@@ -188,15 +188,24 @@ function RecordsController($scope,   $filter,   $http,   editableOptions,   edit
             }
         });
     };
+    var expanded= true;
+    document.getElementById("expand").style.visibility = "hidden"
+
 
     $scope.expandAll = function()
     {
         $$("pivot").$$("data").openAll();
+        document.getElementById("collaspe").style.visibility = "visible"
+        document.getElementById("expand").style.visibility = "hidden"
+        expanded = true;
     };
 
     $scope.collapseAll = function()
     {
         $$("pivot").$$("data").closeAll();
+        document.getElementById("collaspe").style.visibility = "hidden"
+        document.getElementById("expand").style.visibility = "visible"
+        expanded = false;
     };
 
 
@@ -259,10 +268,10 @@ function setupPivotTable($scope)
 {
 
 
-    var pivoHeight = $(window).innerHeight() - 410;
-    if (pivoHeight < 300)
+    var pivoHeight = $(window).innerHeight() - 410 - 600;
+    if (pivoHeight < 450)
     {
-        pivoHeight = 300;
+        pivoHeight = 450;
     }
     //grida.define("height", pivoHeight);
     //grida.height = pivoHeight;
@@ -381,14 +390,11 @@ function setupPivotTable($scope)
     webix.event(window, "resize", function() {
         console.log("resize");
         var pivoHeight = $(window).innerHeight() - 410;
-        if (pivoHeight > grida.rows.length * 10) {
-            pivoHeight = grida.rows.length * 10;
-        }
         if (pivoHeight < 300)
         {
             pivoHeight = 300;
         }
-        grida.define("height", pivoHeight);
+        grida.define("height", 500);
         //grida.height = pivoHeight;
         grida.adjust();
     });

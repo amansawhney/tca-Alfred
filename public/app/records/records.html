@@ -1,7 +1,10 @@
 <style>
     label {
-       font-family: 'Raleway', sans-serif;
-    }
+     font-family: 'Raleway', sans-serif;
+ }
+ #myIFrame {
+
+ }
 </style>
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
@@ -10,30 +13,25 @@
     <div class="modal-body" style="width:1500px;">
         <table class="table table-bordered table-hover table-condensed bg-white-only footable">
             <thead>
-            <tr>
-                <td ng-repeat="field in fields_arr">
-                    {{field}}
-                </td>
-            </tr>
+                <tr>
+                    <td ng-repeat="field in fields_arr">
+                        {{field}}
+                    </td>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="item in items">
-                <td ng-repeat="field in fields_arr">
-                    {{item[field]}}
-                </td>
-            </tr>
+                <tr ng-repeat="item in items">
+                    <td ng-repeat="field in fields_arr">
+                        {{item[field]}}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </script>
 
 <div class="qb-adjust lter b-b wrapper-md" style="padding-bottom:15px;border-bottom: none;">
-    <div class="col-md-2" data-intro="Expand All" data-position="top" style="    padding-left: 0px;">
-        <a type="button" value="Expand All" ng-click="expandAll()" class="applyButton" >Expand All</a>
-    </div>
-    <div class="col-md-2" data-intro="Collapse All" data-position="top">
-        <a type="button" value="Collapse All" ng-click="collapseAll()" class="applyButton" >Collapse All</a>
-    </div>
+    
 </div>
 <div class="wrapper-md qb-adjust">
     <div id="page-wrapper">
@@ -58,8 +56,8 @@
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptionsStart" ng-required="true" close-text="Close" max-date="endDate" />
                                 <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
+                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
                             </p>
                         </div>
 
@@ -68,8 +66,8 @@
                             <p class="input-group">
                                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptionsEnd" ng-required="true" close-text="Close" min-date="startDate" />
                                 <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                      </span>
+                                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
                             </p>
                         </div>
 
@@ -86,38 +84,49 @@
                             <label>&nbsp;</label>
                             <br>
                             <a value="" ng-click="filterPivotTable()" class="user-message" 
-                                style="font-size: 10px; color: #7793a7"
-                                onMouseOver="this.style.color='#007E33'"
-                                onMouseOut="this.style.color='#7793a7'"
+                            style="font-size: 12px; color: #7793a7; font-weight:bold"
+                            onMouseOver="this.style.color='#007E33'"
+                            onMouseOut="this.style.color='#7793a7'"
                             > Apply Filters </a>
                             <a ng-click="openInstruction()" class="user-message" 
-                                style="font-size: 10px; color: #7793a7" 
-                                onMouseOver="this.style.color='#007E33'"
-                                onMouseOut="this.style.color='#7793a7'"
-                            >Show Instruction</a>
+                            style="font-size: 12px; color: #7793a7; font-weight:bold" 
+                            onMouseOver="this.style.color='#007E33'"
+                            onMouseOut="this.style.color='#7793a7'"
+                            >Help</a>
                         </div>
                     </div>
                 </form>
 
 
                 <!-- /.row -->
-                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Pivote Table -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Pivote Table -->
 
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="pgrid" style="overflow-x: scroll;"></div>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-
-
-                        <!-- End of Pivot table -->
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div id="pgrid" style="overflow-x: scroll;"></div>
                     </div>
+                    <div class="col-md-2" data-intro="Expand All" data-position="top">
+                        <a type="button" value="Expand All" id="expand" ng-click="expandAll()" class="user-message" 
+                        style="font-size: 12px; color: #7793a7; font-weight:bold"
+                        onMouseOver="this.style.color='#007E33'"
+                        onMouseOut="this.style.color='#7793a7'">Expand All</a>
+                        <a type="button" value="Collapse All" id="collaspe" ng-click="collapseAll()" class="user-message" 
+                        style="font-size: 12px; color: #7793a7; font-weight:bold"
+                        onMouseOver="this.style.color='#007E33'"
+                        onMouseOut="this.style.color='#7793a7'" >Collapse All</a>
+                    </div>
+
+                    
+                    <br>
+
+
+                    <!-- End of Pivot table -->
+
+                </div>
 
                     <!-- /.row -->
                 </div>
