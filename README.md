@@ -5,15 +5,16 @@ Here's the steps to run the application
 1. Install Node and NPM
 2. Install & Run MongoDB
 3. Create a Database in MongoDB:    tca_db
-4. Replace the "json_file_path" in api/common/config.js with the actual file path of the json file. This should be absolute path.
-5. Install Node Modules
+4. Create api/common/config.js based on sample/config.js
+5. Replace the "json_file_path" in api/common/config.js with the actual file path of the json file. This should be absolute path.
+6. Install Node Modules
 Go to the project directory and install node modules.
 npm install
-6. Install Bower modules
+7. Install Bower modules
 Go to project directory and install bower modules.
 bower install
 note: bower install as root
-7. Test Run the Project
+8. Test Run the Project
 npm start
 
 
